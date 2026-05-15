@@ -1,0 +1,4 @@
+enum ItemsAlignment {
+  row,
+  column,
+}
