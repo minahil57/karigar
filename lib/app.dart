@@ -15,7 +15,7 @@ class KarigarApp extends StatelessWidget {
             scrollBehavior: CustomScrollBehavior(),
             theme: MainAppTheme.lightTheme,
             darkTheme: MainAppTheme.darkTheme,
-            themeMode: ThemeCustomizer.instance.theme,
+            themeMode: ThemeMode.light,
             initialRoute: AppRouter.initialRoute,
             getPages: AppRouter.pages(),
             builder: (context, child) {

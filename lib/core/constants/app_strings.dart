@@ -3,25 +3,28 @@ class AppStrings {
 
   static const String appTitle = "Karigar";
 
-  // Onboarding
-  static const String onboardingTitle1 = 'Find Skilled Karigars';
-  static const String onboardingSubtitle1 = 'Connect instantly with trusted artisans, mechanics, plumbers, and more.';
-  
-  static const String onboardingTitle2 = 'Book Services Easily';
-  static const String onboardingSubtitle2 = 'Choose your required service and hire expert professionals in minutes.';
-  
-  static const String onboardingTitle3 = 'Track Work Progress';
-  static const String onboardingSubtitle3 = 'Stay updated with real-time progress and direct communication.';
-  
-  static const String onboardingTitle4 = 'Secure Payments';
-  static const String onboardingSubtitle4 = 'Pay securely and manage all your service history in one place.';
+// Onboarding
+  static const String onboardingTitle1 = 'Find & Hire Skilled Karigars';
+  static const String onboardingSubtitle1 =
+      'Search trusted electricians, plumbers, mechanics, and other professionals near you with ease.';
+
+  static const String onboardingTitle2 = 'Offer & Accept Services';
+  static const String onboardingSubtitle2 =
+      'As a provider, receive job requests, accept offers, and grow your service network.';
+
+  static const String onboardingTitle3 = 'Manage Work in Real-Time';
+  static const String onboardingSubtitle3 =
+      'Track job progress, communicate directly, and stay updated from start to finish.';
+
+  static const String onboardingTitle4 = 'Build Your Service Network';
+  static const String onboardingSubtitle4 =
+      'Connect users and providers in one platform and manage all your service activity easily.';
+
   // Welcome
   static const String welcomeToKarigar = "Welcome to Karigar";
-  static const String welcomeSubtitle = "Pakistan's largest community for artisans!";
+  static const String welcomeSubtitle =
+      "A two-sided platform connecting customers with skilled professionals and empowering providers with opportunities.";
 
-  // Track Status
-  static const String trackStatusOfLeads = "Track Status of Your Leads";
-  static const String trackStatusSubtitle = "Get real-time updates on lead status and progress";
 
 
   // Buttons
@@ -61,4 +64,17 @@ class AppStrings {
   static const String sessionExpired = "Session Expired";
   static const String sessionExpiredMessage = "Please login again";
   static const String copiedToClipboard = "Copied to clipboard";
+  static const String signIn = "Sign In";
+  static const String signUp = "Sign Up";
+  static const String back = "Back";
+
+  static const String findExpertsOrGetHired = 'Find Experts or Get Hired\nPowered by Smart Agent Matching';
+  static const String poweredBySmartAgentMatching = 'Powered by Smart Agent Matching';
+  static const String signInToYourAccount = 'Sign in to your account';
+  static const String password = "Password";
+  static const String passwordHint = "Enter your password";
+  static const String emailAdress = "Email Adress";
+  static const String enterYourEmail = "Enter your email Adress";
+  static const String dontHaveAnAccount = 'Don\'t have an account? ';
+  static const String createAccount = 'Create Account';
 }

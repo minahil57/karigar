@@ -11,8 +11,6 @@ class AuthRepository {
   // }
 
   static Future<String?> loginUser(Map<String, dynamic> data) async {
-    dynamic model;
-
     try {
       var response = await ApiProvider.auth.login(
         email: data['email'],
@@ -20,9 +18,6 @@ class AuthRepository {
       );
 
       if (response.statusCode == 200 && response.data['status'] == true) {
-        //model = LoginModel.fromJson(response.data['data']);
-
-        //await _saveLoginData(model);
         return null;
       } else {
         return 'Something went wrong';

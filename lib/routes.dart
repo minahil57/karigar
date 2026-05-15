@@ -4,6 +4,7 @@ class Routes {
   static const String login = '/auth/login';
   static const String splash = '/';
   static const String onboarding = '/onboarding';
+  static const String createAccount = '/auth/create_account';
 }
 
 class AppRouter {
@@ -25,6 +26,11 @@ class AppRouter {
         name: Routes.login,
         page: () => const LoginView(),
         binding: LoginBindings(),
+      ),
+      GetPage(
+        name: Routes.createAccount,
+        page: () => const CreateAccountView(),
+        binding: CreateAccountBinding(),
       ),
     ];
   }

@@ -33,6 +33,7 @@ export 'package:url_launcher/url_launcher.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:lottie/lottie.dart';
 export 'package:animate_do/animate_do.dart';
+export 'package:iconsax/iconsax.dart';
 
 export 'app.dart';
 export 'main.dart';

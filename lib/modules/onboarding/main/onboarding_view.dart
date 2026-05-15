@@ -56,7 +56,7 @@ class OnboardingView extends GetView<OnboardingController> {
                       left: 40,
                       right: 40,
                       child: CustomButton(
-                        text: 'Get Started',
+                        text: AppStrings.getStarted,
                         onPressed: controller.nextPage,
                         minSize: const Size(double.infinity, 51),
                         maxSize: const Size(double.infinity, 51),
@@ -69,7 +69,7 @@ class OnboardingView extends GetView<OnboardingController> {
                       left: 40,
                       right: 40,
                       child: CustomButton(
-                        text: 'Sign In',
+                        text: AppStrings.signIn,
                         onPressed: controller.nextPage,
                         minSize: const Size(double.infinity, 51),
                         maxSize: const Size(double.infinity, 51),
@@ -87,7 +87,7 @@ class OnboardingView extends GetView<OnboardingController> {
                               ? GestureDetector(
                                   onTap: controller.previousPage,
                                   child: CustomText(
-                                    text: 'Back',
+                                    text: AppStrings.back,
                                     fontSize: 16,
                                     variant: TextVariant.regular,
                                   ),

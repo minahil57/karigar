@@ -9,7 +9,7 @@ const Color kcSecondaryColor = Color(0xFF5FB3B3); // Teal Green
 const Color kcSecondaryLightColor = Color(0xFFDDF4F4); // Light Teal Surface
 
 // Status Colors
-const Color kcErrorColor = Color(0xFFDC2626); // Modern Red
+const Color kcErrorColor = Color(0xFFDE0B0B);
 
 // Base Colors
 const Color kcWhitecolor = Color(0xFFFFFFFF);
