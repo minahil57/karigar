@@ -3,7 +3,7 @@ class AppStrings {
 
   static const String appTitle = "Karigar";
 
-// Onboarding
+  // Onboarding
   static const String onboardingTitle1 = 'Find & Hire Skilled Karigars';
   static const String onboardingSubtitle1 =
       'Search trusted electricians, plumbers, mechanics, and other professionals near you with ease.';
@@ -24,8 +24,6 @@ class AppStrings {
   static const String welcomeToKarigar = "Welcome to Karigar";
   static const String welcomeSubtitle =
       "A two-sided platform connecting customers with skilled professionals and empowering providers with opportunities.";
-
-
 
   // Buttons
   static const String getStarted = "Get Started";
@@ -53,11 +51,11 @@ class AppStrings {
   static const String home = "Home";
   static const String profile = "Profile";
 
-
   //misc
   static const String somethingWentWrong = "Something went wrong";
   static const String noInternet = "No Internet";
-  static const String noInternetMessage = "Please check your internet connection";
+  static const String noInternetMessage =
+      "Please check your internet connection";
   static const String tryAgain = "Try Again";
   static const String cancel = "Cancel";
   static const String ok = "Ok";
@@ -68,8 +66,10 @@ class AppStrings {
   static const String signUp = "Sign Up";
   static const String back = "Back";
 
-  static const String findExpertsOrGetHired = 'Find Experts or Get Hired\nPowered by Smart Agent Matching';
-  static const String poweredBySmartAgentMatching = 'Powered by Smart Agent Matching';
+  static const String findExpertsOrGetHired =
+      'Find Experts or Get Hired\nPowered by Smart Agent Matching';
+  static const String poweredBySmartAgentMatching =
+      'Powered by Smart Agent Matching';
   static const String signInToYourAccount = 'Sign in to your account';
   static const String password = "Password";
   static const String passwordHint = "Enter your password";
@@ -84,4 +84,9 @@ class AppStrings {
   static const String confirmPassword = "Confirm Password";
   static const String confirmPasswordHint = "Confirm your password";
   static const String registerAsProvider = "Register as Provider";
+  static const String letMeHelpYou =
+      "Let me help you find the right\nservice provider";
+  static const String writeYourMessage = "Write your message";
+  static const String suggestionsForYou = "Suggestions for you";
+  static const String hey = "Hey";
 }
