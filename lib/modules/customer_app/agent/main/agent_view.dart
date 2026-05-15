@@ -46,7 +46,7 @@ class AgentView extends StatelessWidget {
             const Divider(),
             ListTile(
               leading: const Icon(Iconsax.logout),
-              title: const Text('Logout'),
+              title: const Text('Logoutss'),
               onTap: () => AuthRepository.logout(),
             ),
           ],
