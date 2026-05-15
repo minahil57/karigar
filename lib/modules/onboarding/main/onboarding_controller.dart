@@ -18,7 +18,7 @@ class OnboardingController extends GetxController {
       title: AppStrings.onboardingTitle1,
       subtitle: AppStrings.onboardingSubtitle1,
       imagePath: AppImages.onboardingSlide1,
-      brownIndex: [1],
+      brownIndex: [3,4],
     ),
 
     OnboardingPageModel(
@@ -26,7 +26,7 @@ class OnboardingController extends GetxController {
       title: AppStrings.onboardingTitle2,
       subtitle: AppStrings.onboardingSubtitle2,
       imagePath: AppImages.onboardingSlide2,
-      brownIndex: [1],
+      brownIndex: [3],
     ),
 
     OnboardingPageModel(
@@ -34,7 +34,7 @@ class OnboardingController extends GetxController {
       title: AppStrings.onboardingTitle3,
       subtitle: AppStrings.onboardingSubtitle3,
       imagePath: AppImages.onboardingSlide3,
-      brownIndex: [1],
+      brownIndex: [3],
     ),
 
     OnboardingPageModel(
@@ -42,7 +42,7 @@ class OnboardingController extends GetxController {
       title: AppStrings.onboardingTitle4,
       subtitle: AppStrings.onboardingSubtitle4,
       imagePath: AppImages.onboardingSlide4,
-      brownIndex: [1],
+      brownIndex: [3],
     ),
   ];
 
@@ -66,7 +66,7 @@ class OnboardingController extends GetxController {
 
       update();
     } else {
-      Snackbars.info('Coming Soon!!');
+      Get.offAllNamed(Routes.login);
     }
   }
 

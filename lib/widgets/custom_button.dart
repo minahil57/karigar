@@ -56,7 +56,7 @@ class CustomButton extends StatelessWidget {
       child: Container(
         height: height,
         width: width,
-        padding: const EdgeInsets.all(1.5), // Border thickness
+        padding: const EdgeInsets.all(1.5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius),
           color: isEnabled! ? null : kcDisabledColor,
@@ -64,7 +64,7 @@ class CustomButton extends StatelessWidget {
               ? const LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [kcPrimaryColor, Color(0xFF96C1FF)],
+                  colors: [kcPrimaryColor, kcPrimaryColor],
                 )
               : null,
         ),

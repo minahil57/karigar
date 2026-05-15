@@ -7,8 +7,6 @@ abstract final class AppTheme {
   static TextDirection textDirection = TextDirection.rtl;
   static ThemeData theme = getTheme();
 
-
-
   static ThemeData getTheme([ThemeType? themeType]) {
     themeType = themeType ?? AppTheme.themeType;
     if (themeType == ThemeType.light) return lightTheme;
@@ -19,6 +17,11 @@ abstract final class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     /// Brightness
     brightness: Brightness.light,
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: kcPrimaryColor,
+      selectionColor: kcPrimaryColor,
+      selectionHandleColor: kcPrimaryColor,
+    ),
 
     /// Primary Color
     primaryColor: kcPrimaryColor,
@@ -40,7 +43,6 @@ abstract final class AppTheme {
       titleLarge: GoogleFonts.aBeeZee(),
       bodyLarge: GoogleFonts.abel(),
     ),
-
 
     /// Divider Theme
     dividerTheme: const DividerThemeData(
@@ -77,7 +79,7 @@ abstract final class AppTheme {
           WidgetState.selected,
         };
         if (state.any(interactiveStates.contains)) {
-          return const Color(0xffD17E0F);
+          return kcSecondaryColor;
         }
         return null;
       }),
@@ -102,7 +104,7 @@ abstract final class AppTheme {
     splashColor: Colors.white.withAlpha(100),
 
     highlightColor: const Color(0xffeeeeee),
-    colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xffD17E0F))
+    colorScheme: ColorScheme.fromSeed(seedColor: kcPrimaryColor)
         .copyWith(surface: const Color(0xffffffff))
         .copyWith(error: const Color(0xfff0323c)),
   );
@@ -210,7 +212,7 @@ abstract final class AppTheme {
     highlightColor: Colors.white.withAlpha(28),
     splashColor: Colors.white.withAlpha(56),
     colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color(0xffD17E0F),
+      seedColor: kcPrimaryColor,
       brightness: Brightness.dark,
     ).copyWith(surface: const Color(0xff161616)).copyWith(error: Colors.orange),
   );
