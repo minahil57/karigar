@@ -5,6 +5,7 @@ class Routes {
   static const String splash = '/';
   static const String onboarding = '/onboarding';
   static const String createAccount = '/auth/create_account';
+  static const String agent = '/agent';
 }
 
 class AppRouter {
@@ -31,6 +32,11 @@ class AppRouter {
         name: Routes.createAccount,
         page: () => const CreateAccountView(),
         binding: CreateAccountBinding(),
+      ),
+      GetPage(
+        name: Routes.agent,
+        page: () => const AgentView(),
+        binding: AgentBinding(),
       ),
     ];
   }

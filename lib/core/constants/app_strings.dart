@@ -77,4 +77,11 @@ class AppStrings {
   static const String enterYourEmail = "Enter your email Adress";
   static const String dontHaveAnAccount = 'Don\'t have an account? ';
   static const String createAccount = 'Create Account';
+  static const String fullName = "Full Name";
+  static const String fullNameHint = "Enter your full name";
+  static const String phoneNumber = "Phone Number";
+  static const String phoneNumberHint = "Enter your phone number";
+  static const String confirmPassword = "Confirm Password";
+  static const String confirmPasswordHint = "Confirm your password";
+  static const String registerAsProvider = "Register as Provider";
 }

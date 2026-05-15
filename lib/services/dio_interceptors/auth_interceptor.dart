@@ -2,13 +2,7 @@ import 'package:karigar/export.dart';
 
 final Interceptor authInterceptor = QueuedInterceptorsWrapper(
   onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
-    String? accessToken = LocalStorage.getData(LocalStorage.accessToken);
-
-    // options.path.replaceAll(
-    //   EndPoints.baseUrl
-    // );
-    ;
-    options.headers.addAll({'Authorization': 'Bearer ${accessToken ?? ''}'});
+    options.headers.addAll({'Authorization': 'Bearer ${await getAccessToken()}'});
     return handler.next(options);
   },
   onError: (DioException e, ErrorInterceptorHandler handler) async {

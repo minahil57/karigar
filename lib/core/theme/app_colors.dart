@@ -20,6 +20,7 @@ const Color kcSuccessGreenColor = Color(0xFF5FB3B3); // Using Teal as Success
 const Color kcBackgroundColor = Color(0xFFF8FAFC); // Soft Off-White
 const Color kcBackgroundLight = Color(0xFFF8FAFC);
 const Color kcLightVeryPrimaryColor = Color(0xFFF1F5F9);
+const Color kcTabDisableColor = Color(0xFFFAFCFF);
 
 // Borders
 const Color kcborderColor = Color(0xFFE2E8F0); // Subtle Border
