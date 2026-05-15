@@ -34,7 +34,7 @@ TextStyle getBoldStyle({
   return appTextStyle(
     color: color,
     fontSize: fontSize,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600,
     decoration: decoration,
     decorationColor: decorationColor,
     decorationStyle: decorationStyle,

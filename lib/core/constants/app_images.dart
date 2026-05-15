@@ -1,5 +1,6 @@
 class AppImages {
   static const String logo = 'assets/images/logo.png';
+  static const String logoWithoutName = 'assets/images/logo_without_name.png';
 
   //Onboarding Slides
   static const String onboardingSlide1 = 'assets/images/step-1.png';

@@ -69,13 +69,22 @@ double getResponsiveExtraLargeFontSize(BuildContext context) =>
 double getResponsiveMassiveFontSize(BuildContext context) =>
     getResponsiveFontSize(context, fontSize: 30);
 
-double getResponsiveFontSize(BuildContext context,
-    {double? fontSize, double? max,}) {
-  max ??= 100;
+double getResponsiveFontSize(
+  BuildContext context, {
+  double? fontSize,
+  double? max,
+}) {
+  double width = screenWidth(context);
+  // Using 400 as base to make fonts slightly smaller on standard phones
+  double scale = width / 400;
+  double responsiveSize = (fontSize ?? 16) * scale;
 
-  var responsiveSize = min(
-      screenWidthFraction(context, dividedBy: 10) * ((fontSize ?? 100) / 100),
-      max,);
+  if (max != null && responsiveSize > max) {
+    return max;
+  }
 
-  return responsiveSize;
+  // Ensure it doesn't get smaller than 80% of the original size on tiny screens
+  return maxSafe(responsiveSize, (fontSize ?? 16) * 0.8);
 }
+
+double maxSafe(double a, double b) => a > b ? a : b;
