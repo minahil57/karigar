@@ -4,3 +4,4 @@ export 'bad_request_model.dart';
 export 'dio_helper.dart';
 export 'dio_interceptors/export.dart';
 export 'endpoints/endpoints.dart';
+export 'socket_service.dart';
