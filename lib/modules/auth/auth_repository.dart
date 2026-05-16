@@ -10,6 +10,22 @@ class AuthRepository {
   //   await refreshLoginData(model);
   // }
 
+  static Future<String?> registerUser(Map<String, dynamic> data) async {
+    try {
+      var response = await ApiProvider.auth.register(data: data);
+
+      if (response.statusCode == 201) {
+        return null;
+      } else {
+        return response.data['message'] ?? 'Something went wrong';
+      }
+    } on DioException catch (e) {
+      return e.response?.data['message'] ?? 'Something went wrong';
+    } on Exception {
+      return 'Something went wrong';
+    }
+  }
+
   static Future<String?> loginUser(Map<String, dynamic> data) async {
     try {
       var response = await ApiProvider.auth.login(
@@ -17,17 +33,22 @@ class AuthRepository {
         password: data['password'],
       );
 
-      if (response.statusCode == 200 && response.data['status'] == true) {
+      if (response.statusCode == 200) {
+        final loginData = response.data['data'];
+        final token = loginData['token'];
+        final userData = loginData['user'];
+
+        await LocalStorage.saveSecureData(LocalStorage.accessToken, token);
+        await LocalStorage.setUser(UserModel.fromJson(userData));
+        await LocalStorage.setLoggedInUser(true);
+        isLoggedIn = true;
+
         return null;
       } else {
-        return 'Something went wrong';
+        return response.data['message'] ?? 'Something went wrong';
       }
     } on DioException catch (e) {
-      if (e.response?.statusCode == 400) {
-        return e.response?.data['data'];
-      } else {
-        return 'Something went wrong';
-      }
+      return e.response?.data['message'] ?? 'Something went wrong';
     } on Exception {
       return 'Something went wrong';
     }
@@ -112,8 +133,11 @@ class AuthRepository {
 
   static Future<void> localLogout() async {
     await LocalStorage.removeLoggedInUser();
-    await LocalStorage.removeData(LocalStorage.accessToken);
+    await LocalStorage.removeData(LocalStorage.accessToken); // Clear non-secure if exists
+    await LocalStorage.deleteSecureData(LocalStorage.accessToken);
     await LocalStorage.removeData(LocalStorage.refreshToken);
+    await LocalStorage.deleteSecureData(LocalStorage.refreshToken);
+    isLoggedIn = false;
     Get.offAllNamed(Routes.login);
   }
 

@@ -4,7 +4,9 @@ class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>(
+    debugLabel: 'login_form',
+  );
 
   bool _isObscure = true;
   bool get isObscure => _isObscure;
@@ -28,18 +30,36 @@ class LoginController extends GetxController {
     try {
       EasyLoading.show(status: 'Logging in...');
 
-      AuthRepository.loginUser({
+      final errorMessage = await AuthRepository.loginUser({
         'email': emailController.text,
         'password': passwordController.text,
       });
+      if (errorMessage == null) {
+        Snackbars.success('Login successful');
+        EasyLoading.showSuccess('Login successful');
+        log(await getAccessToken());
 
-      await Future.delayed(const Duration(seconds: 1));
-
-      EasyLoading.showSuccess("Login successful!");
-
-      Snackbars.success('Login successful');
+        log((getUser())!.toJson().toString());
+        if (getUser()?.role == UserRole.customer.apiValue) {
+          Get.toNamed(Routes.agent);
+        } else {
+          Snackbars.info('Minahil is Working on providers');
+          // Get.toNamed(Routes.agent);
+        }
+      } else {
+        Snackbars.error(errorMessage);
+      }
     } catch (e) {
-      EasyLoading.showError(e.toString());
+      EasyLoading.showError('Something went wrong');
+      EasyLoading.dismiss();
     }
+    EasyLoading.dismiss();
+  }
+
+  @override
+  void onClose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.onClose();
   }
 }

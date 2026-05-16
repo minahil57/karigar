@@ -91,7 +91,7 @@ class LoginView extends StatelessWidget {
                   CustomTextButton(
                     text: AppStrings.createAccount,
                     onPressed: () {
-                      Get.toNamed(Routes.createAccount);
+                      Get.offNamed(Routes.createAccount);
                     },
                   ),
                 ],

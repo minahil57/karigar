@@ -2,6 +2,8 @@ import 'package:karigar/export.dart';
 
 abstract final class DioHelper {
   static late Dio _dio;
+  static late Dio _dioWithoutAuth;
+  static late Dio _dioforFileUpload;
 
   static void init() {
     _dio = Dio(
@@ -16,7 +18,18 @@ abstract final class DioHelper {
         },
       ),
     )..interceptors.addAll(dioInterceptoprs);
-    log('DioHelper initialized');
+    _dioWithoutAuth = Dio(
+      BaseOptions(
+        receiveDataWhenStatusError: true,
+        contentType: 'application/json',
+      ),
+    )..interceptors.addAll([loggerInterceptor, networkInterceptor]);
+    _dioforFileUpload = Dio(
+      BaseOptions(
+        receiveDataWhenStatusError: true,
+        contentType: 'multipart/form-data',
+      ),
+    )..interceptors.addAll([loggerInterceptor, networkInterceptor]);
   }
 
   static Future<Response> getData({
@@ -24,6 +37,13 @@ abstract final class DioHelper {
     Map<String, dynamic>? queryParameters,
   }) async {
     return _dio.get(endPoint, queryParameters: queryParameters);
+  }
+
+  static Future<Response> getDataWithOutInterceptors({
+    required String endPoint,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    return _dioWithoutAuth.get(endPoint, queryParameters: queryParameters);
   }
 
   static Future<Response> postData({
@@ -34,12 +54,44 @@ abstract final class DioHelper {
     return _dio.post(endPoint, queryParameters: queryParameters, data: data);
   }
 
+  static Future<Response> postMediaUpload({
+    required String endPoint,
+    Map<String, dynamic>? queryParameters,
+    required dynamic data,
+  }) async {
+    return _dioforFileUpload.post(
+      endPoint,
+      queryParameters: queryParameters,
+      data: data,
+    );
+  }
+
+  static Future<Response> posttDataWithOutInterceptors({
+    required String endPoint,
+    Map<String, dynamic>? queryParameters,
+    required dynamic data,
+  }) async {
+    return _dioWithoutAuth.post(
+      endPoint,
+      queryParameters: queryParameters,
+      data: data,
+    );
+  }
+
   static Future<Response> putData({
     required String endPoint,
     Map<String, dynamic>? queryParameters,
     required dynamic data,
   }) async {
     return _dio.put(endPoint, queryParameters: queryParameters, data: data);
+  }
+
+  static Future<Response> patchData({
+    required String endPoint,
+    Map<String, dynamic>? queryParameters,
+    required dynamic data,
+  }) async {
+    return _dio.patch(endPoint, queryParameters: queryParameters, data: data);
   }
 
   static Future<Response> deleteData({
@@ -80,5 +132,27 @@ abstract final class DioHelper {
     } else {
       return [];
     }
+  }
+
+  static Future<Response> uploadSingleFile({
+    required XFile file,
+    required String endPoint,
+  }) async {
+    final bytes = await file.readAsBytes();
+
+    final formData = FormData.fromMap({
+      "url": MultipartFile.fromBytes(
+        bytes,
+        filename: file.name,
+        contentType: MediaType.parse(
+          lookupMimeType(file.name) ?? 'application/octet-stream',
+        ),
+      ),
+      "file_type": file.name.split('.').last,
+      "original_filename": file.name,
+      "file_size": bytes.length,
+    });
+
+    return await postMediaUpload(endPoint: endPoint, data: formData);
   }
 }

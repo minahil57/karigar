@@ -5,6 +5,7 @@ class Routes {
   static const String splash = '/';
   static const String onboarding = '/onboarding';
   static const String createAccount = '/auth/create_account';
+  static const String agent = '/agent';
   static const String home = '/provider/home';
   static const String profile = '/provider/profile';
   static const String workHistory = '/provider/work-history';
@@ -36,6 +37,8 @@ class AppRouter {
         binding: CreateAccountBinding(),
       ),
       GetPage(
+        name: Routes.agent,
+        page: () => const CustomerAppLayout(),
         name: Routes.home,
         page: () => const HomeScreen(),
         binding: HomeBinding(),

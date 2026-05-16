@@ -1,3 +1,7 @@
 import 'package:karigar/export.dart';
 
-final List<Interceptor> dioInterceptoprs = [authInterceptor, loggerInterceptor];
+final List<Interceptor> dioInterceptoprs = [
+  authInterceptor,
+  loggerInterceptor,
+  networkInterceptor,
+];

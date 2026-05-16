@@ -12,7 +12,9 @@ class _Auth {
     : _apiBaseUrl = apiBaseUrl;
   static _Auth? _instance;
 
-  String get _controllerName => '$_apiBaseUrl/Auth';
+  String get _controllerName => '$_apiBaseUrl/auth';
 
-  String get login => '$_controllerName/getToken';
+  String get register => '$_controllerName/sign-up';
+  String get login => '$_controllerName/sign-in';
+  String get refreshToken => '$_controllerName/refresh-token';
 }

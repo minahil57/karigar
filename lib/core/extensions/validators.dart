@@ -54,7 +54,39 @@ class AppValidators {
     if (!strongRegex.hasMatch(value)) {
       return "Password must be 8+ chars with A-Z, a-z, number & symbol";
     }
+  }
 
+  /// NAME VALIDATION
+  static String? name(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Name is required";
+    }
+    if (value.trim().length < 2) {
+      return "Name is too short";
+    }
+    return null;
+  }
+
+  /// PHONE VALIDATION
+  static String? phone(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Phone number is required";
+    }
+    final phoneRegex = RegExp(r"^\+?[0-9]{10,15}$");
+    if (!phoneRegex.hasMatch(value.trim())) {
+      return "Enter a valid phone number";
+    }
+    return null;
+  }
+
+  /// CONFIRM PASSWORD VALIDATION
+  static String? confirmPassword(String? value, String password) {
+    if (value == null || value.isEmpty) {
+      return "Please confirm your password";
+    }
+    if (value != password) {
+      return "Passwords do not match";
+    }
     return null;
   }
 }
