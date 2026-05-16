@@ -1,7 +1,7 @@
 import 'package:karigar/export.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class ProviderHomeScreen extends StatelessWidget {
+  const ProviderHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +26,12 @@ class HomeScreen extends StatelessWidget {
             verticalSpaceSmall,
             ProviderProfileCard(
               provider: controller.provider,
-              onTap: () => Get.toNamed(Routes.profile),
             ),
             verticalSpaceSmall,
             HomeSectionHeader(
               title: AppStrings.liveServiceRequests,
               onViewAll: () {
-                Get.toNamed(Routes.workHistory);
+                // Get.toNamed(Routes.workHistory);
               },
             ),
 

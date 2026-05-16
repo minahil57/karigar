@@ -44,13 +44,15 @@ class CustomTextField extends StatelessWidget {
           keyboardType: keyboardType,
           onChanged: onChanged,
           validator: validator,
+          style: getRegularStyle(color: kcBlackColor, fontSize: 12),
           decoration: InputDecoration(
             hintText: hintText,
             filled: isFilled,
             fillColor: fillColor,
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
-            hintStyle: getRegularStyle(color: kcTextGreyColor, fontSize: 14),
+
+            hintStyle: getRegularStyle(color: kcTextGreyColor, fontSize: 12),
 
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,

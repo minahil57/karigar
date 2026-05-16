@@ -54,6 +54,7 @@ class AppValidators {
     if (!strongRegex.hasMatch(value)) {
       return "Password must be 8+ chars with A-Z, a-z, number & symbol";
     }
+    return null;
   }
 
   /// NAME VALIDATION
