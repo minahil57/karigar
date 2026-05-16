@@ -8,7 +8,7 @@ class SplashController extends GetxController {
     super.onInit();
     Timer(const Duration(seconds: 3), () async {
       if (await getAccessToken() == '') {
-        Get.offAllNamed(Routes.login);
+        Get.offAllNamed(Routes.onboarding);
       } else {
         if (getUser()?.role == UserRole.customer.apiValue) {
           Get.offAllNamed(Routes.agent);

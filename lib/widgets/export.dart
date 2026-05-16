@@ -16,3 +16,5 @@ export 'custom_button.dart';
 export 'custom_textfield.dart';
 export 'custom_text_button.dart';
 export 'custom_tab.dart';
+export 'custom_outlined_button.dart';
+
