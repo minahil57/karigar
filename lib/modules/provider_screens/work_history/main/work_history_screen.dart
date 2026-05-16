@@ -5,6 +5,7 @@ class WorkHistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => WorkHistoryController());
     final controller = Get.find<WorkHistoryController>();
 
     return CustomLayout(
@@ -12,11 +13,8 @@ class WorkHistoryScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            verticalSpaceSmall,
-            const WorkHistoryHeader(),
-            verticalSpaceMedium,
-            const WorkHistoryTabs(),
-            verticalSpaceMedium,
+            // const WorkHistoryTabs(),
+            // verticalSpaceMedium,
             Expanded(
               child: Obx(() {
                 final list = controller.filteredList;

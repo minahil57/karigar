@@ -37,10 +37,9 @@ class AppRouter {
       GetPage(name: Routes.agent, page: () => const CustomerAppLayout()),
       GetPage(
         name: Routes.providerApp,
-        page: () => const ProviderProfileScreen(),
-        binding: ProfileBinding(),
+        page: () => const ProviderAppLayout(),
+       
       ),
-
     ];
   }
 }

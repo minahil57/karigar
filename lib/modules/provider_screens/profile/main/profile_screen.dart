@@ -5,6 +5,7 @@ class ProviderProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => ProfileController());
     final controller = Get.find<ProfileController>();
 
     return CustomLayout(
@@ -12,9 +13,6 @@ class ProviderProfileScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            verticalSpaceSmall,
-            ProfileHeader(title: 'Profile', onEdit: () {}),
-            verticalSpaceMedium,
             ProfileInfoCard(profile: controller.profile),
             verticalSpaceLarge,
             _buildSection(
