@@ -1,25 +1,12 @@
 import 'package:karigar/export.dart';
 
-class AgentView extends StatelessWidget {
+class AgentView extends GetView<AgentController> {
   const AgentView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(AgentController());
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [
-            kcSecondaryColor.withValues(alpha: 0.2),
-            kcSecondaryColor.withValues(alpha: 0.05),
-            kcSecondaryColor.withValues(alpha: 0),
-          ],
-        ),
-      ),
+     Get.lazyPut(() => AgentController());
+    return CustomLayout(
       child: Stack(
         children: [
           Positioned(
@@ -98,8 +85,7 @@ class AgentView extends StatelessWidget {
                 ),
               ),
               const SuggestionsSection(),
-              const ChatField(),
-              verticalSpace(10),
+              SafeArea(top: false, child: const ChatField()),
             ],
           ),
         ],
