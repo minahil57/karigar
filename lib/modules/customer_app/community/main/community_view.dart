@@ -6,15 +6,15 @@ class CommunityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      Get.lazyPut(() => CommunityController());
+    Get.lazyPut(() => CommunityController());
     return GetBuilder<CommunityController>(
+      id: 'providers',
       builder: (controller) {
         return CustomLayout(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                verticalSpace(10),
                 CustomTextField(
                   controller: controller.searchController,
                   hintText: 'Search for Karigars...',
@@ -44,28 +44,30 @@ class CommunityView extends StatelessWidget {
                               ],
                             ),
                           )
-                        : controller.filteredProviders.isEmpty && !controller.isLoading
-                            ? const Center(
-                                child: CustomText(
-                                  fontSize: 14,
-                                  text: 'No providers found',
-                                  color: kcTextGreyColor,
-                                ),
-                              )
-                            : ListView.separated(
-                                physics: const BouncingScrollPhysics(),
-                                itemCount: controller.isLoading
-                                    ? 5
-                                    : controller.filteredProviders.length,
-                                separatorBuilder: (context, index) =>
-                                    verticalSpace(15),
-                                itemBuilder: (context, index) {
-                                  final provider = controller.isLoading
-                                      ? dummyProvidersList[index]
-                                      : controller.filteredProviders[index];
-                                  return ProviderCard(provider: provider);
-                                },
-                              ),
+                        : controller.filteredProviders.isEmpty &&
+                              !controller.isLoading
+                        ? const Center(
+                            child: CustomText(
+                              fontSize: 14,
+                              text: 'No providers found',
+                              color: kcTextGreyColor,
+                            ),
+                          )
+                        : ListView.separated(
+                            padding: EdgeInsets.zero,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: controller.isLoading
+                                ? 5
+                                : controller.filteredProviders.length,
+                            separatorBuilder: (context, index) =>
+                                verticalSpace(15),
+                            itemBuilder: (context, index) {
+                              final provider = controller.isLoading
+                                  ? dummyProvidersList[index]
+                                  : controller.filteredProviders[index];
+                              return ProviderCard(provider: provider);
+                            },
+                          ),
                   ),
                 ),
               ],

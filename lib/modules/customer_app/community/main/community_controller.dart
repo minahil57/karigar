@@ -7,21 +7,21 @@ class CommunityController extends GetxController {
   List<ProviderData> get providers => _providers;
   set providers(List<ProviderData> value) {
     _providers = value;
-    update();
+    update(['providers']);
   }
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
   set isLoading(bool value) {
     _isLoading = value;
-    update();
+    update(['providers']);
   }
 
   String _errorMessage = '';
   String get errorMessage => _errorMessage;
   set errorMessage(String value) {
     _errorMessage = value;
-    update();
+    update(['providers']);
   }
 
   String _searchQuery = '';
@@ -47,21 +47,25 @@ class CommunityController extends GetxController {
     fetchProviders();
   }
 
-  Future<void> fetchProviders() async {
-    isLoading = true;
-    errorMessage = '';
+Future<void> fetchProviders() async {
+    try {
+      isLoading = true;
+      errorMessage = '';
 
-    providers = dummyProvidersList;
+      providers = dummyProvidersList;
 
-    final result = await ProvidersRepository.getProviders({});
+      final result = await ProvidersRepository.getProviders({});
 
-    if (result['error'] == null) {
-      providers = result['data'];
-    } else {
-      errorMessage = result['error'];
+      if (result['error'] == null) {
+        providers = List<ProviderData>.from(result['data']);
+      } else {
+        errorMessage = result['error'].toString();
+      }
+    } catch (e) {
+      errorMessage = e.toString();
+    } finally {
+      isLoading = false;
     }
-
-    isLoading = false;
   }
 
   void onSearchChanged(String value) {

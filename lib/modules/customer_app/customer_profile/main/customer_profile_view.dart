@@ -6,9 +6,20 @@ class CustomerProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => CustomerProfileController());
-    return CustomLayout(child: Column(children: [
-
-      ],
-    ));
+    return CustomLayout(
+      child: Column(
+        children: [
+          CustomOutlineButton(
+            backgroundColor: kcErrorColor,
+            textColor: kcWhitecolor,
+            borderColor: kcErrorColor,
+            text: 'Logout',
+            onPressed: () {
+              AuthRepository.localLogout();
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
