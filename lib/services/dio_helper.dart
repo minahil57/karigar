@@ -11,6 +11,7 @@ abstract final class DioHelper {
         receiveDataWhenStatusError: true,
         contentType: 'application/json',
         headers: {
+    
           'Content-Type': 'application/json',
           'apiKey': '',
           'lang': 'en-US',

@@ -1,0 +1,91 @@
+import 'package:karigar/export.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.find<HomeController>();
+    final bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
+    final bool isTablet = ResponsiveBreakpoints.of(context).isTablet;
+
+    final double horizontalPadding = isMobile
+        ? 20
+        : isTablet
+        ? 40
+        : 80;
+
+    return CustomLayout(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            verticalSpaceSmall,
+            HomeHeader(onLogout: () {}),
+            verticalSpaceSmall,
+            ProviderProfileCard(
+              provider: controller.provider,
+              onTap: () => Get.toNamed(Routes.profile),
+            ),
+            verticalSpaceSmall,
+            HomeSectionHeader(
+              title: AppStrings.liveServiceRequests,
+              onViewAll: () {
+                Get.toNamed(Routes.workHistory);
+              },
+            ),
+
+            _buildServiceRequestList(context, controller, isMobile),
+            verticalSpaceLarge,
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildServiceRequestList(
+    BuildContext context,
+    HomeController controller,
+    bool isMobile,
+  ) {
+    if (!isMobile) {
+      return GridView.builder(
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+          mainAxisExtent: 220,
+        ),
+        itemCount: controller.serviceRequests.length,
+        itemBuilder: (context, index) {
+          final request = controller.serviceRequests[index];
+          return ServiceRequestCard(
+            request: request,
+            onAccept: () {},
+            onReject: () {},
+          );
+        },
+      );
+    }
+
+    return ListView.separated(
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: controller.serviceRequests.length,
+      separatorBuilder: (context, index) => verticalSpaceSmall,
+      itemBuilder: (context, index) {
+        final request = controller.serviceRequests[index];
+        return ServiceRequestCard(
+          request: request,
+          onAccept: () {},
+          onReject: () {},
+        );
+      },
+    );
+  }
+}

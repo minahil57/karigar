@@ -88,4 +88,22 @@ class AppStrings {
   static const String writeYourMessage = "Write your message";
   static const String suggestionsForYou = "Suggestions for you";
   static const String hey = "Hey";
+
+  // Provider Home
+  static const String agenticDiscovery = 'Agentic Discovery';
+  static const String aiPoweredMarketplace =
+      'AI-Powered Local Services Marketplace';
+  static const String logout = 'Logout';
+  static const String verified = 'Verified';
+  static const String jobs = 'Jobs';
+  static const String earnings = 'Earnings';
+  static const String activeBooking = 'Active Booking';
+  static const String ongoing = 'Ongoing';
+  static const String liveServiceRequests = 'Live Service Requests';
+  static const String viewAll = 'View All';
+  static const String aiPerfectMatch = 'AI Perfect Match';
+  static const String estEarnings = 'Est. Earnings';
+  static const String preferred = 'Preferred:';
+  static const String accept = 'Accept';
+  static const String reject = 'Reject';
 }
