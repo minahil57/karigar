@@ -71,7 +71,10 @@ class LoginView extends StatelessWidget {
                       width: double.infinity,
                       text: AppStrings.signIn,
 
-                      onPressed: controller.submitLogin,
+                      onPressed: () {
+                         controller.submitLogin();
+                      //  Get.toNamed(Routes.home);
+                      },
                     ),
                   ],
                 ),

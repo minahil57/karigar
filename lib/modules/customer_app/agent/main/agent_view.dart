@@ -5,21 +5,8 @@ class AgentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(AgentController());
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [
-            kcSecondaryColor.withValues(alpha: 0.2),
-            kcSecondaryColor.withValues(alpha: 0.05),
-            kcSecondaryColor.withValues(alpha: 0),
-          ],
-        ),
-      ),
+     Get.lazyPut(() => AgentController());
+    return CustomLayout(
       child: Stack(
         children: [
           Positioned(
@@ -74,13 +61,17 @@ class AgentView extends StatelessWidget {
                           ),
                         ),
                         verticalSpace(20),
-                        FadeInUp(
-                          child: CustomText(
-                            text: controller.greeting,
-                            fontSize: 24,
-                            variant: TextVariant.medium,
-                            color: kcTextBlackcolor,
-                          ),
+                        GetBuilder<AgentController>(
+                          builder: (controller) {
+                            return FadeInUp(
+                              child: CustomText(
+                                text: controller.greeting,
+                                fontSize: 24,
+                                variant: TextVariant.medium,
+                                color: kcTextBlackcolor,
+                              ),
+                            );
+                          }
                         ),
                         verticalSpace(10),
                         FadeInUp(
@@ -98,8 +89,7 @@ class AgentView extends StatelessWidget {
                 ),
               ),
               const SuggestionsSection(),
-              const ChatField(),
-              verticalSpace(10),
+              SafeArea(top: false, child: const ChatField()),
             ],
           ),
         ],
