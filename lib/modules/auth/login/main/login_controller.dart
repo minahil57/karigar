@@ -43,8 +43,7 @@ class LoginController extends GetxController {
         if (getUser()?.role == UserRole.customer.apiValue) {
           Get.toNamed(Routes.agent);
         } else {
-          Snackbars.info('Minahil is Working on providers');
-          // Get.toNamed(Routes.agent);
+          Get.toNamed(Routes.providerApp);
         }
       } else {
         Snackbars.error(errorMessage);

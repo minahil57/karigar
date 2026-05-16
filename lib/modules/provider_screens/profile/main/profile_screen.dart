@@ -1,7 +1,7 @@
 import 'package:karigar/export.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class ProviderProfileScreen extends StatelessWidget {
+  const ProviderProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
