@@ -1,4 +1,5 @@
 import 'package:karigar/export.dart';
+import 'package:karigar/widgets/custom_skeleton.dart';
 
 class CommunityView extends StatelessWidget {
   const CommunityView({super.key});
@@ -6,12 +7,72 @@ class CommunityView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
       Get.lazyPut(() => CommunityController());
-    return CustomLayout(
-      child: Column(
-        children: [
-
-        ],
-      )
+    return GetBuilder<CommunityController>(
+      builder: (controller) {
+        return CustomLayout(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                verticalSpace(10),
+                CustomTextField(
+                  controller: controller.searchController,
+                  hintText: 'Search for Karigars...',
+                  prefixIcon: const Icon(Iconsax.search_normal),
+                  onChanged: controller.onSearchChanged,
+                ),
+                verticalSpace(20),
+                Expanded(
+                  child: CustomSkeleton(
+                    enabled: controller.isLoading,
+                    child: controller.errorMessage.isNotEmpty
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomText(
+                                  fontSize: 14,
+                                  text: controller.errorMessage,
+                                  color: kcErrorColor,
+                                ),
+                                verticalSpace(10),
+                                CustomOutlineButton(
+                                  text: 'Retry',
+                                  onPressed: controller.fetchProviders,
+                                  height: 40,
+                                ),
+                              ],
+                            ),
+                          )
+                        : controller.filteredProviders.isEmpty && !controller.isLoading
+                            ? const Center(
+                                child: CustomText(
+                                  fontSize: 14,
+                                  text: 'No providers found',
+                                  color: kcTextGreyColor,
+                                ),
+                              )
+                            : ListView.separated(
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: controller.isLoading
+                                    ? 5
+                                    : controller.filteredProviders.length,
+                                separatorBuilder: (context, index) =>
+                                    verticalSpace(15),
+                                itemBuilder: (context, index) {
+                                  final provider = controller.isLoading
+                                      ? dummyProvidersList[index]
+                                      : controller.filteredProviders[index];
+                                  return ProviderCard(provider: provider);
+                                },
+                              ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

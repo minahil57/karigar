@@ -24,9 +24,9 @@ class ProviderHomeScreen extends StatelessWidget {
             verticalSpaceSmall,
             HomeHeader(onLogout: () {}),
             verticalSpaceSmall,
-            ProviderProfileCard(
-              provider: controller.provider,
-            ),
+            // ProviderProfileCard(
+            //   provider: controller.provider,
+            // ),
             verticalSpaceSmall,
             HomeSectionHeader(
               title: AppStrings.liveServiceRequests,
