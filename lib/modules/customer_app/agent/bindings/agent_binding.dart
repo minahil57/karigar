@@ -1,8 +1,8 @@
-import 'package:karigar/export.dart';
+// import 'package:karigar/export.dart';
 
-class AgentBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => AgentController());
-  }
-}
+// class AgentBinding extends Bindings {
+//   @override
+//   void dependencies() {
+//     Get.lazyPut(() => AgentController());
+//   }
+// }

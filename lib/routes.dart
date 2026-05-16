@@ -35,8 +35,7 @@ class AppRouter {
       ),
       GetPage(
         name: Routes.agent,
-        page: () => const AgentView(),
-        binding: AgentBinding(),
+        page: () => const CustomerAppLayout(),
       ),
     ];
   }

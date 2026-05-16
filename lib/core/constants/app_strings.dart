@@ -84,8 +84,7 @@ class AppStrings {
   static const String confirmPassword = "Confirm Password";
   static const String confirmPasswordHint = "Confirm your password";
   static const String registerAsProvider = "Register as Provider";
-  static const String letMeHelpYou =
-      "Let me help you find the right\nservice provider";
+  static const String letMeHelpYou = "Let me help you find the right\nKarigar";
   static const String writeYourMessage = "Write your message";
   static const String suggestionsForYou = "Suggestions for you";
   static const String hey = "Hey";

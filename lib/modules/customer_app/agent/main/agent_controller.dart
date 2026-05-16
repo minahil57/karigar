@@ -5,20 +5,31 @@ class AgentController extends GetxController {
   
   final List<Map<String, String>> suggestions = [
     {
-      'title': "What's available for investment with 10% ROI?",
-      'icon': 'roi',
+      'title': "Mujhe Ek Electrician chahiye ",
+      'icon': 'electrician',
     },
     {
-      'title': "Most off-plan projects handing over in 2027",
-      'icon': 'plan',
+      'title': "Mujhe Ek Painter chahiye",
+      'icon': 'painter',
     },
     {
-      'title': "Luxury penthouses in Downtown Dubai",
-      'icon': 'luxury',
+      'title': "Mujhe Ek Plumber chahiye",
+      'icon': 'plumber',
     },
   ];
 
-  String get greeting => "${AppStrings.hey} ${getUser()?.name ?? 'User'}!";
+  String get greeting {
+    final hour = DateTime.now().hour;
+    String g;
+    if (hour < 12) {
+      g = 'Good Morning';
+    } else if (hour < 17) {
+      g = 'Good Afternoon';
+    } else {
+      g = 'Good Evening';
+    }
+    return "$g, ${getUser()?.name ?? 'User'}!";
+  }
 
   void sendMessage() {
     if (messageController.text.trim().isNotEmpty) {
