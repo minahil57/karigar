@@ -5,6 +5,9 @@ class Routes {
   static const String splash = '/';
   static const String onboarding = '/onboarding';
   static const String createAccount = '/auth/create_account';
+  static const String home = '/provider/home';
+  static const String profile = '/provider/profile';
+  static const String workHistory = '/provider/work-history';
 }
 
 class AppRouter {
@@ -31,6 +34,21 @@ class AppRouter {
         name: Routes.createAccount,
         page: () => const CreateAccountView(),
         binding: CreateAccountBinding(),
+      ),
+      GetPage(
+        name: Routes.home,
+        page: () => const HomeScreen(),
+        binding: HomeBinding(),
+      ),
+      GetPage(
+        name: Routes.profile,
+        page: () => const ProfileScreen(),
+        binding: ProfileBinding(),
+      ),
+      GetPage(
+        name: Routes.workHistory,
+        page: () => const WorkHistoryScreen(),
+        binding: WorkHistoryBinding(),
       ),
     ];
   }
