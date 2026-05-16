@@ -17,7 +17,7 @@ class LoginView extends StatelessWidget {
                 duration: const Duration(milliseconds: 1000),
                 child: CustomText(
                   text: AppStrings.findExpertsOrGetHired,
-                  fontSize: 28,
+                  fontSize: 24,
                   color: kcTextBlackcolor,
                   textAlign: TextAlign.center,
                 ),
@@ -71,10 +71,7 @@ class LoginView extends StatelessWidget {
                       width: double.infinity,
                       text: AppStrings.signIn,
 
-                      onPressed: () {
-                        // controller.submitLogin();
-                        Get.toNamed(Routes.home);
-                      },
+                      onPressed: controller.submitLogin,
                     ),
                   ],
                 ),
@@ -85,7 +82,7 @@ class LoginView extends StatelessWidget {
                 children: [
                   CustomText(
                     text: AppStrings.dontHaveAnAccount,
-                    fontSize: 16,
+                    fontSize: 14,
                     color: kcTextGreyColor,
                   ),
                   CustomTextButton(

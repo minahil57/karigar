@@ -40,7 +40,7 @@ class CustomSegmentedTab extends StatelessWidget {
                 ),
                 child: Container(
                   width: itemWidth,
-                  height: 45,
+                  height: 48,
                   decoration: BoxDecoration(
                     color: kcSecondaryColor,
                     borderRadius: BorderRadius.circular(40),

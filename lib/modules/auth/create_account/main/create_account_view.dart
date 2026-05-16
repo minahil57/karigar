@@ -16,7 +16,7 @@ class CreateAccountView extends StatelessWidget {
                 duration: const Duration(milliseconds: 1000),
                 child: CustomText(
                   text: AppStrings.findExpertsOrGetHired,
-                  fontSize: 28,
+                  fontSize: 24,
                   color: kcTextBlackcolor,
                   textAlign: TextAlign.center,
                 ),
@@ -27,7 +27,7 @@ class CreateAccountView extends StatelessWidget {
                 duration: const Duration(milliseconds: 1000),
                 child: CustomText(
                   text: AppStrings.signInToYourAccount,
-                  fontSize: 16,
+                  fontSize: 14,
                   color: kcTextGreyColor,
                 ),
               ),
@@ -56,7 +56,7 @@ class CreateAccountView extends StatelessWidget {
                 children: [
                   CustomText(
                     text: 'Already Have an Account? ',
-                    fontSize: 16,
+                    fontSize: 14,
                     color: kcTextGreyColor,
                   ),
                   CustomTextButton(

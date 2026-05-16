@@ -2,12 +2,12 @@ import 'package:karigar/export.dart';
 
 class ProviderProfileCard extends StatelessWidget {
   final ProviderModel provider;
-  final VoidCallback? onTap;
+
 
   const ProviderProfileCard({
     super.key,
     required this.provider,
-    this.onTap,
+
   });
 
   @override
@@ -28,117 +28,113 @@ class ProviderProfileCard extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          GestureDetector(
-            onTap: onTap,
-            behavior: HitTestBehavior.opaque,
-            child: Row(
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: kcSecondaryColor.withValues(alpha: 0.5),
-                          width: 2,
-                        ),
-                      ),
-                      child: CircleAvatar(
-                        radius: 35,
-                        backgroundImage: NetworkImage(provider.profileImageUrl),
+          Row(
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: kcSecondaryColor.withValues(alpha: 0.5),
+                        width: 2,
                       ),
                     ),
-                    Positioned(
-                      bottom: 2,
-                      right: 2,
-                      child: Container(
-                        width: 14,
-                        height: 14,
-                        decoration: BoxDecoration(
-                          color: kcSecondaryColor,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: kcPrimaryColor, width: 2),
-                        ),
+                    child: CircleAvatar(
+                      radius: 35,
+                      backgroundImage: NetworkImage(provider.profileImageUrl),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 2,
+                    right: 2,
+                    child: Container(
+                      width: 14,
+                      height: 14,
+                      decoration: BoxDecoration(
+                        color: kcSecondaryColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: kcPrimaryColor, width: 2),
                       ),
+                    ),
+                  ),
+                ],
+              ),
+              horizontalSpaceMedium,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Flexible(
+                          child: CustomText(
+                            text: provider.name,
+                            variant: TextVariant.bold,
+                            fontSize: 16,
+                            color: kcWhitecolor,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        horizontalSpaceSmall,
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: kcSecondaryColor.withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: kcSecondaryColor.withValues(alpha: 0.3),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Iconsax.shield_tick,
+                                color: kcSecondaryColor,
+                                size: 12,
+                              ),
+                              horizontalSpaceTiny,
+                              CustomText(
+                                text: AppStrings.verified,
+                                variant: TextVariant.medium,
+                                fontSize: 10,
+                                color: kcSecondaryColor,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    CustomText(
+                      text: provider.profession,
+                      color: kcWhitecolor.withValues(alpha: 0.6),
+                      fontSize: 12,
+                    ),
+                    verticalSpaceTiny,
+                    Row(
+                      children: [
+                        const Icon(
+                          Iconsax.star1,
+                          color: Colors.amber,
+                          size: 12,
+                        ),
+                        horizontalSpaceTiny,
+                        CustomText(
+                          text: provider.rating,
+                          variant: TextVariant.medium,
+                          color: kcWhitecolor,
+                          fontSize: 10,
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                horizontalSpaceMedium,
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Flexible(
-                            child: CustomText(
-                              text: provider.name,
-                              variant: TextVariant.bold,
-                              fontSize: 16,
-                              color: kcWhitecolor,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          horizontalSpaceSmall,
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 4,
-                            ),
-                            decoration: BoxDecoration(
-                              color: kcSecondaryColor.withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: kcSecondaryColor.withValues(alpha: 0.3),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(
-                                  Iconsax.shield_tick,
-                                  color: kcSecondaryColor,
-                                  size: 12,
-                                ),
-                                horizontalSpaceTiny,
-                                CustomText(
-                                  text: AppStrings.verified,
-                                  variant: TextVariant.medium,
-                                  fontSize: 10,
-                                  color: kcSecondaryColor,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      CustomText(
-                        text: provider.profession,
-                        color: kcWhitecolor.withValues(alpha: 0.6),
-                        fontSize: 12,
-                      ),
-                      verticalSpaceTiny,
-                      Row(
-                        children: [
-                          const Icon(
-                            Iconsax.star1,
-                            color: Colors.amber,
-                            size: 12,
-                          ),
-                          horizontalSpaceTiny,
-                          CustomText(
-                            text: provider.rating,
-                            variant: TextVariant.medium,
-                            color: kcWhitecolor,
-                            fontSize: 10,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           verticalSpaceMedium,
           Row(

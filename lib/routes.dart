@@ -6,9 +6,7 @@ class Routes {
   static const String onboarding = '/onboarding';
   static const String createAccount = '/auth/create_account';
   static const String agent = '/agent';
-  static const String home = '/provider/home';
-  static const String profile = '/provider/profile';
-  static const String workHistory = '/provider/work-history';
+  static const String providerApp = '/provider';
 }
 
 class AppRouter {
@@ -36,23 +34,13 @@ class AppRouter {
         page: () => const CreateAccountView(),
         binding: CreateAccountBinding(),
       ),
+      GetPage(name: Routes.agent, page: () => const CustomerAppLayout()),
       GetPage(
-        name: Routes.agent,
-        page: () => const CustomerAppLayout(),
-        name: Routes.home,
-        page: () => const HomeScreen(),
-        binding: HomeBinding(),
-      ),
-      GetPage(
-        name: Routes.profile,
-        page: () => const ProfileScreen(),
+        name: Routes.providerApp,
+        page: () => const ProviderProfileScreen(),
         binding: ProfileBinding(),
       ),
-      GetPage(
-        name: Routes.workHistory,
-        page: () => const WorkHistoryScreen(),
-        binding: WorkHistoryBinding(),
-      ),
+
     ];
   }
 }

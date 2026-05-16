@@ -38,11 +38,13 @@ class CreateAccountController extends GetxController {
       "role": _selectedValue!.apiValue,
     });
     log(errorMessage.toString());
-    EasyLoading.dismiss();
+
     if (errorMessage == null) {
+      EasyLoading.dismiss();
       Snackbars.success('Account Created Successfully');
       Get.offAllNamed(Routes.login);
     } else {
+      EasyLoading.dismiss();
       Snackbars.error(errorMessage);
     }
   }
