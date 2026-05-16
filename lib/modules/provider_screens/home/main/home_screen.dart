@@ -5,6 +5,7 @@ class ProviderHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => HomeController());
     final controller = Get.find<HomeController>();
     final bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
     final bool isTablet = ResponsiveBreakpoints.of(context).isTablet;
@@ -21,12 +22,10 @@ class ProviderHomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            verticalSpaceSmall,
-            HomeHeader(onLogout: () {}),
-            verticalSpaceSmall,
-            ProviderProfileCard(
-              provider: controller.provider,
-            ),
+            // verticalSpaceSmall,
+            // // HomeHeader(onLogout: () {}),
+            // verticalSpaceSmall,
+            ProviderProfileCard(provider: controller.provider),
             verticalSpaceSmall,
             HomeSectionHeader(
               title: AppStrings.liveServiceRequests,

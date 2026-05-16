@@ -6,3 +6,4 @@ export 'ui_constants.dart';
 export 'custom_layout.dart';
 export 'app_layout.dart';
 export 'customer_app_layout.dart';
+export 'provider_app_layout.dart';

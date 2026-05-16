@@ -13,7 +13,7 @@ class SplashController extends GetxController {
         if (getUser()?.role == UserRole.customer.apiValue) {
           Get.offAllNamed(Routes.agent);
         } else {
-          Snackbars.error("Invalid user role");
+          Get.offAllNamed(Routes.providerApp);
         }
       }
     });
