@@ -7,7 +7,7 @@ final Interceptor authInterceptor = QueuedInterceptorsWrapper(
     // options.path.replaceAll(
     //   EndPoints.baseUrl
     // );
-    ;
+    
     options.headers.addAll({'Authorization': 'Bearer ${accessToken ?? ''}'});
     return handler.next(options);
   },

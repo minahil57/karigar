@@ -1,5 +1,4 @@
 import 'package:karigar/export.dart';
-import '../main/work_history_controller.dart';
 
 class WorkHistoryTabs extends StatelessWidget {
   const WorkHistoryTabs({super.key});

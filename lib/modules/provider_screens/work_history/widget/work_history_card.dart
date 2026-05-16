@@ -1,5 +1,4 @@
 import 'package:karigar/export.dart';
-import '../model/work_history_model.dart';
 
 class WorkHistoryCard extends StatelessWidget {
   final WorkHistoryModel history;

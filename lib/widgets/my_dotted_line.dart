@@ -70,8 +70,9 @@ class _MyDottedLineState extends State<MyDottedLine> {
   Widget build(BuildContext context) {
     if (_isEmpty(widget.width) &&
         _isEmpty(widget.height) &&
-        widget.child == null)
-      return Container();
+        widget.child == null) {
+      return const SizedBox.shrink();
+    }
     if (widget.child != null) {
       tryToGetChildSize();
       List<Widget> children = [

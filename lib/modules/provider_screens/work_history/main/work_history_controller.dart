@@ -1,5 +1,4 @@
 import 'package:karigar/export.dart';
-import '../model/work_history_model.dart';
 
 class WorkHistoryController extends GetxController {
   final RxInt selectedTabIndex = 0.obs;

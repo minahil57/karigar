@@ -6,7 +6,7 @@ class KarigarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppNotifier>(
-      builder: (_, provider, __) {
+      builder: (_, provider, _) {
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: GetMaterialApp(
