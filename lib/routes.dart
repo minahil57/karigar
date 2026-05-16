@@ -7,6 +7,7 @@ class Routes {
   static const String createAccount = '/auth/create_account';
   static const String agent = '/agent';
   static const String providerApp = '/provider';
+  static const String providerProfile = '/provider/profile';
 }
 
 class AppRouter {
@@ -38,7 +39,10 @@ class AppRouter {
       GetPage(
         name: Routes.providerApp,
         page: () => const ProviderAppLayout(),
-       
+      ),
+      GetPage(
+        name: Routes.providerProfile,
+        page: () => const ProviderProfileScreen(),
       ),
     ];
   }

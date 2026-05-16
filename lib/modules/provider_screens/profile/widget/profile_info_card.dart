@@ -1,11 +1,11 @@
 import 'package:karigar/export.dart';
 
 class ProfileInfoCard extends StatelessWidget {
-  final ProfileModel profile;
+  final ProviderData provider;
 
   const ProfileInfoCard({
     super.key,
-    required this.profile,
+    required this.provider,
   });
 
   @override
@@ -24,23 +24,8 @@ class ProfileInfoCard extends StatelessWidget {
               ),
               child: CircleAvatar(
                 radius: 50,
-                backgroundImage: NetworkImage(profile.profileImageUrl),
-              ),
-            ),
-            Positioned(
-              bottom: 2,
-              right: 2,
-              child: Container(
-                padding: const EdgeInsets.all(4),
-                decoration: const BoxDecoration(
-                  color: kcPrimaryColor,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Iconsax.camera,
-                  color: kcWhitecolor,
-                  size: 14,
-                ),
+                backgroundImage: CachedNetworkImageProvider(provider.avatar ?? ''),
+                backgroundColor: kcborderColor,
               ),
             ),
           ],
@@ -49,13 +34,16 @@ class ProfileInfoCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomText(
-              text: profile.name,
-              variant: TextVariant.bold,
-              fontSize: 18,
-              color: kcBlackColor,
+            Flexible(
+              child: CustomText(
+                text: provider.businessName,
+                variant: TextVariant.bold,
+                fontSize: 18,
+                color: kcBlackColor,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-            if (profile.isVerified) ...[
+            if (provider.isVerified) ...[
               horizontalSpaceTiny,
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -82,7 +70,7 @@ class ProfileInfoCard extends StatelessWidget {
           ],
         ),
         CustomText(
-          text: profile.profession,
+          text: provider.specialty?.toString() ?? 'General Technician',
           fontSize: 12,
           color: kcTextGreyColor,
         ),
@@ -93,7 +81,7 @@ class ProfileInfoCard extends StatelessWidget {
             const Icon(Iconsax.star1, color: Colors.amber, size: 14),
             horizontalSpaceTiny,
             CustomText(
-              text: '${profile.rating} (${profile.reviews})',
+              text: '${provider.rating} (${provider.reviewCount} reviews)',
               fontSize: 11,
               color: kcTextGreyColor,
               variant: TextVariant.medium,
@@ -104,7 +92,7 @@ class ProfileInfoCard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: Colors.green.withValues(alpha: 0.05),
+            color: (provider.isAvailable ? Colors.green : Colors.grey).withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(100),
           ),
           child: Row(
@@ -113,16 +101,16 @@ class ProfileInfoCard extends StatelessWidget {
               Container(
                 width: 6,
                 height: 6,
-                decoration: const BoxDecoration(
-                  color: Colors.green,
+                decoration: BoxDecoration(
+                  color: provider.isAvailable ? Colors.green : Colors.grey,
                   shape: BoxShape.circle,
                 ),
               ),
               horizontalSpaceTiny,
               CustomText(
-                text: profile.status,
+                text: provider.isAvailable ? 'Available' : 'Unavailable',
                 fontSize: 10,
-                color: Colors.green,
+                color: provider.isAvailable ? Colors.green : Colors.grey,
                 variant: TextVariant.medium,
               ),
             ],

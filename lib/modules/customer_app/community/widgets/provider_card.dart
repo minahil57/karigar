@@ -9,7 +9,12 @@ class ProviderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap:
+          onTap ??
+          () => Get.toNamed(
+            Routes.providerProfile,
+            arguments: {'providerId': provider.userId},
+          ),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 4),
         padding: const EdgeInsets.all(16),

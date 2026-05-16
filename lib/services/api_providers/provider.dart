@@ -28,4 +28,10 @@ class _Provider {
       data: data,
     );
   }
+
+  Future<Response> getProfile(String id) async {
+    return DioHelper.getData(
+      endPoint: EndPoints.provider.profile(id),
+    );
+  }
 }

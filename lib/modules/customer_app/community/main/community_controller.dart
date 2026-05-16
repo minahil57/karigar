@@ -34,12 +34,16 @@ class CommunityController extends GetxController {
   List<ProviderData> get filteredProviders => searchQuery.isEmpty
       ? providers
       : providers
-          .where((p) =>
-              p.businessName.toLowerCase().contains(searchQuery.toLowerCase()) ||
-              (p.specialty?.toString() ?? '')
-                  .toLowerCase()
-                  .contains(searchQuery.toLowerCase()))
-          .toList();
+            .where(
+              (p) =>
+                  p.businessName.toLowerCase().contains(
+                    searchQuery.toLowerCase(),
+                  ) ||
+                  (p.specialty?.toString() ?? '').toLowerCase().contains(
+                    searchQuery.toLowerCase(),
+                  ),
+            )
+            .toList();
 
   @override
   void onInit() {
@@ -47,7 +51,7 @@ class CommunityController extends GetxController {
     fetchProviders();
   }
 
-Future<void> fetchProviders() async {
+  Future<void> fetchProviders() async {
     try {
       isLoading = true;
       errorMessage = '';
@@ -58,11 +62,14 @@ Future<void> fetchProviders() async {
 
       if (result['error'] == null) {
         providers = List<ProviderData>.from(result['data']);
+        log(providers.length.toString());
       } else {
+        log(result['error'].toString());
         errorMessage = result['error'].toString();
       }
     } catch (e) {
       errorMessage = e.toString();
+      log(e.toString());
     } finally {
       isLoading = false;
     }

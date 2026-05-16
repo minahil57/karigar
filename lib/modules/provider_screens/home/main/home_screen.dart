@@ -1,4 +1,5 @@
 import 'package:karigar/export.dart';
+import 'package:karigar/widgets/custom_skeleton.dart';
 
 class ProviderHomeScreen extends StatelessWidget {
   const ProviderHomeScreen({super.key});
@@ -6,7 +7,6 @@ class ProviderHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => HomeController());
-    final controller = Get.find<HomeController>();
     final bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
     final bool isTablet = ResponsiveBreakpoints.of(context).isTablet;
 
@@ -16,29 +16,35 @@ class ProviderHomeScreen extends StatelessWidget {
         ? 40
         : 80;
 
-    return CustomLayout(
-      child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // verticalSpaceSmall,
-            // // HomeHeader(onLogout: () {}),
-            // verticalSpaceSmall,
-         //   ProviderProfileCard(provider: controller.provider),
-            verticalSpaceSmall,
-            HomeSectionHeader(
-              title: AppStrings.liveServiceRequests,
-              onViewAll: () {
-                // Get.toNamed(Routes.workHistory);
-              },
+    return GetBuilder<HomeController>(
+      builder: (controller) {
+        return CustomLayout(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                verticalSpaceSmall,
+                CustomSkeleton(
+                  enabled: controller.isLoading,
+                  child: ProviderProfileCard(
+                    provider: controller.provider ?? dummyProvider,
+                  ),
+                ),
+                verticalSpaceSmall,
+                HomeSectionHeader(
+                  title: AppStrings.liveServiceRequests,
+                  onViewAll: () {
+                    // Get.toNamed(Routes.workHistory);
+                  },
+                ),
+                _buildServiceRequestList(context, controller, isMobile),
+                verticalSpaceLarge,
+              ],
             ),
-
-            _buildServiceRequestList(context, controller, isMobile),
-            verticalSpaceLarge,
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

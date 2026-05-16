@@ -18,4 +18,5 @@ class _Provider {
   String get getAllProviders => '$_controllerName/';
   String get getProvider => '$_controllerName/get-provider';
   String get updateProvider => '$_controllerName/update-provider';
+String profile(String id) => '$_controllerName/profile/$id';
 }
