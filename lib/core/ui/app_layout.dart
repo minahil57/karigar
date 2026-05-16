@@ -16,7 +16,7 @@ class AppLayout extends StatefulWidget {
     this.child,
     this.tabNames,
     this.tabPages,
-    this.initialIndex = 0,
+    this.initialIndex = 1,
     this.useSafeArea = true,
     this.endDrawer,
     this.drawer,

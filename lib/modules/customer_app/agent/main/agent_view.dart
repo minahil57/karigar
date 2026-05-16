@@ -1,6 +1,6 @@
 import 'package:karigar/export.dart';
 
-class AgentView extends GetView<AgentController> {
+class AgentView extends StatelessWidget {
   const AgentView({super.key});
 
   @override
@@ -61,13 +61,17 @@ class AgentView extends GetView<AgentController> {
                           ),
                         ),
                         verticalSpace(20),
-                        FadeInUp(
-                          child: CustomText(
-                            text: controller.greeting,
-                            fontSize: 24,
-                            variant: TextVariant.medium,
-                            color: kcTextBlackcolor,
-                          ),
+                        GetBuilder<AgentController>(
+                          builder: (controller) {
+                            return FadeInUp(
+                              child: CustomText(
+                                text: controller.greeting,
+                                fontSize: 24,
+                                variant: TextVariant.medium,
+                                color: kcTextBlackcolor,
+                              ),
+                            );
+                          }
                         ),
                         verticalSpace(10),
                         FadeInUp(
