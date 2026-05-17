@@ -67,7 +67,7 @@ class AppStrings {
   static const String back = "Back";
 
   static const String findExpertsOrGetHired =
-      'Find Experts or Get Hired\nPowered by Smart Agent Matching';
+      'Find Karigars or Get Hired\nPowered by Agentic AI';
   static const String poweredBySmartAgentMatching =
       'Powered by Smart Agent Matching';
   static const String signInToYourAccount = 'Sign in to your account';

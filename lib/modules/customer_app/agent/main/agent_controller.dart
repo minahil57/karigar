@@ -224,6 +224,7 @@ class AgentController extends GetxController {
     isIputEmpty.value = messageController.text.trim().isEmpty;
     update();
   }
+
   void _freezeActiveThoughtsAndSteps() {
     for (int i = 0; i < messages.length; i++) {
       final msg = messages[i];

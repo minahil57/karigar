@@ -208,7 +208,7 @@ class _TimelineTile extends StatelessWidget {
           Text(
             item.text ?? '',
             style: getRegularStyle(
-              fontSize: 11.5,
+              fontSize: 15,
               color: kcDarkGreyTextColor,
             ).copyWith(fontStyle: FontStyle.italic, height: 1.4),
           ),

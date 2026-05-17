@@ -36,22 +36,25 @@ class CustomText extends StatelessWidget {
   TextStyle _getTextStyle() {
     switch (variant) {
       case TextVariant.bold:
-        return getBoldStyle(
-          fontSize: fontSize.sp,
+        return appTextStyle(
+          fontSize: fontSize,
+          fontWeight: FontWeight.w700,
           color: color ?? kcTextBlackcolor,
           decoration: decoration,
         );
 
       case TextVariant.medium:
-        return getMediumStyle(
-          fontSize: fontSize.sp,
+        return appTextStyle(
+          fontSize: fontSize,
+          fontWeight: FontWeight.w500,
           color: color ?? kcTextBlackcolor,
           decoration: decoration,
         );
 
       case TextVariant.regular:
-        return getRegularStyle(
-          fontSize: fontSize.sp,
+        return appTextStyle(
+          fontSize: fontSize,
+          fontWeight: FontWeight.w400,
           color: color ?? kcTextBlackcolor,
           decoration: decoration,
         );

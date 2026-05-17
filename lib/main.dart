@@ -10,10 +10,12 @@ Future<void> main() async {
   EasyLoading.instance
     ..indicatorType = EasyLoadingIndicatorType.dualRing
     ..loadingStyle = EasyLoadingStyle.custom
-    ..backgroundColor = kcPrimaryColor.withValues(alpha: 0.2)
+    ..backgroundColor = kcBlackColor
     ..textColor = kcWhitecolor
     ..indicatorColor = kcWhitecolor
     ..userInteractions = false
+    ..radius = 14
+    ..indicatorSize = 30
     ..dismissOnTap = false
     ..maskColor = Colors.transparent;
 

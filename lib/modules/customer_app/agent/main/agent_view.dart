@@ -124,7 +124,7 @@ class AgentView extends StatelessWidget {
                       ? const SizedBox.shrink()
                       : const SuggestionsSection(),
                 ),
-                  SafeArea(top: false, child: const ChatField()),
+                SafeArea(top: false, child: const ChatField()),
               ],
             ),
           ),

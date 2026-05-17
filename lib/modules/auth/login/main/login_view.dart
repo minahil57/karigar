@@ -1,91 +1,102 @@
 import 'package:karigar/export.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<LoginController>();
     return CustomLayout(
       child: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
+            mainAxisAlignment: .spaceBetween,
             children: [
-              SlideInDown(
-                from: 40,
-                duration: const Duration(milliseconds: 1000),
-                child: CustomText(
-                  text: AppStrings.findExpertsOrGetHired,
-                  fontSize: 24,
-                  color: kcTextBlackcolor,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              verticalSpace(20),
-              SlideInDown(
-                from: 40,
-                duration: const Duration(milliseconds: 1000),
-                child: CustomText(
-                  text: AppStrings.signInToYourAccount,
-                  fontSize: 16,
-                  color: kcTextGreyColor,
-                ),
-              ),
-              verticalSpace(50),
-              Form(
-                key: controller.formKey,
-                child: Column(
-                  children: [
-                    CustomTextField(
-                      controller: controller.emailController,
-                      hintText: AppStrings.enterYourEmail,
-                      labelText: AppStrings.emailAdress,
-                      validator: AppValidators.email,
+              Column(
+                spacing: 20.h,
+                children: [
+                  CustomAssetsImage(
+                    imagePath: 'assets/images/logo.png',
+                    height: 100.h,
+                    width: 100.h,
+                    fit: BoxFit.cover,
+                  ),
+                  SlideInDown(
+                    from: 40,
+                    duration: const Duration(milliseconds: 1000),
+                    child: CustomText(
+                      text: AppStrings.findExpertsOrGetHired,
+                      fontSize: 18,
+                      variant: TextVariant.medium,
+                      color: kcTextBlackcolor,
+                      textAlign: TextAlign.center,
                     ),
-                    verticalSpace(20),
-                    GetBuilder<LoginController>(
-                      id: "password",
-                      builder: (context) {
-                        return CustomTextField(
-                          controller: controller.passwordController,
-                          hintText: AppStrings.passwordHint,
-                          labelText: AppStrings.password,
-                          validator: AppValidators.password,
-                          obscureText: controller.isObscure,
-                          suffixIcon: InkWell(
-                            onTap: controller.togglePasswordVisibility,
-                            child: Icon(
-                              controller.isObscure
-                                  ? Iconsax.eye_slash
-                                  : Iconsax.eye,
+                  ),
+                  SlideInDown(
+                    from: 40,
+                    duration: const Duration(milliseconds: 1000),
+                    child: CustomText(
+                      text: AppStrings.signInToYourAccount,
+                      fontSize: 16,
+                      color: kcTextGreyColor,
+                    ),
+                  ),
+                  verticalSpace(0),
+                  Form(
+                    key: controller.formKey,
+                    child: Column(
+                      spacing: 12.h,
+                      children: [
+                        CustomTextField(
+                          controller: controller.emailController,
+                          hintText: AppStrings.enterYourEmail,
+                          labelText: AppStrings.emailAdress,
+                          validator: AppValidators.email,
+                        ),
+                        Obx(
+                          () => CustomTextField(
+                            controller: controller.passwordController,
+                            hintText: AppStrings.passwordHint,
+                            labelText: AppStrings.password,
+                            validator: AppValidators.password,
+                            obscureText: controller.isObscure.value,
+                            suffixIcon: InkWell(
+                              onTap: controller.togglePasswordVisibility,
+                              child: Padding(
+                                padding: EdgeInsets.only(right: 10.w),
+                                child: Icon(
+                                  size: 16,
+                                  controller.isObscure.value
+                                      ? Iconsax.eye_slash
+                                      : Iconsax.eye,
+                                ),
+                              ),
                             ),
                           ),
-                        );
-                      },
-                    ),
-                    verticalSpace(40),
-                    CustomButton(
-                      minSize: Size(double.infinity, 51),
-                      maxSize: Size(double.infinity, 51),
-                      width: double.infinity,
-                      text: AppStrings.signIn,
+                        ),
+                        verticalSpace(5),
+                        CustomButton(
+                          minSize: Size(double.infinity, 51),
+                          maxSize: Size(double.infinity, 51),
+                          width: double.infinity,
+                          text: AppStrings.signIn,
 
-                      onPressed: () {
-                         controller.submitLogin();
-                      //  Get.toNamed(Routes.home);
-                      },
+                          onPressed: () {
+                            controller.submitLogin();
+                            //  Get.toNamed(Routes.home);
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomText(
                     text: AppStrings.dontHaveAnAccount,
-                    fontSize: 14,
+                    fontSize: 12,
                     color: kcTextGreyColor,
                   ),
                   CustomTextButton(
