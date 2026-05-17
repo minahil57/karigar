@@ -8,11 +8,10 @@ class LoginController extends GetxController {
     debugLabel: 'login_form',
   );
 
-  bool _isObscure = true;
-  bool get isObscure => _isObscure;
+  final RxBool isObscure = true.obs;
 
   void togglePasswordVisibility() {
-    _isObscure = !_isObscure;
+    isObscure.value = !isObscure.value;
     update(["password"]);
   }
 

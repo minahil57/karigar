@@ -71,7 +71,7 @@ class ChatBubble extends StatelessWidget {
                       ? "Something went wrong. Try again"
                       : message.text ?? '',
                   style: getMediumStyle(
-                    fontSize: 13.sp,
+                    fontSize: 13,
                     color: kcTextBlackcolor,
                   ),
                 )

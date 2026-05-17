@@ -76,7 +76,7 @@ class _ThoughtBubbleState extends State<ThoughtBubble> {
                         Text(
                           widget.text,
                           style: getRegularStyle(
-                            fontSize: 13,
+                            fontSize: 11,
                             color: kcTextGreyColor,
                           ).copyWith(fontStyle: FontStyle.italic, height: 1.4),
                         ),

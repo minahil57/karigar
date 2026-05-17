@@ -4,7 +4,8 @@ import 'package:karigar/export.dart';
 
 /// Animated three-dot loading indicator shown while [AgentController.isThinking].
 class ThinkingIndicator extends StatefulWidget {
-  const ThinkingIndicator({super.key});
+  final double? width;
+  const ThinkingIndicator({super.key, this.width});
 
   @override
   State<ThinkingIndicator> createState() => _ThinkingIndicatorState();
@@ -33,33 +34,38 @@ class _ThinkingIndicatorState extends State<ThinkingIndicator>
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(14.r),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-            decoration: BoxDecoration(
-              color: kcWhitecolor.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(18.r),
-                topRight: Radius.circular(18.r),
-                bottomRight: Radius.circular(18.r),
-                bottomLeft: Radius.circular(4.r),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: kcBlackColor.withValues(alpha: 0.06),
-                  blurRadius: 8.r,
-                  offset: Offset(0, 2.h),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(14.r),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              width: widget.width ?? 60.w,
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+              decoration: BoxDecoration(
+                color: kcWhitecolor.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(18.r),
+                  topRight: Radius.circular(18.r),
+                  bottomRight: Radius.circular(18.r),
+                  bottomLeft: Radius.circular(4.r),
                 ),
-              ],
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: List.generate(
-                3,
-                (i) => _Dot(index: i, controller: _ctrl),
+                boxShadow: [
+                  BoxShadow(
+                    color: kcBlackColor.withValues(alpha: 0.06),
+                    blurRadius: 8.r,
+                    offset: Offset(0, 2.h),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  3,
+                  (i) => _Dot(index: i, controller: _ctrl),
+                ),
               ),
             ),
           ),
@@ -103,7 +109,7 @@ class _Dot extends StatelessWidget {
           width: 5.r,
           height: 5.r,
           decoration: const BoxDecoration(
-            color: Colors.white,
+            color: kcPrimaryColor,
             shape: BoxShape.circle,
           ),
         ),

@@ -10,7 +10,7 @@ class CustomerAppLayout extends StatelessWidget {
       tabPages: [
         const CommunityView(),
         const AgentView(),
-        CustomerProfileView()
+        CustomerProfileView(),
       ],
     );
   }

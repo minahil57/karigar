@@ -102,10 +102,8 @@ class AppLayoutState extends State<AppLayout> {
               children: [
                 CustomText(
                   text: widget.tabNames![index],
-                  fontSize: 16,
-                  variant: isSelected
-                      ? TextVariant.medium
-                      : TextVariant.regular,
+                  fontSize: 13,
+                  variant: isSelected ? TextVariant.bold : TextVariant.medium,
                   color: isSelected ? kcPrimaryColor : kcTextGreyColor,
                 ),
                 const SizedBox(height: 4),
