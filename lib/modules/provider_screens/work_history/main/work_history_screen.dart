@@ -1,4 +1,5 @@
 import 'package:karigar/export.dart';
+import 'package:karigar/widgets/custom_skeleton.dart';
 
 class WorkHistoryScreen extends StatelessWidget {
   const WorkHistoryScreen({super.key});
@@ -6,35 +7,48 @@ class WorkHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => WorkHistoryController());
-    final controller = Get.find<WorkHistoryController>();
-
     return CustomLayout(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            // const WorkHistoryTabs(),
-            // verticalSpaceMedium,
             Expanded(
-              child: Obx(() {
-                final list = controller.filteredList;
-                if (list.isEmpty) {
-                  return Center(
-                    child: CustomText(
-                      text: 'No jobs found',
-                      fontSize: 14,
-                      color: kcTextLightGrey,
-                    ),
+              child: GetBuilder<WorkHistoryController>(
+                builder: (controller) {
+                  if (controller.isLoading.value) {
+                    return CustomSkeleton(
+                      enabled: true,
+                      child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: controller.historyList.length,
+                        itemBuilder: (context, index) {
+                          return WorkHistoryCard(
+                            history: controller.historyList[index],
+                          );
+                        },
+                      ),
+                    );
+                  }
+
+                  final list = controller.filteredList;
+                  if (list.isEmpty) {
+                    return Center(
+                      child: CustomText(
+                        text: 'No jobs found',
+                        fontSize: 14,
+                        color: kcTextLightGrey,
+                      ),
+                    );
+                  }
+                  return ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      return WorkHistoryCard(history: list[index]);
+                    },
                   );
-                }
-                return ListView.builder(
-                  padding: EdgeInsets.zero,
-                  itemCount: list.length,
-                  itemBuilder: (context, index) {
-                    return WorkHistoryCard(history: list[index]);
-                  },
-                );
-              }),
+                },
+              ),
             ),
             TextButton(
               onPressed: () {},

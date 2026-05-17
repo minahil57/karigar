@@ -76,7 +76,8 @@ class HomeController extends GetxController {
 
       if (result['error'] == null) {
 
-        serviceRequests = result['data'];
+     final   data = result['data'];
+     serviceRequests = data.where((e) => e.status == 'requested').toList();
       } else {
         isServiceLoading = false;
         serviceRequests.clear();

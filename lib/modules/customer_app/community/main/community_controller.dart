@@ -1,4 +1,6 @@
-import 'package:karigar/export.dart';
+import 'package:karigar/export.dart' hide Marker;
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:karigar/modules/customer_app/community/community_map_helpder.dart';
 
 class CommunityController extends GetxController {
   final TextEditingController searchController = TextEditingController();
@@ -45,6 +47,73 @@ class CommunityController extends GetxController {
             )
             .toList();
 
+  bool _isMapView = true;
+  bool get isMapView => _isMapView;
+
+  void setMapView(bool value) {
+    _isMapView = value;
+    update(['view-type']);
+  }
+
+  GoogleMapController? mapController;
+  ProviderData? selectedProvider;
+  Set<Marker> markers = {};
+
+  void onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
+  void selectProvider(ProviderData? provider) {
+    selectedProvider = provider;
+    update(['map']);
+  }
+
+  void dismissCard() => selectProvider(null);
+
+  void zoomIn() => mapController?.animateCamera(CameraUpdate.zoomIn());
+  void zoomOut() => mapController?.animateCamera(CameraUpdate.zoomOut());
+
+  Future<void> buildMarkers(List<ProviderData> providers) async {
+    // ignore: unnecessary_null_comparison
+    final valid = providers.where((p) => p.lat != null).toList();
+
+    final placeholders = await Future.wait(
+      valid.map((provider) async {
+        final icon = await buildPlaceholderMarker(title: provider.businessName);
+        return Marker(
+          markerId: MarkerId(provider.userId),
+          position: LatLng(provider.lat.toDouble(), provider.lng.toDouble()),
+          icon: icon,
+          onTap: () => selectProvider(provider),
+        );
+      }),
+    );
+
+    markers = placeholders.toSet();
+    update(['map']);
+
+    final updated = <String, Marker>{
+      for (final m in placeholders) m.markerId.value: m,
+    };
+
+    await Future.wait(
+      valid.map((provider) async {
+        final icon = await buildNetworkLogoMarker(
+          provider.avatar,
+          title: provider.businessName,
+        );
+        updated[provider.userId] = Marker(
+          markerId: MarkerId(provider.userId),
+          position: LatLng(provider.lat.toDouble(), provider.lng.toDouble()),
+          icon: icon,
+          onTap: () => selectProvider(provider),
+        );
+        markers = updated.values.toSet();
+        update(['map']);
+      }),
+    );
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -62,14 +131,12 @@ class CommunityController extends GetxController {
 
       if (result['error'] == null) {
         providers = List<ProviderData>.from(result['data']);
-        log(providers.length.toString());
+        await buildMarkers(providers);
       } else {
-        log(result['error'].toString());
         errorMessage = result['error'].toString();
       }
     } catch (e) {
       errorMessage = e.toString();
-      log(e.toString());
     } finally {
       isLoading = false;
     }
@@ -77,11 +144,14 @@ class CommunityController extends GetxController {
 
   void onSearchChanged(String value) {
     searchQuery = value;
+    update(['providers']);
   }
 
   @override
   void onClose() {
     searchController.dispose();
+    mapController?.dispose();
+
     super.onClose();
   }
 }

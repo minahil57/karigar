@@ -40,4 +40,10 @@ class _Provider {
       endPoint: EndPoints.provider.providerBookings(id),
     );
   }
+  Future<Response> updateBookingStatus(String id,String status) async {
+    return DioHelper.patchData(
+      endPoint: EndPoints.provider.updateBookingStatus(id),
+      data: {"status":status}
+    );
+  }
 }

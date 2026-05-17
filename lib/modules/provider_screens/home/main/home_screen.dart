@@ -35,7 +35,7 @@ class ProviderHomeScreen extends StatelessWidget {
                 HomeSectionHeader(
                   title: AppStrings.liveServiceRequests,
                   onViewAll: () {
-                    // Get.toNamed(Routes.workHistory);
+                    AppLayout.of(context)?.changeTab(0);
                   },
                 ),
                 _buildServiceRequestList(context, controller, isMobile),

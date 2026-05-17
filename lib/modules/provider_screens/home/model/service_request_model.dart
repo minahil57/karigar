@@ -32,7 +32,7 @@ class ServiceRequestModel {
 class ProviderService {
   final String id;
   final Services service;
-  final ProviderData provider;
+  final ProviderModel provider;
 
   ProviderService({
     required this.id,
@@ -44,7 +44,7 @@ class ProviderService {
     return ProviderService(
       id: json['id'] ?? '',
       service: Services.fromJson(json['service'] ?? {}),
-      provider: ProviderData.fromJson(json['provider'] ?? {}),
+      provider: ProviderModel.fromJson(json['provider'] ?? {}),
     );
   }
 }
@@ -58,5 +58,26 @@ class Services {
   factory Services.fromJson(Map<String, dynamic> json) {
     return Services(id: json['id'] ?? '', name: json['name'] ?? '');
   }
+
+  
 }
 
+class ProviderModel {
+  final String id;
+  final String businessName;
+  final String avatar;
+
+  ProviderModel({
+    required this.id,
+    required this.businessName,
+    required this.avatar,
+  });
+
+  factory ProviderModel.fromJson(Map<String, dynamic> json) {
+    return ProviderModel(
+      id: json['id'] ?? '',
+      businessName: json['businessName'] ?? '',
+      avatar: json['avatar'] ?? '',
+    );
+  }
+}
