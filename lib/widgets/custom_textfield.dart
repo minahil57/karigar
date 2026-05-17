@@ -39,7 +39,7 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType,
       onChanged: onChanged,
       validator: validator,
-      style: getRegularStyle(color: kcBlackColor, fontSize: 10),
+      style: getRegularStyle(color: kcBlackColor, fontSize: 11),
       decoration: InputDecoration(
         hintText: hintText,
         filled: isFilled,
@@ -47,7 +47,7 @@ class CustomTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
 
-        hintStyle: getRegularStyle(color: kcTextGreyColor, fontSize: 10),
+        hintStyle: getRegularStyle(color: kcTextGreyColor, fontSize: 11),
 
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14.h),
 

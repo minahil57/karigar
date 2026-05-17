@@ -49,6 +49,15 @@ class SocketService extends GetxService {
     log('[Socket] Emitted message: $message');
   }
 
+  void cancelResponse() {
+    if (!_initialized) {
+      log('[Socket] Not connected — cannot cancel');
+      return;
+    }
+    _socket.emit('cancel');
+    log('[Socket] Emitted cancel');
+  }
+
   // ── Listen ─────────────────────────────────────────────────────────────────
 
   void on(String event, Function(dynamic) handler) {

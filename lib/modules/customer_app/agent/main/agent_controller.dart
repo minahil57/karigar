@@ -219,6 +219,31 @@ class AgentController extends GetxController {
     _socketService.sendMessage(message: text, token: token);
   }
 
+  void cancelResponse() {
+    if (!isThinking.value) return;
+
+    // 1. Emit cancel to the server
+    _socketService.cancelResponse();
+
+    // 2. Set isThinking to false immediately
+    isThinking.value = false;
+
+    // 3. Remove loading indicator
+    _removeLoading();
+
+    // 4. Finalize the active streaming response bubble by giving it a unique ID
+    final idx = messages.indexWhere((m) => m.id == 'agent_response');
+    if (idx >= 0) {
+      messages[idx] = messages[idx].copyWithId(
+        '${DateTime.now().microsecondsSinceEpoch}_agent_response',
+      );
+    }
+
+    // 5. Add a friendly inline error/cancellation bubble
+    messages.add(ChatMessage.error("You cancelled request"));
+    _scrollToBottom();
+  }
+
   // ── Helpers ──────────────────────────────────────────────────────────────────
   void _onMessageTextChanged() {
     isIputEmpty.value = messageController.text.trim().isEmpty;

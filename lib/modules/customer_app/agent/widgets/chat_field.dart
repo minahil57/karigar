@@ -26,28 +26,39 @@ class ChatField extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (!controller.isIputEmpty.value) ...[
-                  horizontalSpace(10),
-                  InkWell(
-                    onTap: controller.sendMessage,
-                    child: SlideInRight(
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 45.w,
-                        width: 45.w,
-                        decoration: const BoxDecoration(
-                          color: kcSecondaryColor,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Iconsax.send_1,
-                          color: kcWhitecolor,
-                          size: 18,
+                Obx(() {
+                  final isThinking = controller.isThinking.value;
+                  final isInputEmpty = controller.isIputEmpty.value;
+
+                  if (!isThinking && isInputEmpty) {
+                    return const SizedBox.shrink();
+                  }
+
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: InkWell(
+                      onTap: isThinking
+                          ? controller.cancelResponse
+                          : controller.sendMessage,
+                      child: SlideInRight(
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 45.w,
+                          width: 45.w,
+                          decoration: BoxDecoration(
+                            color: isThinking ? kcErrorColor : kcSecondaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            isThinking ? Icons.stop_rounded : Iconsax.send_1,
+                            color: kcWhitecolor,
+                            size: isThinking ? 22 : 18,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  );
+                }),
               ],
             ),
           ),
