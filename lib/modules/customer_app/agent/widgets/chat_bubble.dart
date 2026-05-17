@@ -13,7 +13,7 @@ class ChatBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         mainAxisAlignment: _isUser
             ? MainAxisAlignment.end
@@ -37,7 +37,7 @@ class ChatBubble extends StatelessWidget {
         color: _isError ? kcErrorColor : kcSecondaryColor,
       ),
       child: Icon(
-        _isError ? Iconsax.warning_2 : Iconsax.cpu,
+        _isError ? Iconsax.warning_2 : Iconsax.bubble,
         size: 16,
         color: Colors.white,
       ),
@@ -46,7 +46,7 @@ class ChatBubble extends StatelessWidget {
 
   Widget _bubble() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 14, vertical: _isUser ? 6 : 16),
       decoration: BoxDecoration(
         color: _isUser
             ? kcSecondaryColor

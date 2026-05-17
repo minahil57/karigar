@@ -14,7 +14,7 @@ class AgentController extends GetxController {
 
   // ── Suggestions ─────────────────────────────────────────────────────────────
   final List<Map<String, String>> suggestions = [
-    {'title': "Mujhe Ek Electrician chahiye", 'icon': 'electrician'},
+    {'title': "What is Karigar AI?", 'icon': 'electrician'},
     {'title': "Mujhe Ek Painter chahiye", 'icon': 'painter'},
     {'title': "Mujhe Ek Plumber chahiye", 'icon': 'plumber'},
   ];
@@ -143,8 +143,8 @@ class AgentController extends GetxController {
   }
 
   // ── Send Message ─────────────────────────────────────────────────────────────
-  Future<void> sendMessage() async {
-    final text = messageController.text.trim();
+  Future<void> sendMessage({String? customText}) async {
+    final text = (customText ?? messageController.text).trim();
     if (text.isEmpty) return;
 
     // 1. Show user bubble immediately
