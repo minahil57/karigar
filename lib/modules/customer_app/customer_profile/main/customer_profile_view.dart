@@ -70,7 +70,7 @@ class CustomerProfileView extends StatelessWidget {
                             ),
                             horizontalSpaceTiny,
                             CustomText(
-                              text: controller.user!.role!,
+                              text: controller.user!.role,
                               fontSize: 14,
                               color: kcTextGreyColor,
                             ),
@@ -80,7 +80,104 @@ class CustomerProfileView extends StatelessWidget {
                     ],
                   ),
                 ),
-                verticalSpaceLarge,
+                verticalSpaceMedium,
+
+                // Location Details Card
+                CustomText(
+                  text: 'Your Location',
+                  variant: TextVariant.bold,
+                  fontSize: 18,
+                  color: kcBlackColor,
+                ),
+                verticalSpaceSmall,
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: kcWhitecolor,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: kcborderColor.withValues(alpha: 0.6),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: kcBlackColor.withValues(alpha: 0.02),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: kcSecondaryColor.withValues(alpha: 0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Iconsax.location5,
+                          color: kcSecondaryColor,
+                          size: 24,
+                        ),
+                      ),
+                      horizontalSpaceMedium,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CustomText(
+                              text: 'Current Address',
+                              variant: TextVariant.bold,
+                              fontSize: 14,
+                              color: kcBlackColor,
+                            ),
+                            verticalSpaceTiny,
+                            if (controller.isLoadingAddress)
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 4.0),
+                                child: SizedBox(
+                                  height: 16,
+                                  width: 16,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(kcSecondaryColor),
+                                  ),
+                                ),
+                              )
+                            else
+                              CustomText(
+                                text: controller.currentAddress,
+                                fontSize: 13,
+                                color: kcTextGreyColor,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                          ],
+                        ),
+                      ),
+                      horizontalSpaceSmall,
+                      ClipOval(
+                        child: Material(
+                          color: Colors.transparent,
+                          child: IconButton(
+                            icon: const Icon(
+                              Iconsax.refresh,
+                              size: 20,
+                              color: kcTextGreyColor,
+                            ),
+                            onPressed: controller.isLoadingAddress
+                                ? null
+                                : () => controller.fetchCurrentAddress(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                verticalSpaceMedium,
 
                 // Settings & Preferences
                 CustomText(
@@ -89,23 +186,13 @@ class CustomerProfileView extends StatelessWidget {
                   fontSize: 18,
                   color: kcBlackColor,
                 ),
-                verticalSpaceMedium,
-                _buildOptionTile(
-                  icon: Iconsax.user_edit,
-                  title: 'Edit Profile',
-                  onTap: () {},
-                ),
-                _buildOptionTile(
-                  icon: Iconsax.location,
-                  title: 'Manage Addresses',
-                  onTap: () {},
-                ),
+                verticalSpaceSmall,
                 _buildOptionTile(
                   icon: Iconsax.notification,
                   title: 'Notifications',
                   onTap: () {},
                 ),
-                verticalSpaceLarge,
+                verticalSpaceMedium,
 
                 // Support & About
                 CustomText(
@@ -114,7 +201,7 @@ class CustomerProfileView extends StatelessWidget {
                   fontSize: 18,
                   color: kcBlackColor,
                 ),
-                verticalSpaceMedium,
+                verticalSpaceSmall,
                 _buildOptionTile(
                   icon: Iconsax.message_question,
                   title: 'Help & Support',
@@ -143,8 +230,7 @@ class CustomerProfileView extends StatelessWidget {
                   color: kcErrorColor,
                   onTap: () => _showDeleteConfirmation(context, controller),
                 ),
-                verticalSpaceLarge,
-                verticalSpaceLarge, // extra padding for bottom nav
+                verticalSpaceSmall,
               ],
             ),
           ),

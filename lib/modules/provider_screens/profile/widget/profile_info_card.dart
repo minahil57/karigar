@@ -3,10 +3,7 @@ import 'package:karigar/export.dart';
 class ProfileInfoCard extends StatelessWidget {
   final ProviderData provider;
 
-  const ProfileInfoCard({
-    super.key,
-    required this.provider,
-  });
+  const ProfileInfoCard({super.key, required this.provider});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +19,10 @@ class ProfileInfoCard extends StatelessWidget {
                   width: 4,
                 ),
               ),
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: CachedNetworkImageProvider(provider.avatar ?? ''),
-                backgroundColor: kcborderColor,
+              child: CustomCacheImage(
+                height: 100,
+                width: 100,
+                imageUrl: provider.avatar ?? "",
               ),
             ),
           ],
@@ -50,12 +47,18 @@ class ProfileInfoCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: kcSecondaryColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: kcSecondaryColor.withValues(alpha: 0.2)),
+                  border: Border.all(
+                    color: kcSecondaryColor.withValues(alpha: 0.2),
+                  ),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Iconsax.shield_tick, color: kcSecondaryColor, size: 10),
+                    const Icon(
+                      Iconsax.shield_tick,
+                      color: kcSecondaryColor,
+                      size: 10,
+                    ),
                     horizontalSpaceTiny,
                     CustomText(
                       text: AppStrings.verified,
@@ -92,7 +95,8 @@ class ProfileInfoCard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: (provider.isAvailable ? Colors.green : Colors.grey).withValues(alpha: 0.05),
+            color: (provider.isAvailable ? Colors.green : Colors.grey)
+                .withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(100),
           ),
           child: Row(

@@ -43,9 +43,13 @@ class ServiceRequestCard extends StatelessWidget {
                       children: [
                         Flexible(
                           child: CustomText(
-                            text: request.title,
+                            text: request.providerService.service.name,
                             variant: TextVariant.bold,
-                            fontSize: getResponsiveFontSize(context, fontSize: 14, max: 16),
+                            fontSize: getResponsiveFontSize(
+                              context,
+                              fontSize: 14,
+                              max: 16,
+                            ),
                             color: kcBlackColor,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -65,13 +69,21 @@ class ServiceRequestCard extends StatelessWidget {
                               Icon(
                                 Iconsax.magic_star,
                                 color: kcSecondaryColor,
-                                size: getResponsiveFontSize(context, fontSize: 12, max: 14),
+                                size: getResponsiveFontSize(
+                                  context,
+                                  fontSize: 12,
+                                  max: 14,
+                                ),
                               ),
                               horizontalSpaceTiny,
                               CustomText(
                                 text: AppStrings.aiPerfectMatch,
                                 variant: TextVariant.medium,
-                                fontSize: getResponsiveFontSize(context, fontSize: 10, max: 12),
+                                fontSize: getResponsiveFontSize(
+                                  context,
+                                  fontSize: 10,
+                                  max: 12,
+                                ),
                                 color: kcSecondaryColor,
                               ),
                             ],
@@ -80,9 +92,13 @@ class ServiceRequestCard extends StatelessWidget {
                       ],
                     ),
                     CustomText(
-                      text: request.subtitle,
+                      text: request.providerService.service.name,
                       color: kcTextGreyColor,
-                      fontSize: getResponsiveFontSize(context, fontSize: 11, max: 13),
+                      fontSize: getResponsiveFontSize(
+                        context,
+                        fontSize: 11,
+                        max: 13,
+                      ),
                     ),
                     verticalSpaceSmall,
                     Row(
@@ -96,7 +112,11 @@ class ServiceRequestCard extends StatelessWidget {
                         CustomText(
                           text: request.location,
                           color: kcTextLightGrey,
-                          fontSize: getResponsiveFontSize(context, fontSize: 10, max: 12),
+                          fontSize: getResponsiveFontSize(
+                            context,
+                            fontSize: 10,
+                            max: 12,
+                          ),
                         ),
                         horizontalSpaceSmall,
                         Container(
@@ -109,9 +129,13 @@ class ServiceRequestCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: CustomText(
-                            text: request.distance,
+                            text: request.location,
                             variant: TextVariant.medium,
-                            fontSize: getResponsiveFontSize(context, fontSize: 9, max: 11),
+                            fontSize: getResponsiveFontSize(
+                              context,
+                              fontSize: 9,
+                              max: 11,
+                            ),
                             color: kcPrimaryColor,
                           ),
                         ),
@@ -125,9 +149,13 @@ class ServiceRequestCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   CustomText(
-                    text: request.price,
+                    text: request.providerService.service.name,
                     variant: TextVariant.bold,
-                    fontSize: getResponsiveFontSize(context, fontSize: 16, max: 20),
+                    fontSize: getResponsiveFontSize(
+                      context,
+                      fontSize: 16,
+                      max: 20,
+                    ),
                     color: kcBlackColor,
                   ),
                   const CustomText(
@@ -144,26 +172,18 @@ class ServiceRequestCard extends StatelessWidget {
           verticalSpaceSmall,
           Row(
             children: [
-              const Icon(
-                Iconsax.clock,
-                size: 14,
-                color: kcTextLightGrey,
-              ),
+              const Icon(Iconsax.clock, size: 14, color: kcTextLightGrey),
               horizontalSpaceTiny,
               CustomText(
-                text: request.timeAgo,
+                text: request.createdAt,
                 color: kcTextLightGrey,
                 fontSize: getResponsiveFontSize(context, fontSize: 10, max: 12),
               ),
               const Spacer(),
-              const Icon(
-                Iconsax.calendar_1,
-                size: 12,
-                color: kcTextLightGrey,
-              ),
+              const Icon(Iconsax.calendar_1, size: 12, color: kcTextLightGrey),
               horizontalSpaceTiny,
               CustomText(
-                text: '${AppStrings.preferred} ${request.preferredTime}',
+                text: '${AppStrings.preferred} ${request.scheduledTime}',
                 variant: TextVariant.medium,
                 color: kcDarkTextColor,
                 fontSize: getResponsiveFontSize(context, fontSize: 10, max: 12),

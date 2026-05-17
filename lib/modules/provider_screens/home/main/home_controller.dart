@@ -15,6 +15,13 @@ class HomeController extends GetxController {
     update();
   }
 
+  bool _isServiceLoading = false;
+  bool get isServiceLoading => _isServiceLoading;
+  set isServiceLoading(bool value) {
+    _isServiceLoading = value;
+     update(['serviceRequests']);
+  }
+
   String _errorMessage = '';
   String get errorMessage => _errorMessage;
   set errorMessage(String value) {
@@ -22,21 +29,30 @@ class HomeController extends GetxController {
     update();
   }
 
-  List<ServiceRequestModel> serviceRequests = [];
+   List<ServiceRequestModel> _serviceRequests = [];
+  List<ServiceRequestModel> get serviceRequests => _serviceRequests;
+  set serviceRequests(List<ServiceRequestModel> value) {
+    _serviceRequests = value;
+    update(['serviceRequests']);
+  }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     fetchProfile();
-    _loadMockServiceRequests();
+    fetchServiceRequests();
   }
 
   Future<void> fetchProfile() async {
+    log('Calling API');
     try {
+      log('Try');
       isLoading = true;
       errorMessage = '';
 
-      final result = await ProvidersRepository.getProfile();
+      final result = await ProvidersRepository.getProfile(
+        id: getUser()?.id.toString(),
+      );
 
       if (result['error'] == null) {
         provider = result['data'];
@@ -50,26 +66,28 @@ class HomeController extends GetxController {
     }
   }
 
-  void _loadMockServiceRequests() {
-    serviceRequests = [
-      ServiceRequestModel(
-        title: 'Plumbing Repair',
-        subtitle: 'Kitchen pipe leakage',
-        location: 'Koramangala, Bengaluru',
-        distance: '2.4 km',
-        price: '₹1,250',
-        timeAgo: 'Requested 10m ago',
-        preferredTime: 'Today, 2:00 PM',
-      ),
-      ServiceRequestModel(
-        title: 'Electrical Installation',
-        subtitle: 'Ceiling fan installation',
-        location: 'HSR Layout, Bengaluru',
-        distance: '3.1 km',
-        price: '₹950',
-        timeAgo: 'Requested 25m ago',
-        preferredTime: 'Tomorrow, 11:00 AM',
-      ),
-    ];
+  Future<void> fetchServiceRequests() async {
+    try {
+      isServiceLoading = true;
+      serviceRequests = dummyServiceRequests;
+      final result = await ProvidersRepository.getProviderBookings(
+        id: getUser()?.id.toString(),
+      );
+
+      if (result['error'] == null) {
+
+        serviceRequests = result['data'];
+      } else {
+        isServiceLoading = false;
+        serviceRequests.clear();
+        errorMessage = result['error'].toString();
+      }
+    } catch (e) {
+      isServiceLoading = false;
+      serviceRequests.clear();
+      errorMessage = e.toString();
+    } finally {
+      isServiceLoading = false;
+    }
   }
 }

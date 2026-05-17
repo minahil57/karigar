@@ -54,40 +54,55 @@ class ProviderHomeScreen extends StatelessWidget {
     bool isMobile,
   ) {
     if (!isMobile) {
-      return GridView.builder(
-        padding: EdgeInsets.zero,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          mainAxisExtent: 220,
-        ),
-        itemCount: controller.serviceRequests.length,
-        itemBuilder: (context, index) {
-          final request = controller.serviceRequests[index];
-          return ServiceRequestCard(
-            request: request,
-            onAccept: () {},
-            onReject: () {},
+      return GetBuilder<HomeController>(
+        builder: (controller) {
+          return CustomSkeleton(
+            enabled: controller.isServiceLoading,
+            child: GridView.builder(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                mainAxisExtent: 220,
+              ),
+              itemCount: controller.serviceRequests.length,
+              itemBuilder: (context, index) {
+                final request = controller.serviceRequests[index];
+                return ServiceRequestCard(
+                  request: request,
+                  onAccept: () {},
+                  onReject: () {},
+                );
+              },
+            ),
           );
         },
       );
     }
 
-    return ListView.separated(
-      padding: EdgeInsets.zero,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: controller.serviceRequests.length,
-      separatorBuilder: (context, index) => verticalSpaceSmall,
-      itemBuilder: (context, index) {
-        final request = controller.serviceRequests[index];
-        return ServiceRequestCard(
-          request: request,
-          onAccept: () {},
-          onReject: () {},
+    return GetBuilder<HomeController>(
+      id: 'serviceRequests',
+      builder: (controller) {
+        return CustomSkeleton(
+          enabled: controller.isServiceLoading,
+          child: ListView.separated(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: controller.serviceRequests.length,
+          separatorBuilder: (context, index) => verticalSpaceSmall,
+          itemBuilder: (context, index) {
+            final request = controller.serviceRequests[index];
+            return ServiceRequestCard(
+              request: request,
+              onAccept: () {},
+              onReject: () {},
+            );
+          },
+                ),
         );
       },
     );

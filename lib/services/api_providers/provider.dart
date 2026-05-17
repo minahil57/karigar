@@ -34,4 +34,10 @@ class _Provider {
       endPoint: EndPoints.provider.profile(id),
     );
   }
+
+  Future<Response> getProviderBookings(String id) async {
+    return DioHelper.getData(
+      endPoint: EndPoints.provider.providerBookings(id),
+    );
+  }
 }

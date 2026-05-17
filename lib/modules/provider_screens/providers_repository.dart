@@ -5,77 +5,43 @@ class ProvidersRepository {
     Map<String, dynamic> queryParameters,
   ) async {
     try {
-      debugPrint('========== GET PROVIDERS API ==========');
-      debugPrint('Query Params: $queryParameters');
-
       final response = await ApiProvider.provider.getAllProviders(
         queryParameters: queryParameters,
       );
 
-      debugPrint('Status Code: ${response.statusCode}');
-      debugPrint('Raw Response: ${response.data}');
-
       if (response.statusCode == 200) {
         final List<dynamic> providersData = response.data['data'];
 
-        debugPrint('Providers Count: ${providersData.length}');
-
-        final List<ProviderData> providers = [];
-
-        for (int i = 0; i < providersData.length; i++) {
-          try {
-            debugPrint('---------- Parsing Provider [$i] ----------');
-            debugPrint('Provider JSON: ${providersData[i]}');
-
-            final provider = ProviderData.fromJson(providersData[i]);
-
-            providers.add(provider);
-
-            debugPrint('Provider Parsed Successfully: ${provider.id}');
-          } catch (e, stackTrace) {
-            debugPrint('❌ Error Parsing Provider at index $i');
-            debugPrint('❌ Provider Data: ${providersData[i]}');
-            debugPrint('❌ Error: $e');
-            debugPrint('❌ StackTrace: $stackTrace');
-          }
-        }
-
-        debugPrint('========== END GET PROVIDERS ==========');
+        final List<ProviderData> providers = providersData
+            .map((e) => ProviderData.fromJson(e))
+            .toList();
 
         return {'data': providers, 'error': null};
       } else {
-        debugPrint('❌ API Error: ${response.data['message']}');
-
         return {
           'data': null,
           'error': response.data['message'] ?? 'Something went wrong',
         };
       }
-    } on DioException catch (e, stackTrace) {
-      debugPrint('❌ Dio Exception');
-      debugPrint('❌ Message: ${e.message}');
-      debugPrint('❌ Response: ${e.response?.data}');
-      debugPrint('❌ StackTrace: $stackTrace');
-
+    } on DioException catch (e) {
       return {
         'data': null,
         'error':
             e.response?.data['message'] ?? e.message ?? 'Something went wrong',
       };
-    } catch (e, stackTrace) {
-      debugPrint('❌ Unexpected Exception');
-      debugPrint('❌ Error: $e');
-      debugPrint('❌ StackTrace: $stackTrace');
-
+    } catch (e) {
       return {'data': null, 'error': 'Something went wrong'};
     }
   }
 
   static Future<Map<String, dynamic>> getProfile({String? id}) async {
+    log('Api function');
     try {
-      var response = await ApiProvider.provider.getProfile(id!);
+      final response = await ApiProvider.provider.getProfile(id!);
+
       if (response.statusCode == 200) {
-        final provider = ProviderData.fromJson(response.data['data']);
+        final provider = ProviderData.fromJson(response.data);
+
         return {'data': provider, 'error': null};
       } else {
         return {
@@ -86,7 +52,37 @@ class ProvidersRepository {
     } on DioException catch (e) {
       return {
         'data': null,
-        'error': e.response?.data['message'] ?? 'Something went wrong',
+        'error':
+            e.response?.data['message'] ?? e.message ?? 'Something went wrong',
+      };
+    } catch (e) {
+      return {'data': null, 'error': 'Something went wrong'};
+    }
+  }
+
+  static Future<Map<String, dynamic>> getProviderBookings({String? id}) async {
+    try {
+      final response = await ApiProvider.provider.getProviderBookings(id!);
+
+      if (response.statusCode == 200) {
+        final List<dynamic> bookingsData = response.data['data'];
+
+        final List<ServiceRequestModel> bookings = bookingsData
+            .map((e) => ServiceRequestModel.fromJson(e))
+            .toList();
+
+        return {'data': bookings, 'error': null};
+      } else {
+        return {
+          'data': null,
+          'error': response.data['message'] ?? 'Something went wrong',
+        };
+      }
+    } on DioException catch (e) {
+      return {
+        'data': null,
+        'error':
+            e.response?.data['message'] ?? e.message ?? 'Something went wrong',
       };
     } catch (e) {
       return {'data': null, 'error': 'Something went wrong'};
