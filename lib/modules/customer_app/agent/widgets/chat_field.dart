@@ -21,22 +21,25 @@ class ChatField extends StatelessWidget {
                     hintText: AppStrings.writeYourMessage,
                     suffixIcon: const Icon(
                       Iconsax.microphone,
+                      size: 19,
                       color: kcTextGreyColor,
                     ),
                   ),
                 ),
-                horizontalSpace(10),
-                InkWell(
-                  onTap: controller.sendMessage,
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: const BoxDecoration(
-                      color: kcSecondaryColor,
-                      shape: BoxShape.circle,
+                if (!controller.isIputEmpty.value) ...[
+                  horizontalSpace(10),
+                  InkWell(
+                    onTap: controller.sendMessage,
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: const BoxDecoration(
+                        color: kcSecondaryColor,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Iconsax.send_1, color: kcWhitecolor),
                     ),
-                    child: const Icon(Iconsax.send_1, color: kcWhitecolor),
                   ),
-                ),
+                ],
               ],
             ),
           ),

@@ -1,5 +1,13 @@
 // Enum for distinguishing message bubble types in the chat list
-enum ChatMessageType { user, agentResponse, agentStep, bookingConfirmed, loading, error }
+enum ChatMessageType {
+  user,
+  agentResponse,
+  agentStep,
+  bookingConfirmed,
+  loading,
+  error,
+  agentThought,
+}
 
 // ── AgentStep ──────────────────────────────────────────────────────────────
 
@@ -17,20 +25,20 @@ class AgentStep {
   });
 
   factory AgentStep.fromJson(Map<String, dynamic> json) => AgentStep(
-        agent: json['agent'] as String? ?? '',
-        message: json['message'] as String? ?? '',
-        status: json['status'] as String? ?? 'running',
-        timestamp: json['timestamp'] != null
-            ? DateTime.tryParse(json['timestamp'] as String)
-            : null,
-      );
+    agent: json['agent'] as String? ?? '',
+    message: json['message'] as String? ?? '',
+    status: json['status'] as String? ?? 'running',
+    timestamp: json['timestamp'] != null
+        ? DateTime.tryParse(json['timestamp'] as String)
+        : null,
+  );
 
   AgentStep copyWith({String? status, String? message}) => AgentStep(
-        agent: agent,
-        message: message ?? this.message,
-        status: status ?? this.status,
-        timestamp: timestamp,
-      );
+    agent: agent,
+    message: message ?? this.message,
+    status: status ?? this.status,
+    timestamp: timestamp,
+  );
 }
 
 // ── BookingConfirmed ───────────────────────────────────────────────────────
@@ -41,7 +49,8 @@ class BookingProvider {
 
   BookingProvider({required this.businessName, required this.rating});
 
-  factory BookingProvider.fromJson(Map<String, dynamic> json) => BookingProvider(
+  factory BookingProvider.fromJson(Map<String, dynamic> json) =>
+      BookingProvider(
         businessName: json['businessName'] as String? ?? '',
         rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
       );
@@ -62,7 +71,8 @@ class BookingConfirmed {
     this.reminderTime,
   });
 
-  factory BookingConfirmed.fromJson(Map<String, dynamic> json) => BookingConfirmed(
+  factory BookingConfirmed.fromJson(Map<String, dynamic> json) =>
+      BookingConfirmed(
         id: json['id'] as String? ?? '',
         status: json['status'] as String? ?? '',
         scheduledTime: json['scheduledTime'] as String? ?? '',
@@ -103,40 +113,48 @@ class ChatMessage {
 
   // ── Factories ──────────────────────────────────────────────────────────────
 
-  factory ChatMessage.user(String text) => ChatMessage._(
-        id: _uid(),
-        type: ChatMessageType.user,
-        text: text,
-      );
+  factory ChatMessage.user(String text) =>
+      ChatMessage._(id: _uid(), type: ChatMessageType.user, text: text);
 
   factory ChatMessage.agentResponse(String text) => ChatMessage._(
-        id: _uid(),
-        type: ChatMessageType.agentResponse,
-        text: text,
-      );
+    id: _uid(),
+    type: ChatMessageType.agentResponse,
+    text: text,
+  );
 
-  factory ChatMessage.loading() => ChatMessage._(
-        id: 'loading',
-        type: ChatMessageType.loading,
-      );
+  factory ChatMessage.loading() =>
+      ChatMessage._(id: 'loading', type: ChatMessageType.loading);
 
   factory ChatMessage.agentStep(AgentStep step) => ChatMessage._(
-        id: 'step_${step.agent}',
-        type: ChatMessageType.agentStep,
-        step: step,
-      );
+    id: 'step_${step.agent}',
+    type: ChatMessageType.agentStep,
+    step: step,
+  );
 
-  factory ChatMessage.bookingConfirmed(BookingConfirmed booking) => ChatMessage._(
+  factory ChatMessage.agentThought(String text) => ChatMessage._(
+    id: 'agent_thought_${_uid()}',
+    type: ChatMessageType.agentThought,
+    text: text,
+  );
+
+  factory ChatMessage.bookingConfirmed(BookingConfirmed booking) =>
+      ChatMessage._(
         id: _uid(),
         type: ChatMessageType.bookingConfirmed,
         booking: booking,
       );
 
-      factory ChatMessage.error(String text) => ChatMessage._(
-        id: _uid(),
-        type: ChatMessageType.error,
-        text: text,
-      );
+  factory ChatMessage.error(String text) =>
+      ChatMessage._(id: _uid(), type: ChatMessageType.error, text: text);
+
+  ChatMessage copyWithId(String newId) => ChatMessage._(
+    id: newId,
+    type: type,
+    text: text,
+    step: step,
+    booking: booking,
+    createdAt: createdAt,
+  );
 
   static String _uid() => DateTime.now().microsecondsSinceEpoch.toString();
 }

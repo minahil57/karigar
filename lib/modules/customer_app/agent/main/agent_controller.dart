@@ -8,6 +8,8 @@ class AgentController extends GetxController {
   final TextEditingController messageController = TextEditingController();
   final ScrollController scrollController = ScrollController();
 
+  final RxBool isIputEmpty = true.obs;
+
   // ── Reactive State ──────────────────────────────────────────────────────────
   final RxList<ChatMessage> messages = <ChatMessage>[].obs;
   final RxBool isThinking = false.obs;
@@ -38,6 +40,7 @@ class AgentController extends GetxController {
   void onInit() {
     super.onInit();
     _socketService = Get.find<SocketService>();
+    messageController.addListener(_onMessageTextChanged);
     _initChat();
   }
 
@@ -48,6 +51,7 @@ class AgentController extends GetxController {
 
   @override
   void onClose() {
+    messageController.removeListener(_onMessageTextChanged);
     messageController.dispose();
     scrollController.dispose();
     _removeEventListeners();
@@ -63,6 +67,7 @@ class AgentController extends GetxController {
   void _registerEventListeners() {
     _socketService.on('agent:loading', _onAgentLoading);
     _socketService.on('agent:step', _onAgentStep);
+    _socketService.on('agent:thought', _onAgentThought);
     _socketService.on('agent:response', _onAgentResponse);
     _socketService.on('booking:confirmed', _onBookingConfirmed);
     _socketService.on('agent:done', _onAgentDone);
@@ -72,6 +77,7 @@ class AgentController extends GetxController {
   void _removeEventListeners() {
     _socketService.off('agent:loading');
     _socketService.off('agent:step');
+    _socketService.off('agent:thought');
     _socketService.off('agent:response');
     _socketService.off('booking:confirmed');
     _socketService.off('agent:done');
@@ -85,6 +91,23 @@ class AgentController extends GetxController {
     // Remove any stale loading bubble, then add fresh one
     messages.removeWhere((m) => m.type == ChatMessageType.loading);
     messages.add(ChatMessage.loading());
+    _scrollToBottom();
+  }
+
+  void _onAgentThought(dynamic data) {
+    if (data is! Map) return;
+    final text = data['text'] as String? ?? '';
+    if (text.isEmpty) return;
+
+    // Insert before the loading bubble
+    final loadingIdx = messages.indexWhere(
+      (m) => m.type == ChatMessageType.loading,
+    );
+    if (loadingIdx >= 0) {
+      messages.insert(loadingIdx, ChatMessage.agentThought(text));
+    } else {
+      messages.add(ChatMessage.agentThought(text));
+    }
     _scrollToBottom();
   }
 
@@ -114,7 +137,19 @@ class AgentController extends GetxController {
     if (data is! Map) return;
     final text = data['message'] as String? ?? '';
     _removeLoading();
-    messages.add(ChatMessage.agentResponse(text));
+
+    // Find if we already have an active streaming response bubble
+    final idx = messages.indexWhere((m) => m.id == 'agent_response');
+    if (idx >= 0) {
+      messages[idx] = ChatMessage.agentResponse(
+        text,
+      ).copyWithId('agent_response');
+    } else {
+      _freezeActiveThoughtsAndSteps();
+      messages.add(
+        ChatMessage.agentResponse(text).copyWithId('agent_response'),
+      );
+    }
     _scrollToBottom();
   }
 
@@ -128,11 +163,29 @@ class AgentController extends GetxController {
   void _onAgentDone(dynamic _) {
     isThinking.value = false;
     _removeLoading();
+
+    // Finalize the streaming response bubble by giving it a unique ID
+    final idx = messages.indexWhere((m) => m.id == 'agent_response');
+    if (idx >= 0) {
+      messages[idx] = messages[idx].copyWithId(
+        '${DateTime.now().microsecondsSinceEpoch}_agent_response',
+      );
+    }
   }
 
   void _onAgentError(dynamic data) {
     isThinking.value = false;
     _removeLoading();
+    _freezeActiveThoughtsAndSteps();
+
+    // Finalize any active streaming response
+    final idx = messages.indexWhere((m) => m.id == 'agent_response');
+    if (idx >= 0) {
+      messages[idx] = messages[idx].copyWithId(
+        '${DateTime.now().microsecondsSinceEpoch}_agent_response',
+      );
+    }
+
     final msg =
         (data is Map ? data['message'] : null) as String? ??
         'Something went wrong. Please try again.';
@@ -145,7 +198,11 @@ class AgentController extends GetxController {
   // ── Send Message ─────────────────────────────────────────────────────────────
   Future<void> sendMessage({String? customText}) async {
     final text = (customText ?? messageController.text).trim();
+    // close keyboard
+    FocusScope.of(Get.context!).unfocus();
     if (text.isEmpty) return;
+
+    _freezeActiveThoughtsAndSteps();
 
     // 1. Show user bubble immediately
     messages.add(ChatMessage.user(text));
@@ -163,6 +220,23 @@ class AgentController extends GetxController {
   }
 
   // ── Helpers ──────────────────────────────────────────────────────────────────
+  void _onMessageTextChanged() {
+    isIputEmpty.value = messageController.text.trim().isEmpty;
+    update();
+  }
+  void _freezeActiveThoughtsAndSteps() {
+    for (int i = 0; i < messages.length; i++) {
+      final msg = messages[i];
+      if (msg.id == 'agent_thought' ||
+          msg.id.startsWith('step_') ||
+          msg.id == 'agent_response') {
+        messages[i] = msg.copyWithId(
+          '${DateTime.now().microsecondsSinceEpoch}_${msg.id}',
+        );
+      }
+    }
+  }
+
   void _removeLoading() {
     messages.removeWhere((m) => m.type == ChatMessageType.loading);
   }

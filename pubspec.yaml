@@ -23,10 +23,8 @@ dependencies:
   intl: ^0.20.2
   dio: ^5.9.2
   flutter_easyloading: ^3.0.5
-  google_fonts: ^8.1.0
   cached_network_image: ^3.4.1
   responsive_framework: ^1.5.1
-  auto_size_text: ^3.0.0
   equatable: ^2.0.8
   image_picker: ^1.2.2
   http_parser: ^4.1.2
@@ -42,6 +40,8 @@ dependencies:
   iconsax: ^0.0.8
   socket_io_client: ^3.1.4
   gpt_markdown: ^1.1.7
+  flutter_screenutil: ^5.9.3
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -55,4 +55,14 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    # - assets/icons/
+    - assets/fonts/
+
+  fonts:
+    - family: Sora
+      fonts:
+        - asset: assets/fonts/Sora-Regular.ttf
+        - asset: assets/fonts/Sora-Medium.ttf
+        - asset: assets/fonts/Sora-SemiBold.ttf
+        - asset: assets/fonts/Sora-Bold.ttf
+        - asset: assets/fonts/Sora-ExtraBold.ttf
+  

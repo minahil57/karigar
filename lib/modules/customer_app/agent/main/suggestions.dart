@@ -12,9 +12,9 @@ class SuggestionsSection extends StatelessWidget {
         return FadeInUp(
           delay: const Duration(milliseconds: 400),
           child: SizedBox(
-            height: 60,
+            height: 50.h,
             child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               scrollDirection: Axis.horizontal,
               itemCount: controller.suggestions.length,
               shrinkWrap: true,
@@ -27,15 +27,15 @@ class SuggestionsSection extends StatelessWidget {
                       customText: suggestion['title']!,
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(16.r),
                       child: BackdropFilter(
                         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                         child: Container(
-                          margin: const EdgeInsets.only(right: 12),
-                          padding: const EdgeInsets.symmetric(horizontal: 22),
+                          margin: EdgeInsets.only(right: 12.w),
+                          padding: EdgeInsets.symmetric(horizontal: 22.w),
                           decoration: BoxDecoration(
                             color: kcWhitecolor.withValues(alpha: 0.4),
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20.r),
                             border: Border.all(
                               color: kcWhitecolor.withValues(alpha: 0.8),
                             ),
@@ -49,7 +49,7 @@ class SuggestionsSection extends StatelessWidget {
                                     : suggestion['icon'] == 'painter'
                                     ? Iconsax.brush
                                     : Iconsax.airdrop,
-                                size: 18,
+                                size: 18.r,
                                 color: kcSecondaryColor,
                               ),
                               horizontalSpace(10),

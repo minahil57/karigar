@@ -1,6 +1,4 @@
-import 'dart:math';
-
-import 'package:flutter/material.dart';
+import '../../export.dart';
 
 const double _tinySize = 5;
 const double _smallSize = 10;
@@ -8,40 +6,44 @@ const double _mediumSize = 25;
 const double _largeSize = 50;
 const double _massiveSize = 120;
 
-const Widget horizontalSpaceTiny = SizedBox(width: _tinySize);
-const Widget horizontalSpaceSmall = SizedBox(width: _smallSize);
-const Widget horizontalSpaceMedium = SizedBox(width: _mediumSize);
-const Widget horizontalSpaceLarge = SizedBox(width: _largeSize);
-Widget horizontalSpace(double widths) => SizedBox(
-  width: widths,
-);
+Widget get horizontalSpaceTiny => SizedBox(width: _tinySize.w);
+Widget get horizontalSpaceSmall => SizedBox(width: _smallSize.w);
+Widget get horizontalSpaceMedium => SizedBox(width: _mediumSize.w);
+Widget get horizontalSpaceLarge => SizedBox(width: _largeSize.w);
+Widget horizontalSpace(double widths) => SizedBox(width: widths.w);
 
-const Widget verticalSpaceTiny = SizedBox(height: _tinySize);
-const Widget verticalSpaceSmall = SizedBox(height: _smallSize);
-const Widget verticalSpaceMedium = SizedBox(height: _mediumSize);
-const Widget verticalSpaceLarge = SizedBox(height: _largeSize);
-const Widget verticalSpaceMassive = SizedBox(height: _massiveSize);
+Widget get verticalSpaceTiny => SizedBox(height: _tinySize.h);
+Widget get verticalSpaceSmall => SizedBox(height: _smallSize.h);
+Widget get verticalSpaceMedium => SizedBox(height: _mediumSize.h);
+Widget get verticalSpaceLarge => SizedBox(height: _largeSize.h);
+Widget get verticalSpaceMassive => SizedBox(height: _massiveSize.h);
 
-Widget spacedDivider = const Column(
+Widget get spacedDivider => Column(
   children: <Widget>[
     verticalSpaceMedium,
-    Divider(color: Colors.blueGrey, height: 5),
+    Divider(color: Colors.blueGrey, height: 5.h),
     verticalSpaceMedium,
   ],
 );
 
-Widget verticalSpace(double height) => SizedBox(height: height);
+Widget verticalSpace(double height) => SizedBox(height: height.h);
 
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
-double screenHeightFraction(BuildContext context,
-    {int dividedBy = 1, double offsetBy = 0, double max = 3000,}) =>
-    min((screenHeight(context) - offsetBy) / dividedBy, max);
+double screenHeightFraction(
+  BuildContext context, {
+  int dividedBy = 1,
+  double offsetBy = 0,
+  double max = 3000,
+}) => min((screenHeight(context) - offsetBy) / dividedBy, max);
 
-double screenWidthFraction(BuildContext context,
-    {int dividedBy = 1, double offsetBy = 0, double max = 3000,}) =>
-    min((screenWidth(context) - offsetBy) / dividedBy, max);
+double screenWidthFraction(
+  BuildContext context, {
+  int dividedBy = 1,
+  double offsetBy = 0,
+  double max = 3000,
+}) => min((screenWidth(context) - offsetBy) / dividedBy, max);
 
 double halfScreenWidth(BuildContext context) =>
     screenWidthFraction(context, dividedBy: 2);

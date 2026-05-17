@@ -45,7 +45,7 @@ class _AppLayoutState extends State<AppLayout> {
           if (widget.tabNames != null)
             SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.all(16),
                 child: _buildTabBar(),
               ),
             ),
@@ -89,7 +89,7 @@ class _AppLayoutState extends State<AppLayout> {
               children: [
                 CustomText(
                   text: widget.tabNames![index],
-                  fontSize: 18,
+                  fontSize: 16,
                   variant: isSelected
                       ? TextVariant.medium
                       : TextVariant.regular,
