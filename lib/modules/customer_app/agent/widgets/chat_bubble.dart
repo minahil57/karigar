@@ -46,14 +46,14 @@ class ChatBubble extends StatelessWidget {
           decoration: BoxDecoration(
             color: _isUser
                 ? kcSecondaryColor.withValues(alpha: 0.2)
-                : _isError
+                : _isError && message.text != "You cancelled request"
                 ? kcErrorColor.withValues(alpha: 0.1)
                 : kcWhitecolor.withValues(alpha: 0.4),
             borderRadius: bubbleRadius,
             border: Border.all(
               color: _isUser
                   ? kcSecondaryColor.withValues(alpha: 0.4)
-                  : _isError
+                  : _isError && message.text != "You cancelled request"
                   ? kcErrorColor.withValues(alpha: 0.3)
                   : kcWhitecolor.withValues(alpha: 0.8),
             ),
@@ -68,12 +68,12 @@ class ChatBubble extends StatelessWidget {
           child: !_isUser
               ? GptMarkdown(
                   _isError
-                      ? "Something went wrong. Try again"
+                      ? (message.text == "Response cancelled by user." ||
+                                message.text == "You cancelled request"
+                            ? "You cancelled request"
+                            : "Something went wrong. Try again")
                       : message.text ?? '',
-                  style: getMediumStyle(
-                    fontSize: 13,
-                    color: kcTextBlackcolor,
-                  ),
+                  style: getMediumStyle(fontSize: 13, color: kcTextBlackcolor),
                 )
               : CustomText(
                   text: message.text ?? '',

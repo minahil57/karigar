@@ -214,6 +214,12 @@ class AgentView extends StatelessWidget {
         return const SizedBox.shrink();
 
       case ChatMessageType.error:
+        if (msg.text == "Response cancelled by user." ||
+            msg.text == "You cancelled request") {
+          return ChatBubble(
+            message: ChatMessage.error("You cancelled request"),
+          );
+        }
         return ChatBubble(message: msg);
     }
   }
