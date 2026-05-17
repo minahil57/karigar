@@ -1,5 +1,6 @@
 import 'package:karigar/export.dart';
-import 'package:karigar/modules/customer_app/agent/widgets/steps_bottom_sheet.dart';
+import 'package:karigar/modules/customer_app/agent/widgets/steps_trigger.dart';
+import 'package:karigar/modules/customer_app/agent/widgets/thought_bubble.dart';
 
 class AgentView extends StatelessWidget {
   const AgentView({super.key});
@@ -13,11 +14,11 @@ class AgentView extends StatelessWidget {
         children: [
           // ── Background glow ─────────────────────────────────────────────
           Positioned(
-            bottom: -150,
-            right: -150,
+            bottom: -150.h,
+            right: -150.w,
             child: Container(
-              width: 500,
-              height: 500,
+              width: context.width * (500 / 360),
+              height: context.height * (500 / 690),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
@@ -31,98 +32,101 @@ class AgentView extends StatelessWidget {
           ),
 
           // ── Main content ─────────────────────────────────────────────────
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ── Chat area ─────────────────────────────────────────────────
-              Expanded(
-                child: Obx(() {
-                  final messages = controller.messages;
-                  final hasMessages = messages.isNotEmpty;
+          Padding(
+            padding: EdgeInsets.only(bottom: 12.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // ── Chat area ─────────────────────────────────────────────────
+                Expanded(
+                  child: Obx(() {
+                    final messages = controller.messages;
+                    final hasMessages = messages.isNotEmpty;
 
-                  if (!hasMessages) {
-                    // ── Empty state: logo + greeting ──────────────────────
-                    return SingleChildScrollView(
+                    if (!hasMessages) {
+                      // ── Empty state: logo + greeting ──────────────────────
+                      return SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(
+                          parent: AlwaysScrollableScrollPhysics(),
+                        ),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              verticalSpace(40),
+                              FadeInDown(
+                                child: Container(
+                                  padding: EdgeInsets.all(10.r),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: kcWhitecolor,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: kcBlackColor.withValues(
+                                          alpha: 0.05,
+                                        ),
+                                        blurRadius: 40.r,
+                                        offset: Offset(0, 2.h),
+                                      ),
+                                    ],
+                                  ),
+                                  child: CustomAssetsImage(
+                                    imagePath: 'assets/images/logo.png',
+                                    height: 80.h,
+                                    width: 80.h,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              verticalSpace(20),
+                              FadeInUp(
+                                child: CustomText(
+                                  text: controller.greeting,
+                                  fontSize: 16,
+                                  variant: TextVariant.medium,
+                                  color: kcTextBlackcolor,
+                                ),
+                              ),
+                              verticalSpace(10),
+                              FadeInUp(
+                                delay: const Duration(milliseconds: 200),
+                                child: CustomText(
+                                  text: AppStrings.letMeHelpYou,
+                                  fontSize: 13,
+                                  color: kcTextGreyColor,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+
+                    // ── Chat messages list ─────────────────────────────────
+                    return ListView.builder(
+                      controller: controller.scrollController,
                       physics: const BouncingScrollPhysics(
                         parent: AlwaysScrollableScrollPhysics(),
                       ),
-                      child: Center(
-                        child: Column(
-                          children: [
-                            verticalSpace(40),
-                            FadeInDown(
-                              child: Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: kcWhitecolor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: kcBlackColor.withValues(
-                                        alpha: 0.05,
-                                      ),
-                                      blurRadius: 40,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const CustomAssetsImage(
-                                  imagePath: 'assets/images/logo.png',
-                                  height: 100,
-                                  width: 100,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            verticalSpace(20),
-                            FadeInUp(
-                              child: CustomText(
-                                text: controller.greeting,
-                                fontSize: 24,
-                                variant: TextVariant.medium,
-                                color: kcTextBlackcolor,
-                              ),
-                            ),
-                            verticalSpace(10),
-                            FadeInUp(
-                              delay: const Duration(milliseconds: 200),
-                              child: CustomText(
-                                text: AppStrings.letMeHelpYou,
-                                fontSize: 16,
-                                color: kcTextGreyColor,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      padding: EdgeInsets.only(top: 16.h, bottom: 8.h),
+                      itemCount: messages.length,
+                      itemBuilder: (context, index) {
+                        final msg = messages[index];
+                        return _buildMessageItem(context, msg, index, messages);
+                      },
                     );
-                  }
+                  }),
+                ),
 
-                  // ── Chat messages list ─────────────────────────────────
-                  return ListView.builder(
-                    controller: controller.scrollController,
-                    physics: const BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics(),
-                    ),
-                    padding: const EdgeInsets.only(top: 16, bottom: 8),
-                    itemCount: messages.length,
-                    itemBuilder: (context, index) {
-                      final msg = messages[index];
-                      return _buildMessageItem(context, msg, index, messages);
-                    },
-                  );
-                }),
-              ),
-
-              // ── Suggestions + input ────────────────────────────────────`
-              Obx(
-                () => controller.messages.isNotEmpty
-                    ? const SizedBox.shrink()
-                    : const SuggestionsSection(),
-              ),
-              SafeArea(top: false, child: const ChatField()),
-            ],
+                // ── Suggestions + input ────────────────────────────────────`
+                Obx(
+                  () => controller.messages.isNotEmpty
+                      ? const SizedBox.shrink()
+                      : const SuggestionsSection(),
+                ),
+                  SafeArea(top: false, child: const ChatField()),
+              ],
+            ),
           ),
         ],
       ),
@@ -140,12 +144,12 @@ class AgentView extends StatelessWidget {
         return ChatBubble(message: msg);
 
       case ChatMessageType.agentResponse:
-        final steps = _getStepsForResponse(index, allMessages);
+        final processItems = _getProcessItemsForResponse(index, allMessages);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (processItems.isNotEmpty) StepsTrigger(items: processItems),
             ChatBubble(message: msg),
-            if (steps.isNotEmpty) _buildStepsTrigger(context, steps),
           ],
         );
 
@@ -188,51 +192,49 @@ class AgentView extends StatelessWidget {
       case ChatMessageType.loading:
         return const ThinkingIndicator();
 
+      case ChatMessageType.agentThought:
+        bool hasResponseAfter = false;
+        bool isLastThoughtInSequence = true;
+
+        for (int j = index + 1; j < allMessages.length; j++) {
+          final t = allMessages[j].type;
+          if (t == ChatMessageType.agentResponse ||
+              t == ChatMessageType.bookingConfirmed ||
+              t == ChatMessageType.error) {
+            hasResponseAfter = true;
+            break;
+          }
+          if (t == ChatMessageType.agentThought) {
+            isLastThoughtInSequence = false;
+          }
+        }
+        if (!hasResponseAfter && isLastThoughtInSequence) {
+          return ThoughtBubble(text: msg.text ?? '');
+        }
+        return const SizedBox.shrink();
+
       case ChatMessageType.error:
         return ChatBubble(message: msg);
     }
   }
 
-  /// Finds all [agentStep] messages that preceded this response.
-  List<AgentStep> _getStepsForResponse(int responseIdx, List<ChatMessage> all) {
-    final List<AgentStep> steps = [];
+  /// Finds all [agentStep] and [agentThought] messages that preceded this response.
+  List<ChatMessage> _getProcessItemsForResponse(
+    int responseIdx,
+    List<ChatMessage> all,
+  ) {
+    final List<ChatMessage> items = [];
     // Look backward from the response until we hit a user message or another response
     for (int i = responseIdx - 1; i >= 0; i--) {
       if (all[i].type == ChatMessageType.user ||
           all[i].type == ChatMessageType.agentResponse) {
         break;
       }
-      if (all[i].type == ChatMessageType.agentStep && all[i].step != null) {
-        steps.insert(0, all[i].step!);
+      if (all[i].type == ChatMessageType.agentStep ||
+          all[i].type == ChatMessageType.agentThought) {
+        items.insert(0, all[i]);
       }
     }
-    return steps;
-  }
-
-  Widget _buildStepsTrigger(BuildContext context, List<AgentStep> steps) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 56, bottom: 10),
-      child: InkWell(
-        onTap: () {
-          Get.bottomSheet(
-            StepsBottomSheet(steps: steps),
-            isScrollControlled: true,
-          );
-        },
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            CustomText(
-              text: 'Steps',
-              fontSize: 12,
-              color: kcSecondaryColor,
-              variant: TextVariant.medium,
-            ),
-            horizontalSpace(4),
-            Icon(Icons.chevron_right, size: 14, color: kcSecondaryColor),
-          ],
-        ),
-      ),
-    );
+    return items;
   }
 }

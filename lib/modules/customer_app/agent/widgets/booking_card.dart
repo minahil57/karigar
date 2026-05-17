@@ -9,7 +9,7 @@ class BookingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -20,17 +20,17 @@ class BookingCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
             BoxShadow(
               color: kcSecondaryColor.withValues(alpha: 0.3),
-              blurRadius: 16,
-              offset: const Offset(0, 6),
+              blurRadius: 16.r,
+              offset: Offset(0, 6.h),
             ),
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(20.r),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -38,15 +38,15 @@ class BookingCard extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: EdgeInsets.all(8.r),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Iconsax.calendar_tick,
                       color: Colors.white,
-                      size: 20,
+                      size: 20.r,
                     ),
                   ),
                   horizontalSpace(12),
@@ -70,9 +70,9 @@ class BookingCard extends StatelessWidget {
                 ],
               ),
 
-              const SizedBox(height: 16),
+              verticalSpace(16),
               _divider(),
-              const SizedBox(height: 16),
+              verticalSpace(16),
 
               // ── Provider ────────────────────────────────────────────────
               if (booking.provider != null) ...[
@@ -80,16 +80,16 @@ class BookingCard extends StatelessWidget {
                   icon: Iconsax.user,
                   label: booking.provider!.businessName,
                 ),
-                const SizedBox(height: 10),
+                verticalSpace(10),
                 _ratingRow(booking.provider!.rating),
-                const SizedBox(height: 10),
+                verticalSpace(10),
               ],
 
               // ── Scheduled Time ───────────────────────────────────────────
               _infoRow(icon: Iconsax.clock, label: booking.scheduledTime),
 
               if (booking.reminderTime != null) ...[
-                const SizedBox(height: 10),
+                verticalSpace(10),
                 _infoRow(
                   icon: Iconsax.notification,
                   label: 'Reminder at ${_formatTime(booking.reminderTime!)}',
@@ -103,11 +103,11 @@ class BookingCard extends StatelessWidget {
   }
 
   Widget _divider() =>
-      Container(height: 1, color: Colors.white.withValues(alpha: 0.2));
+      Container(height: 1.h, color: Colors.white.withValues(alpha: 0.2));
 
   Widget _infoRow({required IconData icon, required String label}) => Row(
     children: [
-      Icon(icon, size: 16, color: Colors.white.withValues(alpha: 0.85)),
+      Icon(icon, size: 16.r, color: Colors.white.withValues(alpha: 0.85)),
       horizontalSpace(8),
       Expanded(
         child: CustomText(text: label, fontSize: 13, color: Colors.white),
@@ -122,7 +122,7 @@ class BookingCard extends StatelessWidget {
         final half = !filled && i < rating;
         return Icon(
           half ? Icons.star_half : (filled ? Icons.star : Icons.star_border),
-          size: 14,
+          size: 14.r,
           color: Colors.amber,
         );
       }),

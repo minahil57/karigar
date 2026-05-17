@@ -15,6 +15,7 @@ abstract final class AppTheme {
 
   /// -------------------------- Light Theme  -------------------------------------------- ///
   static final ThemeData lightTheme = ThemeData(
+    fontFamily: 'Sora',
     /// Brightness
     brightness: Brightness.light,
     textSelectionTheme: const TextSelectionThemeData(
@@ -38,11 +39,6 @@ abstract final class AppTheme {
     /// Card Theme
     cardTheme: const CardThemeData(color: Color(0xfff0f0f0)),
     cardColor: const Color(0xfff0f0f0),
-
-    textTheme: TextTheme(
-      titleLarge: GoogleFonts.aBeeZee(),
-      bodyLarge: GoogleFonts.abel(),
-    ),
 
     /// Divider Theme
     dividerTheme: const DividerThemeData(
@@ -111,6 +107,7 @@ abstract final class AppTheme {
 
   /// -------------------------- Dark Theme  -------------------------------------------- ///
   static final ThemeData darkTheme = ThemeData(
+    fontFamily: 'Sora',
     /// Brightness
     brightness: Brightness.dark,
 

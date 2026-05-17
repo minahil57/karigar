@@ -10,10 +10,10 @@ TextStyle appTextStyle({
   Color? decorationColor,
   TextDecorationStyle decorationStyle = TextDecorationStyle.solid,
 }) {
-  final TextStyle baseStyle = GoogleFonts.poppins(
-    fontSize: fontSize,
+  final TextStyle baseStyle = TextStyle(
+    fontFamily: 'Sora',
+    fontSize: fontSize.sp,
     fontWeight: fontWeight,
-    letterSpacing: -0.7,
   );
 
   return baseStyle.copyWith(
@@ -67,7 +67,7 @@ TextStyle getRegularStyle({
 }) {
   return appTextStyle(
     color: color,
-    fontSize: fontSize,
+    fontSize: fontSize.sp,
     fontWeight: FontWeight.w400,
     decoration: decoration,
     decorationColor: decorationColor,

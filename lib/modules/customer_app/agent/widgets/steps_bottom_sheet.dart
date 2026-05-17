@@ -1,14 +1,16 @@
 import 'package:karigar/export.dart';
 
+/// Bottom sheet displaying the complete agent trace log, detailing
+/// the chronological sequence of execution steps and internal reflections.
 class StepsBottomSheet extends StatelessWidget {
-  final List<AgentStep> steps;
+  final List<ChatMessage> items;
 
-  const StepsBottomSheet({super.key, required this.steps});
+  const StepsBottomSheet({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
       decoration: const BoxDecoration(
         color: kcWhitecolor,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -17,13 +19,42 @@ class StepsBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Drag Handle
+          Center(
+            child: Container(
+              width: 40.w,
+              height: 4.h,
+              margin: EdgeInsets.only(bottom: 16.h),
+              decoration: BoxDecoration(
+                color: kcborderColor,
+                borderRadius: BorderRadius.circular(2.r),
+              ),
+            ),
+          ),
+
+          // Header
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomText(
-                text: 'Process Details',
-                fontSize: 18,
-                variant: TextVariant.medium,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: 'Thoughts',
+                      fontSize: 18,
+                      variant: TextVariant.bold,
+                      color: kcTextBlackcolor,
+                    ),
+                    verticalSpace(2),
+                    CustomText(
+                      text: 'Steps and thoughts of the agent',
+                      fontSize: 11,
+                      color: kcTextGreyColor,
+                    ),
+                  ],
+                ),
               ),
               IconButton(
                 onPressed: () => Get.back(),
@@ -32,72 +63,161 @@ class StepsBottomSheet extends StatelessWidget {
             ],
           ),
           verticalSpace(10),
+
+          // Timeline Content
           Flexible(
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: steps.length,
-              separatorBuilder: (context, index) => verticalSpace(12),
-              itemBuilder: (context, index) {
-                final step = steps[index];
-                return _StepTile(step: step);
-              },
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.h),
+                child: Column(
+                  children: List.generate(items.length, (index) {
+                    final item = items[index];
+                    final isLast = index == items.length - 1;
+                    return _TimelineTile(item: item, isLast: isLast);
+                  }),
+                ),
+              ),
             ),
           ),
-          verticalSpace(20),
+          verticalSpace(10),
         ],
       ),
     );
   }
 }
 
-class _StepTile extends StatelessWidget {
-  final AgentStep step;
-  const _StepTile({required this.step});
+class _TimelineTile extends StatelessWidget {
+  final ChatMessage item;
+  final bool isLast;
+
+  const _TimelineTile({required this.item, required this.isLast});
 
   @override
   Widget build(BuildContext context) {
-    final bool isDone = step.status == 'done';
-    
-    return Row(
+    final isStep = item.type == ChatMessageType.agentStep;
+    final step = item.step;
+    final isDone = isStep && step?.status == 'done';
+
+    // Icon Configuration
+    final IconData icon = isStep
+        ? (isDone ? Iconsax.tick_circle : Iconsax.info_circle)
+        : Iconsax.cpu;
+
+    final Color iconColor = isStep
+        ? (isDone ? const Color(0xFF22C55E) : kcSecondaryColor)
+        : kcPrimaryColor;
+
+    final Color iconBg = isStep
+        ? (isDone
+              ? const Color(0xFFE8FDF0)
+              : kcSecondaryColor.withValues(alpha: 0.1))
+        : kcPrimaryVeryLight;
+
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Left Timeline Axis
+          SizedBox(
+            width: 32.w,
+            child: Column(
+              children: [
+                // Icon Wrapper
+                Container(
+                  width: 24.r,
+                  height: 24.r,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: iconBg,
+                  ),
+                  child: Center(
+                    child: Icon(icon, size: 14.r, color: iconColor),
+                  ),
+                ),
+                // Connective line to next node
+                if (!isLast)
+                  Expanded(
+                    child: Container(
+                      width: 1.5.w,
+                      color: kcLightBorderColor.withValues(alpha: 0.5),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          horizontalSpace(12),
+
+          // Right Content Area
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 20.h),
+              child: isStep ? _buildStepContent() : _buildThoughtContent(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStepContent() {
+    final step = item.step!;
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: 24,
-          height: 24,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: isDone ? const Color(0xFF22C55E) : kcSecondaryColor.withValues(alpha: 0.1),
-          ),
-          child: Icon(
-            isDone ? Icons.check : Icons.more_horiz,
-            size: 14,
-            color: isDone ? Colors.white : kcSecondaryColor,
-          ),
+        CustomText(
+          text: _getStepLabel(step.agent),
+          fontSize: 13,
+          variant: TextVariant.medium,
+          color: kcTextBlackcolor,
         ),
-        horizontalSpace(12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomText(
-                text: _getLabel(step.agent),
-                fontSize: 14,
-                variant: TextVariant.medium,
-                color: kcTextBlackcolor,
-              ),
-              CustomText(
-                text: step.message,
-                fontSize: 12,
-                color: kcTextGreyColor,
-              ),
-            ],
-          ),
-        ),
+        verticalSpace(4),
+        CustomText(text: step.message, fontSize: 12, color: kcTextGreyColor),
       ],
     );
   }
 
-  String _getLabel(String agent) {
+  Widget _buildThoughtContent() {
+    return Container(
+      padding: EdgeInsets.all(12.r),
+      decoration: BoxDecoration(
+        color: kcPrimaryVeryLight.withValues(alpha: 0.6),
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: kcborderColor.withValues(alpha: 0.5)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Iconsax.message_programming,
+                size: 12.r,
+                color: kcPrimaryColor.withValues(alpha: 0.6),
+              ),
+              horizontalSpace(6),
+              CustomText(
+                text: 'Reflection',
+                fontSize: 10,
+                color: kcPrimaryColor.withValues(alpha: 0.6),
+                variant: TextVariant.medium,
+              ),
+            ],
+          ),
+          verticalSpace(6),
+          Text(
+            item.text ?? '',
+            style: getRegularStyle(
+              fontSize: 11.5,
+              color: kcDarkGreyTextColor,
+            ).copyWith(fontStyle: FontStyle.italic, height: 1.4),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _getStepLabel(String agent) {
     const labels = {
       'filter_extraction': 'Understanding Request',
       'provider_query': 'Searching Providers',

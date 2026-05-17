@@ -7,7 +7,6 @@ export 'dart:typed_data';
 export 'dart:ui' show PointerDeviceKind, Path, PathMetric;
 
 export 'package:ansicolor/ansicolor.dart';
-export 'package:auto_size_text/auto_size_text.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:dio/dio.dart';
 export 'package:equatable/equatable.dart';
@@ -16,7 +15,6 @@ export 'package:flutter/services.dart';
 export 'package:flutter_easyloading/flutter_easyloading.dart';
 export 'package:get/get.dart'
     hide FormData, MultipartFile, Response, IterableExtensions;
-export 'package:google_fonts/google_fonts.dart';
 export 'package:http_parser/http_parser.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:intl/intl.dart' hide TextDirection;
@@ -35,6 +33,8 @@ export 'package:lottie/lottie.dart';
 export 'package:animate_do/animate_do.dart';
 export 'package:iconsax/iconsax.dart';
 export 'package:flutter_secure_storage/flutter_secure_storage.dart';
+export 'package:flutter_screenutil/flutter_screenutil.dart';
+
 export 'package:geolocator/geolocator.dart';
 export 'package:geocoding/geocoding.dart' hide Location;
 

@@ -21,6 +21,7 @@ class ChatField extends StatelessWidget {
                     hintText: AppStrings.writeYourMessage,
                     suffixIcon: const Icon(
                       Iconsax.microphone,
+                      size: 19,
                       color: kcTextGreyColor,
                     ),
                   ),
