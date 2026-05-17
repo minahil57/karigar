@@ -41,9 +41,9 @@ class LoginController extends GetxController {
 
         log((getUser())!.toJson().toString());
         if (getUser()?.role == UserRole.customer.apiValue) {
-          Get.toNamed(Routes.agent);
+          Get.offAllNamed(Routes.agent);
         } else {
-          Get.toNamed(Routes.providerApp);
+          Get.offAllNamed(Routes.providerApp);
         }
       } else {
         Snackbars.error(errorMessage);

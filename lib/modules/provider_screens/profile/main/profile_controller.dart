@@ -1,35 +1,70 @@
 import 'package:karigar/export.dart';
 
 class ProfileController extends GetxController {
-  late ProfileModel profile;
+  ProviderData? _provider;
+  ProviderData? get provider => _provider;
+  set provider(ProviderData? value) {
+    _provider = value;
+    update();
+  }
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+  set isLoading(bool value) {
+    _isLoading = value;
+    update();
+  }
+
+  String _errorMessage = '';
+  String get errorMessage => _errorMessage;
+  set errorMessage(String value) {
+    _errorMessage = value;
+    update();
+  }
+
+  bool _isUser = false;
+  bool get isUser => _isUser;
+  set isUser(bool value) {
+    _isUser = value;
+    update();
+  }
 
   @override
   void onInit() {
     super.onInit();
-    _loadProfileData();
+    final args = Get.arguments;
+
+    if (args != null && args['providerId'] != null) {
+      fetchProfile(args['providerId']);
+      isUser = false; // Viewing someone else
+    } else {
+      // Fetch own profile
+      fetchProfile(getUser()?.id);
+      isUser = true; // Viewing self
+    }
   }
 
-  void _loadProfileData() {
-    // Mock data based on the provided design
-    profile = ProfileModel(
-      name: 'Aarav Sharma',
-      profession: 'Plumbing Specialist',
-      profileImageUrl: 'https://i.pravatar.cc/300?img=12',
-      rating: '4.9',
-      reviews: '128 reviews',
-      isVerified: true,
-      status: 'Available for Work',
-      experience: '6+ Years',
-      memberSince: 'Jan 2023',
-      phone: '+91 98765 43210',
-      email: 'aarav.sharma@example.com',
-      serviceAreas: 'Bengaluru, Karnataka',
-      languages: 'English, Hindi, Kannada',
-      aboutMe: 'Experienced plumbing specialist providing quality and reliable plumbing services with a focus on customer satisfaction.',
-      skills: ['Pipe Repair', 'Leak Detection', 'Tap Installation', 'Drain Cleaning', 'Water Heater Repair'],
-      jobsCompleted: '128',
-      successRate: '98%',
-      avgRating: '4.9',
-    );
+  Future<void> fetchProfile(String? providerId) async {
+    log('Calling API');
+    try {
+      isLoading = true;
+      errorMessage = '';
+
+      final result = await ProvidersRepository.getProfile(id: providerId);
+
+      if (result['error'] == null) {
+        provider = result['data'];
+      } else {
+        errorMessage = result['error'].toString();
+      }
+    } catch (e) {
+      errorMessage = e.toString();
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  void logout() {
+    AuthRepository.localLogout();
   }
 }

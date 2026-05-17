@@ -1,11 +1,11 @@
 import 'package:karigar/export.dart';
 
 class ProfileStatsRow extends StatelessWidget {
-  final ProfileModel profile;
+  final ProviderData provider;
 
   const ProfileStatsRow({
     super.key,
-    required this.profile,
+    required this.provider,
   });
 
   @override
@@ -20,11 +20,11 @@ class ProfileStatsRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildStat(context, Iconsax.briefcase, profile.jobsCompleted, 'Jobs Completed'),
+          _buildStat(context, Iconsax.briefcase, '—', 'Jobs Done'),
           _buildDivider(),
-          _buildStat(context, Iconsax.verify, profile.successRate, 'Success Rate'),
+          _buildStat(context, Iconsax.timer, '${provider.responseTime}m', 'Response'),
           _buildDivider(),
-          _buildStat(context, Iconsax.star1, profile.avgRating, 'Avg. Rating'),
+          _buildStat(context, Iconsax.star1, provider.rating.toString(), 'Rating'),
         ],
       ),
     );

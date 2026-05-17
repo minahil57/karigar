@@ -89,7 +89,11 @@ class _AppLayoutState extends State<AppLayout> {
               children: [
                 CustomText(
                   text: widget.tabNames![index],
-                  fontSize: 18,
+                  fontSize: getResponsiveFontSize(
+                    context,
+                    fontSize: 15,
+                    max: 16,
+                  ),
                   variant: isSelected
                       ? TextVariant.medium
                       : TextVariant.regular,
