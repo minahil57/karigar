@@ -40,13 +40,13 @@ class _ThinkingIndicatorState extends State<ThinkingIndicator>
               shape: BoxShape.circle,
               color: kcSecondaryColor,
             ),
-            child: const Icon(Iconsax.cpu, size: 16, color: Colors.black),
+            child: const Icon(Iconsax.bubble, size: 16, color: Colors.black),
           ),
           horizontalSpace(10),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: kcSecondaryColor,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(18),
                 topRight: Radius.circular(18),
@@ -104,12 +104,12 @@ class _Dot extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 3),
+        padding: const EdgeInsets.symmetric(horizontal: 2),
         child: Container(
-          width: 7,
-          height: 7,
+          width: 5,
+          height: 5,
           decoration: BoxDecoration(
-            color: kcSecondaryColor.withValues(alpha: 0.7),
+            color: Colors.white,
             shape: BoxShape.circle,
           ),
         ),
