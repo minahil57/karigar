@@ -143,7 +143,9 @@ class CustomerProfileView extends StatelessWidget {
                                   width: 16,
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2,
-                                    valueColor: AlwaysStoppedAnimation<Color>(kcSecondaryColor),
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      kcSecondaryColor,
+                                    ),
                                   ),
                                 ),
                               )
@@ -194,11 +196,15 @@ class CustomerProfileView extends StatelessWidget {
                 ),
                 _buildOptionTile(
                   icon: Iconsax.global,
-                  title: LocalizationService.isUrdu ? 'English (Switch)' : 'اردو (تبدیل کریں)',
+                  title: LocalizationService.isUrdu
+                      ? 'English (Switch)'
+                      : 'اردو (تبدیل کریں)',
                   onTap: () {
                     final newLang = LocalizationService.isUrdu ? 'en' : 'ur';
                     LocalizationService.changeLocale(newLang);
-                  _buildOptionTile(
+                  },
+                ),
+                _buildOptionTile(
                   icon: Iconsax.notification,
                   title: 'Bookings',
                   onTap: () {
@@ -288,7 +294,11 @@ class CustomerProfileView extends StatelessWidget {
             ),
             RotatedBox(
               quarterTurns: LocalizationService.isUrdu ? 2 : 0,
-              child: const Icon(Iconsax.arrow_right_3, size: 16, color: kcTextGreyColor),
+              child: const Icon(
+                Iconsax.arrow_right_3,
+                size: 16,
+                color: kcTextGreyColor,
+              ),
             ),
           ],
         ),
