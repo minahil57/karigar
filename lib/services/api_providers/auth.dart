@@ -54,4 +54,8 @@ class _Auth {
     // dio.options.headers['apiKey'] = Constants.apiKey;
     return dio.post(EndPoints.auth.login, data: {'token': refreshToken});
   }
+
+    Future<Response> updateFcmToken({required String token}) async {
+    return DioHelper.postData(endPoint: EndPoints.auth.fcmToken, data: {'token': token});
+  }
 }

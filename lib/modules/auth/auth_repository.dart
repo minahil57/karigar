@@ -209,4 +209,11 @@ class AuthRepository {
     // await LocalStorage.saveData(LocalStorage.accessToken, model.accessToken!);
     // await LocalStorage.saveData(LocalStorage.refreshToken, model.refreshToken!);
   }
+
+  static Future<void> updateFcmToken() async {
+    String? token = LocalStorage.getFcmToken();
+    if (token != null) {
+      await ApiProvider.auth.updateFcmToken(token: token);
+    }
+  }
 }

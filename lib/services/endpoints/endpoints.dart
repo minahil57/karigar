@@ -6,7 +6,7 @@ part 'customer.dart';
 
 abstract final class EndPoints {
   // static const String loginUrl = 'https://api.newcrm.freemyip.com'; // PROD
-  static const String baseUrl = 'http://172.24.66.227:3000';
+  static const String baseUrl = 'http://192.168.1.5:3000';
   static const String _apiBaseUrl = '$baseUrl/api';
 
   static _Auth get auth => _Auth(apiBaseUrl: _apiBaseUrl);

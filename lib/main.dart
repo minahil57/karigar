@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:karigar/export.dart';
 import 'package:karigar/firebase_options.dart';
 import 'package:karigar/services/notifications/firebase_notification.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +38,11 @@ Future<void> main() async {
 
   Get.put(AppNotifier());
 
-  runApp(const KarigarApp());
+  runApp(
+    OverlaySupport.global(
+      child: const KarigarApp(),
+    ),
+  );
 }
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {

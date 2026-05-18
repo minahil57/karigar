@@ -8,10 +8,8 @@ class SplashController extends GetxController {
   }
 
   Future<void> _initializeApp() async {
-    // Request location permission on startup
     await LocationService.requestLocationPermission();
 
-    // Ensure the splash screen is visible for a brief moment for a smooth transition
     await Future.delayed(const Duration(seconds: 2));
 
     log(await getAccessToken());
@@ -22,7 +20,7 @@ class SplashController extends GetxController {
         Get.offAllNamed(Routes.agent);
       } else {
         if (getUser()!.isProfileCompleted == false) {
-          Get.offAllNamed(Routes.providerApp);
+          Get.offAllNamed(Routes.completeProfile);
         } else {
           Get.offAllNamed(Routes.providerApp);
         }

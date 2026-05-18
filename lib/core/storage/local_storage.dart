@@ -11,6 +11,7 @@ abstract final class LocalStorage {
   static const String _userDataKey = 'user_data';
   static const String _themeCustomizerKey = 'theme_customizer';
   static const String _languageKey = 'lang_code';
+  static const String fcmToken = 'fcmToken';
 
   static SharedPreferences? _preferencesInstance;
   static const _secureStorage = FlutterSecureStorage();
@@ -105,5 +106,13 @@ abstract final class LocalStorage {
     String? userJson = _preferences.getString(_userDataKey);
     if (userJson == null) return null;
     return UserModel.fromJson(jsonDecode(userJson));
+  }
+
+  static Future<void> setFcmToken(String token) async {
+    await _preferences.setString(fcmToken, token);
+  }
+
+  static String? getFcmToken() {
+    return _preferences.getString(fcmToken);
   }
 }
