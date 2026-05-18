@@ -12,6 +12,9 @@ class KarigarApp extends StatelessWidget {
           child: GetMaterialApp(
             title: 'Karigar',
             debugShowCheckedModeBanner: false,
+            translations: AppTranslations(),
+            locale: LocalizationService.currentLocale,
+            fallbackLocale: LocalizationService.fallbackLocale,
             scrollBehavior: CustomScrollBehavior(),
             theme: MainAppTheme.lightTheme,
             darkTheme: MainAppTheme.darkTheme,

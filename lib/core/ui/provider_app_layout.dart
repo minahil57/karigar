@@ -6,7 +6,7 @@ class ProviderAppLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      tabNames: const ["Work History", "Home", 'Profile'],
+      tabNames: [AppStrings.workHistoryTab, AppStrings.homeTab, AppStrings.profileTab],
       tabPages: [
         const WorkHistoryScreen(),
         const ProviderHomeScreen(),

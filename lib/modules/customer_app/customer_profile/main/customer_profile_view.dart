@@ -84,7 +84,7 @@ class CustomerProfileView extends StatelessWidget {
 
                 // Location Details Card
                 CustomText(
-                  text: 'Your Location',
+                  text: AppStrings.yourLocation,
                   variant: TextVariant.bold,
                   fontSize: 18,
                   color: kcBlackColor,
@@ -129,7 +129,7 @@ class CustomerProfileView extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             CustomText(
-                              text: 'Current Address',
+                              text: AppStrings.currentAddress,
                               variant: TextVariant.bold,
                               fontSize: 14,
                               color: kcBlackColor,
@@ -181,7 +181,7 @@ class CustomerProfileView extends StatelessWidget {
 
                 // Settings & Preferences
                 CustomText(
-                  text: 'Preferences',
+                  text: AppStrings.preferences,
                   variant: TextVariant.bold,
                   fontSize: 18,
                   color: kcBlackColor,
@@ -189,9 +189,15 @@ class CustomerProfileView extends StatelessWidget {
                 verticalSpaceSmall,
                 _buildOptionTile(
                   icon: Iconsax.notification,
-                  title: 'Notifications',
+                  title: AppStrings.notifications,
                   onTap: () {},
                 ),
+                _buildOptionTile(
+                  icon: Iconsax.global,
+                  title: LocalizationService.isUrdu ? 'English (Switch)' : 'اردو (تبدیل کریں)',
+                  onTap: () {
+                    final newLang = LocalizationService.isUrdu ? 'en' : 'ur';
+                    LocalizationService.changeLocale(newLang);
                   _buildOptionTile(
                   icon: Iconsax.notification,
                   title: 'Bookings',
@@ -203,7 +209,7 @@ class CustomerProfileView extends StatelessWidget {
 
                 // Support & About
                 CustomText(
-                  text: 'Support',
+                  text: AppStrings.support,
                   variant: TextVariant.bold,
                   fontSize: 18,
                   color: kcBlackColor,
@@ -211,12 +217,12 @@ class CustomerProfileView extends StatelessWidget {
                 verticalSpaceSmall,
                 _buildOptionTile(
                   icon: Iconsax.message_question,
-                  title: 'Help & Support',
+                  title: AppStrings.helpSupport,
                   onTap: () {},
                 ),
                 _buildOptionTile(
                   icon: Iconsax.shield_tick,
-                  title: 'Privacy Policy',
+                  title: AppStrings.privacyPolicy,
                   onTap: () {},
                 ),
                 verticalSpaceLarge,
@@ -226,14 +232,14 @@ class CustomerProfileView extends StatelessWidget {
                 verticalSpaceMedium,
                 _buildActionTile(
                   icon: Iconsax.logout,
-                  title: 'Logout',
+                  title: AppStrings.logout,
                   color: kcTextGreyColor,
                   onTap: controller.logout,
                 ),
                 verticalSpaceSmall,
                 _buildActionTile(
                   icon: Iconsax.trash,
-                  title: 'Delete Account',
+                  title: AppStrings.deleteAccount,
                   color: kcErrorColor,
                   onTap: () => _showDeleteConfirmation(context, controller),
                 ),
@@ -280,7 +286,10 @@ class CustomerProfileView extends StatelessWidget {
                 color: kcBlackColor,
               ),
             ),
-            const Icon(Iconsax.arrow_right_3, size: 16, color: kcTextGreyColor),
+            RotatedBox(
+              quarterTurns: LocalizationService.isUrdu ? 2 : 0,
+              child: const Icon(Iconsax.arrow_right_3, size: 16, color: kcTextGreyColor),
+            ),
           ],
         ),
       ),
@@ -344,16 +353,15 @@ class CustomerProfileView extends StatelessWidget {
                 ),
               ),
               verticalSpaceMedium,
-              const CustomText(
-                text: 'Delete Account?',
+              CustomText(
+                text: AppStrings.deleteAccountQuestion,
                 variant: TextVariant.bold,
                 fontSize: 18,
                 color: kcBlackColor,
               ),
               verticalSpaceSmall,
-              const CustomText(
-                text:
-                    'Are you sure you want to delete your account? This action cannot be undone.',
+              CustomText(
+                text: AppStrings.deleteAccountWarning,
                 fontSize: 14,
                 color: kcTextGreyColor,
                 textAlign: TextAlign.center,
@@ -363,7 +371,7 @@ class CustomerProfileView extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomOutlineButton(
-                      text: 'Cancel',
+                      text: AppStrings.cancel,
                       onPressed: () => Get.back(),
                     ),
                   ),
@@ -371,7 +379,7 @@ class CustomerProfileView extends StatelessWidget {
                   Expanded(
                     child: CustomOutlineButton(
                       textColor: kcErrorColor,
-                      text: 'Delete',
+                      text: AppStrings.delete,
                       borderColor: kcErrorColor,
                       onPressed: () {
                         Get.back();

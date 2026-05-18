@@ -34,7 +34,7 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
     });
 
     EasyLoading.show(
-      status: isAccept ? 'Accepting request...' : 'Rejecting request...',
+      status: isAccept ? AppStrings.acceptingRequest : AppStrings.rejectingRequest,
     );
 
     try {
@@ -45,7 +45,7 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
 
       if (success) {
         EasyLoading.showSuccess(
-          isAccept ? 'Request accepted successfully!' : 'Request rejected.',
+          isAccept ? AppStrings.requestAccepted : AppStrings.requestRejected,
         );
 
         // Execute local triggers
@@ -60,10 +60,10 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
           Get.find<HomeController>().fetchServiceRequests();
         }
       } else {
-        EasyLoading.showError('Failed to update request status.');
+        EasyLoading.showError(AppStrings.somethingWentWrong);
       }
     } catch (e) {
-      EasyLoading.showError('Error: ${e.toString()}');
+      EasyLoading.showError('${AppStrings.somethingWentWrong}: ${e.toString()}');
     } finally {
       if (mounted) {
         setState(() {
@@ -220,7 +220,7 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
                     ),
                     color: kcBlackColor,
                   ),
-                  const CustomText(
+                  CustomText(
                     text: AppStrings.estEarnings,
                     color: kcTextLightGrey,
                     fontSize: 9,
@@ -283,7 +283,7 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
                           : Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const CustomText(
+                                CustomText(
                                   text: AppStrings.accept,
                                   variant: TextVariant.medium,
                                   color: kcWhitecolor,
@@ -333,7 +333,7 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
                           : Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const CustomText(
+                                CustomText(
                                   text: AppStrings.reject,
                                   variant: TextVariant.medium,
                                   color: kcDarkTextColor,

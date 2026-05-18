@@ -12,6 +12,37 @@ class LoginView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: GestureDetector(
+                  onTap: () {
+                    final newLang = LocalizationService.isUrdu ? 'en' : 'ur';
+                    LocalizationService.changeLocale(newLang);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: kcPrimaryColor.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: kcPrimaryColor.withValues(alpha: 0.3)),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Iconsax.global, size: 16, color: kcPrimaryColor),
+                        horizontalSpaceTiny,
+                        CustomText(
+                          text: LocalizationService.isUrdu ? 'English' : 'اردو',
+                          fontSize: 12,
+                          color: kcPrimaryColor,
+                          variant: TextVariant.bold,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              verticalSpace(10),
               SlideInDown(
                 from: 40,
                 duration: const Duration(milliseconds: 1000),

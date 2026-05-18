@@ -149,10 +149,13 @@ class ProviderCard extends StatelessWidget {
                   ),
                 ),
                 verticalSpaceMedium,
-                const Icon(
-                  Iconsax.arrow_right_3,
-                  color: kcTextGreyColor,
-                  size: 20,
+                RotatedBox(
+                  quarterTurns: LocalizationService.isUrdu ? 2 : 0,
+                  child: const Icon(
+                    Iconsax.arrow_right_3,
+                    color: kcTextGreyColor,
+                    size: 20,
+                  ),
                 ),
               ],
             ),

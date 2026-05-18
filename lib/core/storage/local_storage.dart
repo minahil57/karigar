@@ -64,9 +64,9 @@ abstract final class LocalStorage {
     );
   }
 
-  // static Future<bool> setLanguage(Language language) {
-  //   return _preferences.setString(_languageKey, language.locale.languageCode);
-  // }
+  static Future<bool> setLanguage(String langCode) {
+    return _preferences.setString(_languageKey, langCode);
+  }
 
   static String? getLanguage() {
     return _preferences.getString(_languageKey);

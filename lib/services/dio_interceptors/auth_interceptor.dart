@@ -3,7 +3,7 @@ import 'package:karigar/export.dart';
 final Interceptor authInterceptor = QueuedInterceptorsWrapper(
   onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
     String? accessToken = await getAccessToken();
-    print("accessToken:$accessToken");
+    AppLogger.d("accessToken:$accessToken");
 
     // options.path.replaceAll(
     //   EndPoints.baseUrl

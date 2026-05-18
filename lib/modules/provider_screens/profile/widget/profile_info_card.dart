@@ -89,7 +89,7 @@ class ProfileInfoCard extends StatelessWidget {
             const Icon(Iconsax.star1, color: Colors.amber, size: 14),
             horizontalSpaceTiny,
             CustomText(
-              text: '${provider.rating} (${provider.reviewCount} reviews)',
+              text: '${provider.rating} (${provider.reviewCount} ${AppStrings.reviews})',
               fontSize: 11,
               color: kcTextGreyColor,
               variant: TextVariant.medium,
@@ -117,7 +117,7 @@ class ProfileInfoCard extends StatelessWidget {
               ),
               horizontalSpaceTiny,
               CustomText(
-                text: provider.isAvailable ? 'Available' : 'Unavailable',
+                text: provider.isAvailable ? AppStrings.available : AppStrings.unavailable,
                 fontSize: 10,
                 color: provider.isAvailable ? Colors.green : Colors.grey,
                 variant: TextVariant.medium,
@@ -144,13 +144,13 @@ class ProfileInfoCard extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Row(
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Iconsax.edit, color: kcWhitecolor, size: 16),
+                  const Icon(Iconsax.edit, color: kcWhitecolor, size: 16),
                   horizontalSpaceTiny,
                   CustomText(
-                    text: 'Edit Profile',
+                    text: AppStrings.editProfile,
                     variant: TextVariant.medium,
                     fontSize: 12,
                     color: kcWhitecolor,

@@ -1,138 +1,187 @@
+import 'package:get/get.dart';
+
 class AppStrings {
   AppStrings._();
 
-  static const String appTitle = "Karigar";
+  static String get appTitle => "appTitle".tr;
 
   // Onboarding
-  static const String onboardingTitle1 = 'Find & Hire Skilled Karigars';
-  static const String onboardingSubtitle1 =
-      'Search trusted electricians, plumbers, mechanics, and other professionals near you with ease.';
-
-  static const String onboardingTitle2 = 'Offer & Accept Services';
-  static const String onboardingSubtitle2 =
-      'As a provider, receive job requests, accept offers, and grow your service network.';
-
-  static const String onboardingTitle3 = 'Manage Work in Real-Time';
-  static const String onboardingSubtitle3 =
-      'Track job progress, communicate directly, and stay updated from start to finish.';
-
-  static const String onboardingTitle4 = 'Build Your Service Network';
-  static const String onboardingSubtitle4 =
-      'Connect users and providers in one platform and manage all your service activity easily.';
+  static String get onboardingTitle1 => "onboardingTitle1".tr;
+  static String get onboardingSubtitle1 => "onboardingSubtitle1".tr;
+  static String get onboardingTitle2 => "onboardingTitle2".tr;
+  static String get onboardingSubtitle2 => "onboardingSubtitle2".tr;
+  static String get onboardingTitle3 => "onboardingTitle3".tr;
+  static String get onboardingSubtitle3 => "onboardingSubtitle3".tr;
+  static String get onboardingTitle4 => "onboardingTitle4".tr;
+  static String get onboardingSubtitle4 => "onboardingSubtitle4".tr;
 
   // Welcome
-  static const String welcomeToKarigar = "Welcome to Karigar";
-  static const String welcomeSubtitle =
-      "A two-sided platform connecting customers with skilled professionals and empowering providers with opportunities.";
+  static String get welcomeToKarigar => "welcomeToKarigar".tr;
+  static String get welcomeSubtitle => "welcomeSubtitle".tr;
 
   // Buttons
-  static const String getStarted = "Get Started";
-  static const String next = "Next";
-  static const String skip = "Skip";
-  static const String loginRegister = "Login / Register";
+  static String get getStarted => "getStarted".tr;
+  static String get next => "next".tr;
+  static String get skip => "skip".tr;
+  static String get loginRegister => "loginRegister".tr;
 
   // Authentication
-  static const String enterYourName = "Enter Your Name";
-  static const String enterNameHint = "Type your full name here";
-
-  static const String enterMobile = "Enter Mobile Number";
-  static const String mobileHint = "e.g. 9876543210";
-
-  static const String enterOTP = "Enter OTP";
-  static const String otpSentMessage = "We’ve sent a 6-digit OTP to";
-  static const String resendOTP = "Resend OTP";
-  static const String verify = "Verify";
-
-  static const String selectLanguage = "Select Language";
-  static const String english = "English";
-  static const String hindi = "हिन्दी";
+  static String get enterYourName => "enterYourName".tr;
+  static String get enterNameHint => "enterNameHint".tr;
+  static String get enterMobile => "enterMobile".tr;
+  static String get mobileHint => "mobileHint".tr;
+  static String get enterOTP => "enterOTP".tr;
+  static String get otpSentMessage => "otpSentMessage".tr;
+  static String get resendOTP => "resendOTP".tr;
+  static String get verify => "verify".tr;
+  static String get selectLanguage => "selectLanguage".tr;
+  static String get english => "english".tr;
+  static String get hindi => "hindi".tr;
+  static String get urdu => "urdu".tr;
 
   // Home
-  static const String home = "Home";
-  static const String profile = "Profile";
+  static String get home => "home".tr;
+  static String get profile => "profile".tr;
 
-  //misc
-  static const String somethingWentWrong = "Something went wrong";
-  static const String noInternet = "No Internet";
-  static const String noInternetMessage =
-      "Please check your internet connection";
-  static const String tryAgain = "Try Again";
-  static const String cancel = "Cancel";
-  static const String ok = "Ok";
-  static const String sessionExpired = "Session Expired";
-  static const String sessionExpiredMessage = "Please login again";
-  static const String copiedToClipboard = "Copied to clipboard";
-  static const String signIn = "Sign In";
-  static const String signUp = "Sign Up";
-  static const String back = "Back";
+  // Misc / Errors
+  static String get somethingWentWrong => "somethingWentWrong".tr;
+  static String get noInternet => "noInternet".tr;
+  static String get noInternetMessage => "noInternetMessage".tr;
+  static String get tryAgain => "tryAgain".tr;
+  static String get cancel => "cancel".tr;
+  static String get ok => "ok".tr;
+  static String get sessionExpired => "sessionExpired".tr;
+  static String get sessionExpiredMessage => "sessionExpiredMessage".tr;
+  static String get copiedToClipboard => "copiedToClipboard".tr;
+  static String get signIn => "signIn".tr;
+  static String get signUp => "signUp".tr;
+  static String get back => "back".tr;
 
-  static const String findExpertsOrGetHired =
-      'Find Experts or Get Hired\nPowered by Smart Agent Matching';
-  static const String poweredBySmartAgentMatching =
-      'Powered by Smart Agent Matching';
-  static const String signInToYourAccount = 'Sign in to your account';
-  static const String password = "Password";
-  static const String passwordHint = "Enter your password";
-  static const String emailAdress = "Email Adress";
-  static const String enterYourEmail = "Enter your email Adress";
-  static const String dontHaveAnAccount = 'Don\'t have an account? ';
-  static const String createAccount = 'Create Account';
-  static const String fullName = "Full Name";
-  static const String fullNameHint = "Enter your full name";
-  static const String phoneNumber = "Phone Number";
-  static const String phoneNumberHint = "Enter your phone number";
-  static const String confirmPassword = "Confirm Password";
-  static const String confirmPasswordHint = "Confirm your password";
-  static const String registerAsProvider = "Register as Provider";
-  static const String letMeHelpYou = "Let me help you find the right\nKarigar";
-  static const String writeYourMessage = "Write your message";
-  static const String suggestionsForYou = "Suggestions for you";
-  static const String hey = "Hey";
+  static String get findExpertsOrGetHired => "findExpertsOrGetHired".tr;
+  static String get poweredBySmartAgentMatching => "poweredBySmartAgentMatching".tr;
+  static String get signInToYourAccount => "signInToYourAccount".tr;
+  static String get password => "password".tr;
+  static String get passwordHint => "passwordHint".tr;
+  static String get emailAdress => "emailAdress".tr;
+  static String get enterYourEmail => "enterYourEmail".tr;
+  static String get dontHaveAnAccount => "dontHaveAnAccount".tr;
+  static String get createAccount => "createAccount".tr;
+  static String get fullName => "fullName".tr;
+  static String get fullNameHint => "fullNameHint".tr;
+  static String get phoneNumber => "phoneNumber".tr;
+  static String get phoneNumberHint => "phoneNumberHint".tr;
+  static String get confirmPassword => "confirmPassword".tr;
+  static String get confirmPasswordHint => "confirmPasswordHint".tr;
+  static String get registerAsProvider => "registerAsProvider".tr;
+  static String get letMeHelpYou => "letMeHelpYou".tr;
+  static String get writeYourMessage => "writeYourMessage".tr;
+  static String get suggestionsForYou => "suggestionsForYou".tr;
+  static String get hey => "hey".tr;
 
   // Provider Home
-  static const String agenticDiscovery = 'Agentic Discovery';
-  static const String aiPoweredMarketplace =
-      'AI-Powered Local Services Marketplace';
-  static const String logout = 'Logout';
-  static const String verified = 'Verified';
-  static const String jobs = 'Jobs';
-  static const String earnings = 'Earnings';
-  static const String activeBooking = 'Active Booking';
-  static const String ongoing = 'Ongoing';
-  static const String liveServiceRequests = 'Live Service Requests';
-  static const String viewAll = 'View All';
-  static const String aiPerfectMatch = 'AI Perfect Match';
-  static const String estEarnings = 'Est. Earnings';
-  static const String preferred = 'Preferred:';
-  static const String accept = 'Accept';
-  static const String reject = 'Reject';
+  static String get agenticDiscovery => "agenticDiscovery".tr;
+  static String get aiPoweredMarketplace => "aiPoweredMarketplace".tr;
+  static String get logout => "logout".tr;
+  static String get verified => "verified".tr;
+  static String get jobs => "jobs".tr;
+  static String get earnings => "earnings".tr;
+  static String get activeBooking => "activeBooking".tr;
+  static String get ongoing => "ongoing".tr;
+  static String get liveServiceRequests => "liveServiceRequests".tr;
+  static String get viewAll => "viewAll".tr;
+  static String get aiPerfectMatch => "aiPerfectMatch".tr;
+  static String get estEarnings => "estEarnings".tr;
+  static String get preferred => "preferred".tr;
+  static String get accept => "accept".tr;
+  static String get reject => "reject".tr;
 
   // Complete Profile
-  static const String selectOperatingCity = "Select Operating City";
-  static const String completeProfile = "Complete Profile";
-  static const String personalInfo = "Personal Info";
-  static const String businessName = "Business Name";
-  static const String businessNameHint = "Enter your business name";
-  static const String profession = "Profession";
-  static const String professionHint = "e.g. Electrician, Plumber";
-  static const String aboutMe = "About Me";
-  static const String aboutMeHint = "Tell us about your services, background, etc.";
-  static const String serviceDetails = "Service Details";
-  static const String serviceAreas = "Service Areas (Main Cities)";
-  static const String languagesSpoken = "Languages Spoken";
-  static const String selectLanguages = "Select Languages";
-  static const String selectLanguagesHint = "Select Languages (Multi-select)";
-  static const String skillsExpertise = "Skills & Expertise";
-  static const String addSkill = "Add Skill";
-  static const String addSkillHint = "e.g. Pipe Fitting, Wiring";
-  static const String availabilityOption = "Availability Option";
-  static const String openingTime = "Opening Time";
-  static const String closingTime = "Closing Time";
-  static const String priceRange = "Price Range / Rate";
-  static const String experienceYearsLabel = "Experience (Years)";
-  static const String experienceHint = "e.g. 5";
-  static const String saveProfile = "Save Profile";
-  static const String unsupportedLocation = "Unsupported Location";
-  static const String changeCity = "Change City";
-  static const String chooseSupportedCity = "Choose Supported City";
+  static String get selectOperatingCity => "selectOperatingCity".tr;
+  static String get completeProfile => "completeProfile".tr;
+  static String get personalInfo => "personalInfo".tr;
+  static String get businessName => "businessName".tr;
+  static String get businessNameHint => "businessNameHint".tr;
+  static String get profession => "profession".tr;
+  static String get professionHint => "professionHint".tr;
+  static String get aboutMe => "aboutMe".tr;
+  static String get aboutMeHint => "aboutMeHint".tr;
+  static String get serviceDetails => "serviceDetails".tr;
+  static String get serviceAreas => "serviceAreas".tr;
+  static String get languagesSpoken => "languagesSpoken".tr;
+  static String get selectLanguages => "selectLanguages".tr;
+  static String get selectLanguagesHint => "selectLanguagesHint".tr;
+  static String get skillsExpertise => "skillsExpertise".tr;
+  static String get addSkill => "addSkill".tr;
+  static String get addSkillHint => "addSkillHint".tr;
+  static String get availabilityOption => "availabilityOption".tr;
+  static String get openingTime => "openingTime".tr;
+  static String get closingTime => "closingTime".tr;
+  static String get priceRange => "priceRange".tr;
+  static String get experienceYearsLabel => "experienceYearsLabel".tr;
+  static String get experienceHint => "experienceHint".tr;
+  static String get saveProfile => "saveProfile".tr;
+  static String get unsupportedLocation => "unsupportedLocation".tr;
+  static String get changeCity => "changeCity".tr;
+  static String get chooseSupportedCity => "chooseSupportedCity".tr;
+
+  // Newly Localized Hardcoded UI Strings
+  static String get yourLocation => "yourLocation".tr;
+  static String get currentAddress => "currentAddress".tr;
+  static String get preferences => "preferences".tr;
+  static String get notifications => "notifications".tr;
+  static String get support => "support".tr;
+  static String get helpSupport => "helpSupport".tr;
+  static String get privacyPolicy => "privacyPolicy".tr;
+  static String get deleteAccount => "deleteAccount".tr;
+  static String get deleteAccountQuestion => "deleteAccountQuestion".tr;
+  static String get deleteAccountWarning => "deleteAccountWarning".tr;
+  static String get delete => "delete".tr;
+  static String get experience => "experience".tr;
+  static String get memberSince => "memberSince".tr;
+  static String get phone => "phone".tr;
+  static String get email => "email".tr;
+  static String get serviceAreasLabel => "serviceAreasLabel".tr;
+  static String get languages => "languages".tr;
+  static String get noDescription => "noDescription".tr;
+  static String get alreadyHaveAccount => "alreadyHaveAccount".tr;
+  static String get customer => "customer".tr;
+  static String get serviceProvider => "serviceProvider".tr;
+  static String get requested => "requested".tr;
+  static String get confirmed => "confirmed".tr;
+  static String get reminded => "reminded".tr;
+  static String get completed => "completed".tr;
+  static String get cancelled => "cancelled".tr;
+  static String get workHistoryTab => "workHistoryTab".tr;
+  static String get homeTab => "homeTab".tr;
+  static String get profileTab => "profileTab".tr;
+  static String get communityTab => "communityTab".tr;
+  static String get aiTab => "aiTab".tr;
+  static String get jobsDone => "jobsDone".tr;
+  static String get responseTimeLabel => "responseTimeLabel".tr;
+  static String get ratingLabel => "ratingLabel".tr;
+  static String get editProfile => "editProfile".tr;
+  static String get available => "available".tr;
+  static String get unavailable => "unavailable".tr;
+  static String get reviews => "reviews".tr;
+  static String get thisMonth => "thisMonth".tr;
+  static String get noActiveBookings => "noActiveBookings".tr;
+  static String get loggingIn => "loggingIn".tr;
+  static String get loginSuccessful => "loginSuccessful".tr;
+  static String get acceptingRequest => "acceptingRequest".tr;
+  static String get rejectingRequest => "rejectingRequest".tr;
+  static String get requestAccepted => "requestAccepted".tr;
+  static String get requestRejected => "requestRejected".tr;
+  static String get savingProfile => "savingProfile".tr;
+  static String get profileCompleted => "profileCompleted".tr;
+  static String get selectProfilePicture => "selectProfilePicture".tr;
+  static String get takePhoto => "takePhoto".tr;
+  static String get chooseGallery => "chooseGallery".tr;
+  static String get upload => "upload".tr;
+  static String get required => "required".tr;
+  static String get phoneLengthError => "phoneLengthError".tr;
+  static String get personalInformation => "personalInformation".tr;
+  static String get additionalInformation => "additionalInformation".tr;
+  static String get searchForKarigars => "searchForKarigars".tr;
+  static String get retry => "retry".tr;
+  static String get noProvidersFound => "noProvidersFound".tr;
 }

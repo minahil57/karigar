@@ -50,10 +50,13 @@ class ProfileMenuItem extends StatelessWidget {
               ),
               horizontalSpaceSmall,
             ],
-            const Icon(
-              Icons.arrow_forward_ios,
-              size: 14,
-              color: kcTextLightGrey,
+            RotatedBox(
+              quarterTurns: LocalizationService.isUrdu ? 2 : 0,
+              child: const Icon(
+                Icons.arrow_forward_ios,
+                size: 14,
+                color: kcTextLightGrey,
+              ),
             ),
           ],
         ),

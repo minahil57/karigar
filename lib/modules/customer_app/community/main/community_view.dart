@@ -31,7 +31,7 @@ class CommunityView extends StatelessWidget {
                                   Expanded(
                                     child: CustomTextField(
                                       controller: controller.searchController,
-                                      hintText: 'Search for Karigars...',
+                                      hintText: AppStrings.searchForKarigars,
                                       prefixIcon: const Icon(
                                         Iconsax.search_normal,
                                       ),
@@ -71,7 +71,7 @@ class CommunityView extends StatelessWidget {
                                     ),
                                     verticalSpace(10),
                                     CustomOutlineButton(
-                                      text: 'Retry',
+                                      text: AppStrings.retry,
                                       onPressed: controller.fetchProviders,
                                       height: 40,
                                     ),
@@ -80,10 +80,10 @@ class CommunityView extends StatelessWidget {
                               )
                             : controller.filteredProviders.isEmpty &&
                                   !controller.isLoading
-                            ? const Center(
+                            ? Center(
                                 child: CustomText(
                                   fontSize: 14,
-                                  text: 'No providers found',
+                                  text: AppStrings.noProvidersFound,
                                   color: kcTextGreyColor,
                                 ),
                               )
@@ -93,7 +93,7 @@ class CommunityView extends StatelessWidget {
                                 itemCount: controller.isLoading
                                     ? 5
                                     : controller.filteredProviders.length,
-                                separatorBuilder: (_, __) => verticalSpace(15),
+                                separatorBuilder: (_, _) => verticalSpace(15),
                                 itemBuilder: (context, index) {
                                   final provider = controller.isLoading
                                       ? dummyProvidersList[index]

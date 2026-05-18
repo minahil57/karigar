@@ -6,7 +6,7 @@ class CustomerAppLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      tabNames: const ["Community", "Karigar AI", 'Profile'],
+      tabNames: [AppStrings.communityTab, AppStrings.aiTab, AppStrings.profileTab],
       tabPages: [
         const CommunityView(),
         const AgentView(),
