@@ -19,11 +19,13 @@ final dummyProvider = ProviderData(
     country: 'Pakistan',
   ),
   availability: Availability(
-    monday: DayAvailability(open: '09:00', close: '18:00'),
-    tuesday: DayAvailability(open: '09:00', close: '18:00'),
-    wednesday: DayAvailability(open: '09:00', close: '18:00'),
-    thursday: DayAvailability(open: '09:00', close: '18:00'),
-    friday: DayAvailability(open: '09:00', close: '18:00'),
+    days: {
+      'monday': DayAvailability(open: '09:00', close: '18:00'),
+      'tuesday': DayAvailability(open: '09:00', close: '18:00'),
+      'wednesday': DayAvailability(open: '09:00', close: '18:00'),
+      'thursday': DayAvailability(open: '09:00', close: '18:00'),
+      'friday': DayAvailability(open: '09:00', close: '18:00'),
+    },
   ),
   priceRange: null,
   responseTime: 10,

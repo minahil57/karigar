@@ -186,8 +186,6 @@ class CustomerProfileView extends StatelessWidget {
                   },
                 ),
                 verticalSpaceMedium,
-
-                // Support & About
                 CustomText(
                   text: AppStrings.support,
                   variant: TextVariant.medium,
