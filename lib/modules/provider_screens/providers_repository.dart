@@ -88,4 +88,39 @@ class ProvidersRepository {
       return {'data': null, 'error': 'Something went wrong'};
     }
   }
+
+  static Future<Map<String, dynamic>> updateProfile(Map<String, dynamic> data) async {
+    try {
+      final response = await ApiProvider.provider.updateProfile(data);
+
+      if (response.statusCode == 200) {
+        return {'data': response.data, 'error': null};
+      } else {
+        return {
+          'data': null,
+          'error': response.data['message'] ?? 'Something went wrong',
+        };
+      }
+    } on DioException catch (e) {
+      return {
+        'data': null,
+        'error':
+            e.response?.data['message'] ?? e.message ?? 'Something went wrong',
+      };
+    } catch (e) {
+      return {'data': null, 'error': 'Something went wrong'};
+  static Future<bool> updateBookingStatus(
+    String id, String status) async {
+    try {
+      final response = await ApiProvider.provider.updateBookingStatus(id, status);
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
 }

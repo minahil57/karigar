@@ -1,12 +1,14 @@
 import 'package:karigar/export.dart';
 
 class WorkHistoryCard extends StatelessWidget {
-  final WorkHistoryModel history;
+  final ServiceRequestModel history;
 
   const WorkHistoryCard({super.key, required this.history});
 
   @override
   Widget build(BuildContext context) {
+    final bookingStatus = BookingStatus.fromApi(history.status);
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
@@ -26,13 +28,13 @@ class WorkHistoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomText(
-                      text: history.serviceTitle,
+                      text: history.providerService.service.name,
                       variant: TextVariant.bold,
                       fontSize: 14,
                       color: kcBlackColor,
                     ),
-                    CustomText(
-                      text: history.price,
+                    const CustomText(
+                      text: 'Market Competitive',
                       variant: TextVariant.bold,
                       fontSize: 14,
                       color: kcBlackColor,
@@ -40,8 +42,8 @@ class WorkHistoryCard extends StatelessWidget {
                   ],
                 ),
                 verticalSpaceTiny,
-                CustomText(
-                  text: history.description,
+                const CustomText(
+                  text: 'Scheduled Service Booking',
                   fontSize: 11,
                   color: kcTextGreyColor,
                 ),
@@ -63,7 +65,7 @@ class WorkHistoryCard extends StatelessWidget {
                     const Icon(Iconsax.calendar, size: 12, color: kcTextLightGrey),
                     horizontalSpaceTiny,
                     CustomText(
-                      text: history.dateTime,
+                      text: history.scheduledTime,
                       fontSize: 10,
                       color: kcTextLightGrey,
                     ),
@@ -79,25 +81,23 @@ class WorkHistoryCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: history.status == WorkStatus.completed
-                      ? Colors.green.withValues(alpha: 0.1)
-                      : Colors.red.withValues(alpha: 0.1),
+                  color: bookingStatus.backgroundColor,
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: CustomText(
-                  text: history.status == WorkStatus.completed ? 'Completed' : 'Cancelled',
+                  text: bookingStatus.title,
                   fontSize: 9,
-                  color: history.status == WorkStatus.completed ? Colors.green : Colors.red,
+                  color: bookingStatus.color,
                   variant: TextVariant.medium,
                 ),
               ),
               verticalSpaceMedium,
-              Row(
+              const Row(
                 children: [
-                  const Icon(Iconsax.star1, color: Colors.amber, size: 12),
+                  Icon(Iconsax.star1, color: Colors.amber, size: 12),
                   horizontalSpaceTiny,
                   CustomText(
-                    text: history.rating.toString(),
+                    text: '5.0',
                     fontSize: 10,
                     color: kcTextGreyColor,
                     variant: TextVariant.medium,

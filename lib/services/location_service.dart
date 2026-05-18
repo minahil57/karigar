@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart';
+
+import 'package:karigar/export.dart';
+
 
 class LocationService {
   /// Request location permissions and check if location service is enabled.

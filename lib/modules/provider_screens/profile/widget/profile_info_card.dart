@@ -2,8 +2,13 @@ import 'package:karigar/export.dart';
 
 class ProfileInfoCard extends StatelessWidget {
   final ProviderData provider;
+  final bool isUser;
 
-  const ProfileInfoCard({super.key, required this.provider});
+  const ProfileInfoCard({
+    super.key,
+    required this.provider,
+    this.isUser = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +125,41 @@ class ProfileInfoCard extends StatelessWidget {
             ],
           ),
         ),
+        if (isUser) ...[
+          verticalSpaceSmall,
+          GestureDetector(
+            onTap: () {
+              // Edit profile action
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              decoration: BoxDecoration(
+                color: kcPrimaryColor,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: kcPrimaryColor.withValues(alpha: 0.2),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Iconsax.edit, color: kcWhitecolor, size: 16),
+                  horizontalSpaceTiny,
+                  CustomText(
+                    text: 'Edit Profile',
+                    variant: TextVariant.medium,
+                    fontSize: 12,
+                    color: kcWhitecolor,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ],
     );
   }

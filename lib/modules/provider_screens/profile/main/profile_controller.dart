@@ -42,6 +42,7 @@ class ProfileController extends GetxController {
       fetchProfile(getUser()?.id);
       isUser = true; // Viewing self
     }
+    log('Profile Type: ${isUser.toString()}');
   }
 
   Future<void> fetchProfile(String? providerId) async {

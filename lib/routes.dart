@@ -8,6 +8,7 @@ class Routes {
   static const String agent = '/agent';
   static const String providerApp = '/provider';
   static const String providerProfile = '/provider/profile';
+  static const String completeProfile = '/provider/complete_profile';
 }
 
 class AppRouter {
@@ -44,8 +45,14 @@ class AppRouter {
         name: Routes.providerProfile,
         page: () => const ProviderProfileScreen(),
       ),
+      GetPage(
+        name: Routes.completeProfile,
+        page: () => const CompleteProfileScreen(),
+        binding: CompleteProfileBinding(),
+      ),
     ];
   }
+
 }
 
 class AuthMiddleware extends GetMiddleware {

@@ -2,64 +2,54 @@ import 'package:karigar/export.dart';
 
 class WorkHistoryController extends GetxController {
   final RxInt selectedTabIndex = 0.obs;
-  final RxList<WorkHistoryModel> historyList = <WorkHistoryModel>[].obs;
+  final RxBool isLoading = false.obs;
+  final List<ServiceRequestModel> _historyList = <ServiceRequestModel>[];
+  List<ServiceRequestModel> get historyList => _historyList;
+
+  set historyList(List<ServiceRequestModel> value) {
+    _historyList.clear();
+    _historyList.assignAll(value);
+    update();
+  }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    _loadHistoryData();
+   await  fetchWorkHistory();
   }
 
-  void _loadHistoryData() {
-    // Mock data based on the provided design
-    historyList.value = [
-      WorkHistoryModel(
-        serviceTitle: 'Plumbing Repair',
-        description: 'Bathroom pipe leakage',
-        location: 'Koramangala, Bengaluru',
-        dateTime: '12 May 2025, 2:00 PM',
-        price: '₹1,250',
-        status: WorkStatus.completed,
-        rating: 5.0,
-      ),
-      WorkHistoryModel(
-        serviceTitle: 'Tap Installation',
-        description: 'Kitchen tap replacement',
-        location: 'HSR Layout, Bengaluru',
-        dateTime: '10 May 2025, 11:30 AM',
-        price: '₹850',
-        status: WorkStatus.completed,
-        rating: 4.9,
-      ),
-      WorkHistoryModel(
-        serviceTitle: 'Water Heater Repair',
-        description: 'Geyser not heating',
-        location: 'Indiranagar, Bengaluru',
-        dateTime: '08 May 2025, 4:00 PM',
-        price: '₹1,100',
-        status: WorkStatus.completed,
-        rating: 5.0,
-      ),
-      WorkHistoryModel(
-        serviceTitle: 'Drain Cleaning',
-        description: 'Bathroom drain blocked',
-        location: 'Jayanagar, Bengaluru',
-        dateTime: '05 May 2025, 10:00 AM',
-        price: '₹900',
-        status: WorkStatus.completed,
-        rating: 4.8,
-      ),
-    ];
+  Future<void> fetchWorkHistory() async {
+    try {
+      isLoading.value = true;
+      historyList = dummyServiceRequests;
+
+      final result = await ProvidersRepository.getProviderBookings(
+        id: getUser()?.id.toString(),
+      );
+
+      if (result['error'] == null) {
+        historyList = result['data'] ?? [];
+      } else {
+        historyList.clear();
+      }
+    } catch (e) {
+      historyList.clear();
+    } finally {
+      
+      isLoading.value = false;
+    }
   }
 
-  List<WorkHistoryModel> get filteredList {
+  List<ServiceRequestModel> get filteredList {
     if (selectedTabIndex.value == 0) return historyList;
     if (selectedTabIndex.value == 1) {
       return historyList
-          .where((e) => e.status == WorkStatus.completed)
+          .where((e) => e.status.toLowerCase() == 'completed')
           .toList();
     }
-    return historyList.where((e) => e.status == WorkStatus.cancelled).toList();
+    return historyList
+        .where((e) => e.status.toLowerCase() == 'cancelled')
+        .toList();
   }
 
   void changeTab(int index) {
