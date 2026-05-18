@@ -182,8 +182,17 @@ class CompleteProfileController extends GetxController
         final result = await ProvidersRepository.updateProfile(requestData);
 
         if (result['error'] == null) {
+         final user = LocalStorage.getUser();
+
+          if (user != null) {
+            final updatedUser = user.copyWith(isProfileCompleted: true);
+
+            await LocalStorage.setUser(updatedUser);
+          }
+
+          Get.offAllNamed(Routes.providerApp);
+
           Snackbars.success('Profile completed successfully!');
-          Get.back();
         } else {
           Snackbars.error(result['error'].toString());
         }

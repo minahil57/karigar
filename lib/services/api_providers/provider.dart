@@ -46,9 +46,9 @@ class _Provider {
       endPoint: EndPoints.provider.profilePatch,
       data: data,
     );
-  }
-
-  Future<Response> updateBookingStatus(String id,String status) async {
+  
+}
+Future<Response> updateBookingStatus(String id,String status) async {
     return DioHelper.patchData(
       endPoint: EndPoints.provider.updateBookingStatus(id),
       data: {"status":status}

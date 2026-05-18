@@ -36,26 +36,53 @@ class ProvidersRepository {
 
   static Future<Map<String, dynamic>> getProfile({String? id}) async {
     log('Api function');
+
     try {
       final response = await ApiProvider.provider.getProfile(id!);
 
-      if (response.statusCode == 200) {
-        final provider = ProviderData.fromJson(response.data);
+      log('Status Code: ${response.statusCode}');
+      log('Raw Response: ${response.data}');
 
-        return {'data': provider, 'error': null};
+      if (response.statusCode == 200) {
+        try {
+          final jsonData = response.data;
+
+          log('JSON Type: ${jsonData.runtimeType}');
+          log('JSON Data: $jsonData');
+
+          final provider = ProviderData.fromJson(jsonData);
+
+          log('Parsed Provider: ${provider.toJson()}');
+
+          return {'data': provider, 'error': null};
+        } catch (e, stackTrace) {
+          log('JSON Parsing Error: $e');
+          log('StackTrace: $stackTrace');
+
+          return {'data': null, 'error': 'JSON Parsing Error: $e'};
+        }
       } else {
+        log('API Error: ${response.data}');
+
         return {
           'data': null,
           'error': response.data['message'] ?? 'Something went wrong',
         };
       }
-    } on DioException catch (e) {
+    } on DioException catch (e, stackTrace) {
+      log('Dio Error: ${e.message}');
+      log('Dio Response: ${e.response?.data}');
+      log('StackTrace: $stackTrace');
+
       return {
         'data': null,
         'error':
             e.response?.data['message'] ?? e.message ?? 'Something went wrong',
       };
-    } catch (e) {
+    } catch (e, stackTrace) {
+      log('Unexpected Error: $e');
+      log('StackTrace: $stackTrace');
+
       return {'data': null, 'error': 'Something went wrong'};
     }
   }
@@ -109,10 +136,10 @@ class ProvidersRepository {
       };
     } catch (e) {
       return {'data': null, 'error': 'Something went wrong'};
+ 
     }
   }
-
-  static Future<bool> updateBookingStatus(
+   static Future<bool> updateBookingStatus(
     String id, String status) async {
     try {
       final response = await ApiProvider.provider.updateBookingStatus(id, status);

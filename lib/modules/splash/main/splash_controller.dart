@@ -8,6 +8,7 @@ class SplashController extends GetxController {
   }
 
   Future<void> _initializeApp() async {
+    log(getUser()!.isProfileCompleted.toString());
     // Request location permission on startup
     await LocationService.requestLocationPermission();
 
@@ -21,7 +22,11 @@ class SplashController extends GetxController {
       if (getUser()?.role == UserRole.customer.apiValue) {
         Get.offAllNamed(Routes.agent);
       } else {
-        Get.offAllNamed(Routes.providerApp);
+        if (getUser()!.isProfileCompleted == false) {
+          Get.offAllNamed(Routes.providerApp);
+        } else {
+          Get.offAllNamed(Routes.providerApp);
+        }
       }
     }
   }

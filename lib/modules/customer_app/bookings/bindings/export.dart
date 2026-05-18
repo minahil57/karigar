@@ -1,0 +1,1 @@
+export 'customer_booings_binding.dart';

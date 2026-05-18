@@ -43,7 +43,11 @@ class LoginController extends GetxController {
         if (getUser()?.role == UserRole.customer.apiValue) {
           Get.offAllNamed(Routes.agent);
         } else {
-          Get.offAllNamed(Routes.providerApp);
+          if (getUser()?.isProfileCompleted == true) {
+            Get.offAllNamed(Routes.providerApp);
+          } else {
+            Get.offAllNamed(Routes.completeProfile);
+          }
         }
       } else {
         Snackbars.error(errorMessage);

@@ -24,8 +24,6 @@ final dummyProvider = ProviderData(
     wednesday: DayAvailability(open: '09:00', close: '18:00'),
     thursday: DayAvailability(open: '09:00', close: '18:00'),
     friday: DayAvailability(open: '09:00', close: '18:00'),
-    saturday: DayAvailability(open: '09:00', close: '18:00'),
-    sunday: DayAvailability(open: '09:00', close: '18:00'),
   ),
   priceRange: null,
   responseTime: 10,
@@ -105,7 +103,7 @@ final List<ServiceRequestModel> dummyServiceRequests = [
     providerService: ProviderService(
       id: 'ps4',
       service: Services(id: 's4', name: 'Home'),
-       provider: ProviderModel(
+      provider: ProviderModel(
         id: 'p3',
         businessName: 'Spark Electric Solutions',
         avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d',

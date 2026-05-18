@@ -198,6 +198,11 @@ class CustomerProfileView extends StatelessWidget {
                   onTap: () {
                     final newLang = LocalizationService.isUrdu ? 'en' : 'ur';
                     LocalizationService.changeLocale(newLang);
+                  _buildOptionTile(
+                  icon: Iconsax.notification,
+                  title: 'Bookings',
+                  onTap: () {
+                    Get.toNamed(Routes.customerBookings);
                   },
                 ),
                 verticalSpaceMedium,

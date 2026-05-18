@@ -9,6 +9,8 @@ class Routes {
   static const String providerApp = '/provider';
   static const String providerProfile = '/provider/profile';
   static const String completeProfile = '/provider/complete_profile';
+    static const String customerBookings = '/customer/bookings';
+
 }
 
 class AppRouter {
@@ -49,6 +51,11 @@ class AppRouter {
         name: Routes.completeProfile,
         page: () => const CompleteProfileScreen(),
         binding: CompleteProfileBinding(),
+      ),
+        GetPage(
+        name: Routes.customerBookings,
+        page: () => const CustomerBookingsView(),
+        binding: CustomerBookingsBinding(),
       ),
     ];
   }
