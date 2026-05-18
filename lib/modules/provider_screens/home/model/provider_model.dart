@@ -158,39 +158,42 @@ class Address {
 }
 
 class Availability {
-  final DayAvailability monday;
-  final DayAvailability tuesday;
-  final DayAvailability wednesday;
-  final DayAvailability thursday;
-  final DayAvailability friday;
+  final Map<String, DayAvailability> days;
 
-  Availability({
-    required this.monday,
-    required this.tuesday,
-    required this.wednesday,
-    required this.thursday,
-    required this.friday,
-  });
+  Availability({required this.days});
 
-  factory Availability.fromJson(Map<String, dynamic> json) {
-    return Availability(
-      monday: DayAvailability.fromJson(json['monday']),
-      tuesday: DayAvailability.fromJson(json['tuesday']),
-      wednesday: DayAvailability.fromJson(json['wednesday']),
-      thursday: DayAvailability.fromJson(json['thursday']),
-      friday: DayAvailability.fromJson(json['friday']),
-    );
+  factory Availability.fromJson(Map<String, dynamic>? json) {
+    if (json == null) return Availability(days: {});
+
+    final Map<String, DayAvailability> parsedDays = {};
+
+    json.forEach((key, value) {
+      if (value is Map<String, dynamic>) {
+        try {
+          parsedDays[key] = DayAvailability.fromJson(value);
+        } catch (e) {
+          debugPrint("❌ Error parsing $key availability: $e");
+        }
+      }
+    });
+
+    return Availability(days: parsedDays);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'monday': monday.toJson(),
-      'tuesday': tuesday.toJson(),
-      'wednesday': wednesday.toJson(),
-      'thursday': thursday.toJson(),
-      'friday': friday.toJson(),
-    };
+    final Map<String, dynamic> json = {};
+
+    days.forEach((key, value) {
+      json[key] = value.toJson();
+    });
+
+    return json;
   }
+
+  // Optional helpers (VERY useful)
+  DayAvailability? getDay(String day) => days[day];
+
+  bool isOpenOn(String day) => days.containsKey(day);
 }
 
 class DayAvailability {
@@ -199,8 +202,15 @@ class DayAvailability {
 
   DayAvailability({required this.open, required this.close});
 
-  factory DayAvailability.fromJson(Map<String, dynamic> json) {
-    return DayAvailability(open: json['open'], close: json['close']);
+  factory DayAvailability.fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return DayAvailability(open: '', close: '');
+    }
+
+    return DayAvailability(
+      open: json['open']?.toString() ?? '',
+      close: json['close']?.toString() ?? '',
+    );
   }
 
   Map<String, dynamic> toJson() {

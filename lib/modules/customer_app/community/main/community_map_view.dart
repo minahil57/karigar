@@ -6,7 +6,7 @@ class CommunityMapView extends StatelessWidget {
 
   static const CameraPosition _initialPosition = CameraPosition(
     target: LatLng(24.8607, 67.0011),
-    zoom: 14          ,
+    zoom: 14,
   );
 
   @override
@@ -20,20 +20,60 @@ class CommunityMapView extends StatelessWidget {
             children: [
               GoogleMap(
                 initialCameraPosition: _initialPosition,
+                mapType: MapType.normal,
+
+                /// Your custom markers only
                 markers: ctrl.markers,
+
                 onMapCreated: ctrl.onMapCreated,
                 onTap: (_) => ctrl.dismissCard(),
+
+                /// Current location
+                myLocationEnabled: true,
                 myLocationButtonEnabled: false,
+
+                /// Disable default map UI
+                buildingsEnabled: false,
+                indoorViewEnabled: false,
+                trafficEnabled: false,
+                mapToolbarEnabled: false,
+                compassEnabled: false,
                 zoomControlsEnabled: false,
+
+                /// Remove default POIs like bus stops, shops, etc.
+                style: '''
+[
+  {
+    "featureType": "poi",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.icon",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  }
+]
+''',
               ),
 
               Positioned(
                 right: 16,
                 bottom: ctrl.selectedProvider != null ? 230 : 40,
-                child: ZoomButtons(),
+                child: const ZoomButtons(),
               ),
 
               const Positioned(top: 16, right: 16, child: ViewToggleButton()),
+
               AnimatedPositioned(
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeOut,

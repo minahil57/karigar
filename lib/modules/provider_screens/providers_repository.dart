@@ -12,24 +12,45 @@ class ProvidersRepository {
       if (response.statusCode == 200) {
         final List<dynamic> providersData = response.data['data'];
 
-        final List<ProviderData> providers = providersData
-            .map((e) => ProviderData.fromJson(e))
-            .toList();
+        final List<ProviderData> providers = [];
+
+        for (int i = 0; i < providersData.length; i++) {
+          try {
+            final item = providersData[i];
+
+            providers.add(ProviderData.fromJson(item));
+          } catch (e, stackTrace) {
+            // 🔥 LOG EXACT ITEM THAT FAILED
+            debugPrint("❌ JSON SERIALIZATION ERROR at index $i");
+            debugPrint("❌ Failed item: ${providersData[i]}");
+            debugPrint("❌ Error: $e");
+            debugPrint("❌ StackTrace: $stackTrace");
+          }
+        }
 
         return {'data': providers, 'error': null};
       } else {
+        debugPrint("❌ API ERROR: ${response.data}");
+
         return {
           'data': null,
           'error': response.data['message'] ?? 'Something went wrong',
         };
       }
-    } on DioException catch (e) {
+    } on DioException catch (e, stackTrace) {
+      debugPrint("❌ DIO ERROR: ${e.response?.data}");
+      debugPrint("❌ MESSAGE: ${e.message}");
+      debugPrint("❌ STACK: $stackTrace");
+
       return {
         'data': null,
         'error':
             e.response?.data['message'] ?? e.message ?? 'Something went wrong',
       };
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint("❌ UNKNOWN ERROR: $e");
+      debugPrint("❌ STACK: $stackTrace");
+
       return {'data': null, 'error': 'Something went wrong'};
     }
   }
@@ -116,7 +137,9 @@ class ProvidersRepository {
     }
   }
 
-  static Future<Map<String, dynamic>> updateProfile(Map<String, dynamic> data) async {
+  static Future<Map<String, dynamic>> updateProfile(
+    Map<String, dynamic> data,
+  ) async {
     try {
       final response = await ApiProvider.provider.updateProfile(data);
 
@@ -136,13 +159,15 @@ class ProvidersRepository {
       };
     } catch (e) {
       return {'data': null, 'error': 'Something went wrong'};
- 
     }
   }
-   static Future<bool> updateBookingStatus(
-    String id, String status) async {
+
+  static Future<bool> updateBookingStatus(String id, String status) async {
     try {
-      final response = await ApiProvider.provider.updateBookingStatus(id, status);
+      final response = await ApiProvider.provider.updateBookingStatus(
+        id,
+        status,
+      );
 
       if (response.statusCode == 200) {
         return true;

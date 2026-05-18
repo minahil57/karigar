@@ -59,8 +59,23 @@ class CommunityController extends GetxController {
   ProviderData? selectedProvider;
   Set<Marker> markers = {};
 
-  void onMapCreated(GoogleMapController controller) {
+  Future<void> onMapCreated(GoogleMapController controller) async {
     mapController = controller;
+
+    final position = await Geolocator.getCurrentPosition(
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 10,
+      ),
+    );
+
+    final currentLatLng = LatLng(position.latitude, position.longitude);
+
+    mapController?.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(target: currentLatLng, zoom: 15),
+      ),
+    );
   }
 
   void selectProvider(ProviderData? provider) {
