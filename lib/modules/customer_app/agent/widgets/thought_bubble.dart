@@ -52,7 +52,11 @@ class _ThoughtBubbleState extends State<ThoughtBubble> {
                     children: [
                       Row(
                         children: [
-                          Icon(Iconsax.cpu, size: 16.r, color: kcTextGreyColor),
+                          Icon(
+                            Iconsax.bubble,
+                            size: 16.r,
+                            color: kcTextGreyColor,
+                          ),
                           horizontalSpace(8),
                           Expanded(
                             child: CustomText(
@@ -78,7 +82,7 @@ class _ThoughtBubbleState extends State<ThoughtBubble> {
                           style: getRegularStyle(
                             fontSize: 11,
                             color: kcTextGreyColor,
-                          ).copyWith(fontStyle: FontStyle.italic, height: 1.4),
+                          ),
                         ),
                       ],
                     ],
