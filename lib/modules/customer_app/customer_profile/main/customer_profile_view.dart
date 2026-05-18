@@ -192,6 +192,13 @@ class CustomerProfileView extends StatelessWidget {
                   title: 'Notifications',
                   onTap: () {},
                 ),
+                  _buildOptionTile(
+                  icon: Iconsax.notification,
+                  title: 'Bookings',
+                  onTap: () {
+                    Get.toNamed(Routes.customerBookings);
+                  },
+                ),
                 verticalSpaceMedium,
 
                 // Support & About
