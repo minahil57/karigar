@@ -6,7 +6,7 @@ class CommunityMapView extends StatelessWidget {
 
   static const CameraPosition _initialPosition = CameraPosition(
     target: LatLng(24.8607, 67.0011),
-    zoom: 14,
+    zoom: 14          ,
   );
 
   @override
