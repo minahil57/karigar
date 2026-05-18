@@ -8,14 +8,14 @@ class CitySelectionWidget extends StatelessWidget {
     return GetBuilder<CompleteProfileController>(
       builder: (controller) {
         if (controller.isLocationLoading) {
-          return const Center(
+          return Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: [
-                  CircularProgressIndicator(color: kcSecondaryColor), // Teal accent loading
+                  const CircularProgressIndicator(color: kcSecondaryColor), // Teal accent loading
                   verticalSpaceSmall,
-                  CustomText(
+                  const CustomText(
                     text: 'Detecting your location...',
                     fontSize: 14,
                     variant: TextVariant.medium,

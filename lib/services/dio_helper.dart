@@ -29,15 +29,6 @@ abstract final class DioHelper {
         contentType: 'application/json',
       ),
     )..interceptors.addAll([loggerInterceptor, networkInterceptor]);
-    _dioforFileUpload = Dio(
-      BaseOptions(
-        connectTimeout: const Duration(seconds: 30),
-        receiveTimeout: const Duration(minutes: 5),
-        sendTimeout: const Duration(minutes: 5),
-        receiveDataWhenStatusError: true,
-        contentType: 'multipart/form-data',
-      ),
-    )..interceptors.addAll([loggerInterceptor, networkInterceptor]);
   }
 
   static Future<Response> getData({

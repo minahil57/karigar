@@ -108,7 +108,7 @@ class CreateAccountView extends StatelessWidget {
                 children: [
                   CustomText(
                     text: AppStrings.alreadyHaveAccount,
-                    fontSize: 14,
+                    fontSize: 12,
                     color: kcTextGreyColor,
                   ),
                   CustomTextButton(

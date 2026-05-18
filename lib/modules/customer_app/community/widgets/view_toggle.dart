@@ -96,16 +96,16 @@ class _ViewToggleButtonState extends State<ViewToggleButton>
                               ),
                             ],
                           ),
-                          child: const Row(
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.lightbulb_outline,
                                 color: Colors.amber,
                                 size: 14,
                               ),
                               horizontalSpaceTiny,
-                              CustomText(
+                              const CustomText(
                                 text: 'Click here to switch view!',
                                 fontSize: 11,
                                 variant: TextVariant.medium,

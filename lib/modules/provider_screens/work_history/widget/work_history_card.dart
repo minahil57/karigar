@@ -92,11 +92,11 @@ class WorkHistoryCard extends StatelessWidget {
                 ),
               ),
               verticalSpaceMedium,
-              const Row(
+              Row(
                 children: [
-                  Icon(Iconsax.star1, color: Colors.amber, size: 12),
+                  const Icon(Iconsax.star1, color: Colors.amber, size: 12),
                   horizontalSpaceTiny,
-                  CustomText(
+                  const CustomText(
                     text: '5.0',
                     fontSize: 10,
                     color: kcTextGreyColor,
