@@ -68,7 +68,7 @@ class CustomSegmentedTab extends StatelessWidget {
                           child: AnimatedDefaultTextStyle(
                             duration: const Duration(milliseconds: 300),
                             style: getMediumStyle(
-                              fontSize: 14,
+                              fontSize: 11,
                               color: isSelected
                                   ? Colors.white
                                   : kcDarkGreyTextColor,
@@ -76,7 +76,7 @@ class CustomSegmentedTab extends StatelessWidget {
                             child: Text(
                               item,
                               style: getMediumStyle(
-                                fontSize: 14,
+                                fontSize: 11,
                                 color: isSelected
                                     ? Colors.white
                                     : kcDarkGreyTextColor,

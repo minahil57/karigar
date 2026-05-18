@@ -10,8 +10,18 @@ class CreateAccountView extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Align(
+              Column(
+                spacing: 20.h,
+                children: [
+                  CustomAssetsImage(
+                    imagePath: 'assets/images/logo.png',
+                    height: 100.h,
+                    width: 100.h,
+                    fit: BoxFit.cover,
+                  ),
+                  Align(
                 alignment: Alignment.topRight,
                 child: GestureDetector(
                   onTap: () {
@@ -43,51 +53,62 @@ class CreateAccountView extends StatelessWidget {
               ),
               verticalSpace(10),
               SlideInDown(
-                from: 40,
-                duration: const Duration(milliseconds: 1000),
-                child: CustomText(
-                  text: AppStrings.findExpertsOrGetHired,
-                  fontSize: 24,
-                  color: kcTextBlackcolor,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              verticalSpace(20),
-              SlideInDown(
-                from: 40,
-                duration: const Duration(milliseconds: 1000),
-                child: CustomText(
-                  text: AppStrings.signInToYourAccount,
-                  fontSize: 14,
-                  color: kcTextGreyColor,
-                ),
-              ),
-              verticalSpace(50),
-              GetBuilder<CreateAccountController>(
-                id: "tab",
-                builder: (context) {
-                  return CustomSegmentedTab(
-                    items: UserRole.values.map((e) => e.title).toList(),
-                    selectedValue: controller.selectedValue?.title ?? '',
-                    onChanged: (value) {
-                      final role = UserRole.values.firstWhere(
-                        (e) => e.title == value,
-                      );
+                    from: 40,
+                    duration: const Duration(milliseconds: 1000),
+                    child: CustomText(
+                      text: AppStrings.findExpertsOrGetHired,
+                      fontSize: 18,
+                      variant: TextVariant.medium,
+                      color: kcTextBlackcolor,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SlideInDown(
+                    from: 40,
+                    duration: const Duration(milliseconds: 1000),
+                    child: CustomText(
+                      text: AppStrings.signInToYourAccount,
+                      fontSize: 16,
+                      color: kcTextGreyColor,
+                    ),
+                  ),
+                  verticalSpace(0),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Column(
+                      spacing: 12.h,
+                      children: [
+                        GetBuilder<CreateAccountController>(
+                          id: "tab",
+                          builder: (context) {
+                            return CustomSegmentedTab(
+                              items: UserRole.values
+                                  .map((e) => e.title)
+                                  .toList(),
+                              selectedValue:
+                                  controller.selectedValue?.title ?? '',
+                              onChanged: (value) {
+                                final role = UserRole.values.firstWhere(
+                                  (e) => e.title == value,
+                                );
 
-                      controller.onChanged(role);
-                    },
-                  );
-                },
+                                controller.onChanged(role);
+                              },
+                            );
+                          },
+                        ),
+                        CreateAccountForm(),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              verticalSpace(20),
-              CreateAccountForm(),
-              Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomText(
                     text: AppStrings.alreadyHaveAccount,
-                    fontSize: 14,
+                    fontSize: 12,
                     color: kcTextGreyColor,
                   ),
                   CustomTextButton(

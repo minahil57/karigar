@@ -24,22 +24,11 @@ class WorkHistoryCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      text: history.providerService.service.name,
-                      variant: TextVariant.bold,
-                      fontSize: 14,
-                      color: kcBlackColor,
-                    ),
-                    const CustomText(
-                      text: 'Market Competitive',
-                      variant: TextVariant.bold,
-                      fontSize: 14,
-                      color: kcBlackColor,
-                    ),
-                  ],
+                CustomText(
+                  text: history.providerService.service.name,
+                  variant: TextVariant.bold,
+                  fontSize: 14,
+                  color: kcBlackColor,
                 ),
                 verticalSpaceTiny,
                 const CustomText(
@@ -50,7 +39,23 @@ class WorkHistoryCard extends StatelessWidget {
                 verticalSpaceTiny,
                 Row(
                   children: [
-                    const Icon(Iconsax.location, size: 12, color: kcTextLightGrey),
+                    const Icon(Iconsax.user, size: 12, color: kcTextLightGrey),
+                    horizontalSpaceTiny,
+                    CustomText(
+                      text: history.providerService.provider.businessName,
+                      fontSize: 10,
+                      color: kcTextLightGrey,
+                    ),
+                  ],
+                ),
+                verticalSpaceTiny,
+                Row(
+                  children: [
+                    const Icon(
+                      Iconsax.location,
+                      size: 12,
+                      color: kcTextLightGrey,
+                    ),
                     horizontalSpaceTiny,
                     CustomText(
                       text: history.location,
@@ -62,7 +67,11 @@ class WorkHistoryCard extends StatelessWidget {
                 verticalSpaceTiny,
                 Row(
                   children: [
-                    const Icon(Iconsax.calendar, size: 12, color: kcTextLightGrey),
+                    const Icon(
+                      Iconsax.calendar,
+                      size: 12,
+                      color: kcTextLightGrey,
+                    ),
                     horizontalSpaceTiny,
                     CustomText(
                       text: history.scheduledTime,
@@ -92,11 +101,11 @@ class WorkHistoryCard extends StatelessWidget {
                 ),
               ),
               verticalSpaceMedium,
-              const Row(
+              Row(
                 children: [
-                  Icon(Iconsax.star1, color: Colors.amber, size: 12),
+                  const Icon(Iconsax.star1, color: Colors.amber, size: 12),
                   horizontalSpaceTiny,
-                  CustomText(
+                  const CustomText(
                     text: '5.0',
                     fontSize: 10,
                     color: kcTextGreyColor,

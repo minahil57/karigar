@@ -21,25 +21,48 @@ class ChatField extends StatelessWidget {
                     hintText: AppStrings.writeYourMessage,
                     suffixIcon: const Icon(
                       Iconsax.microphone,
+                      size: 19,
                       color: kcTextGreyColor,
                     ),
                   ),
                 ),
-                horizontalSpace(10),
-                InkWell(
-                  onTap: controller.sendMessage,
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: const BoxDecoration(
-                      color: kcSecondaryColor,
-                      shape: BoxShape.circle,
+                Obx(() {
+                  final isThinking = controller.isThinking.value;
+                  final isInputEmpty = controller.isIputEmpty.value;
+
+                  if (!isThinking && isInputEmpty) {
+                    return const SizedBox.shrink();
+                  }
+
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: InkWell(
+                      onTap: isThinking
+                          ? controller.cancelResponse
+                          : controller.sendMessage,
+                      child: SlideInRight(
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 45.w,
+                          width: 45.w,
+                          decoration: BoxDecoration(
+                            color: isThinking ? kcErrorColor : kcSecondaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: RotatedBox(
+                            quarterTurns:
+                                LocalizationService.isUrdu ? 2 : 0,
+                            child: Icon(
+                              isThinking ? Icons.stop_rounded : Iconsax.send_1,
+                              color: kcWhitecolor,
+                              size: isThinking ? 22 : 18,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                    child: RotatedBox(
-                      quarterTurns: LocalizationService.isUrdu ? 2 : 0,
-                      child: const Icon(Iconsax.send_1, color: kcWhitecolor),
-                    ),
-                  ),
-                ),
+                  );
+                }),
               ],
             ),
           ),

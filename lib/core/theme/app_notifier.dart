@@ -1,17 +1,17 @@
 import 'package:karigar/export.dart';
 
-class AppNotifier extends ChangeNotifier {
+class AppNotifier extends GetxController {
   AppNotifier();
 
   Future<void> init() async {
     _changeTheme();
-    notifyListeners();
+    update();
   }
 
   void updateTheme(ThemeCustomizer themeCustomizer) {
     _changeTheme();
 
-    notifyListeners();
+    update();
 
     LocalStorage.setCustomizer(themeCustomizer);
   }
@@ -25,7 +25,7 @@ class AppNotifier extends ChangeNotifier {
     MainAppTheme.textDirection = textDirection;
     My.setTextDirection(textDirection);
 
-    if (notify) notifyListeners();
+    if (notify) update();
   }
 
   // Future<void> changeLanguage(
@@ -43,7 +43,7 @@ class AppNotifier extends ChangeNotifier {
 
   //   await ThemeCustomizer.changeLanguage(language);
 
-  //   if (notify) notifyListeners();
+  //   if (notify) update();
   // }
 
   void _changeTheme() {

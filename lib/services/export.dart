@@ -5,3 +5,4 @@ export 'dio_helper.dart';
 export 'dio_interceptors/export.dart';
 export 'endpoints/endpoints.dart';
 export 'location_service.dart';
+export 'socket_service.dart';

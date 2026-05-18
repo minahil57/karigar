@@ -38,7 +38,11 @@ class AppRouter {
         page: () => const CreateAccountView(),
         binding: CreateAccountBinding(),
       ),
-      GetPage(name: Routes.agent, page: () => const CustomerAppLayout()),
+      GetPage(
+        name: Routes.agent,
+        page: () => const CustomerAppLayout(),
+        binding: AgentBinding(),
+      ),
       GetPage(
         name: Routes.providerApp,
         page: () => const ProviderAppLayout(),

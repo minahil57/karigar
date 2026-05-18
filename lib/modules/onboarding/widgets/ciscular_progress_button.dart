@@ -23,17 +23,17 @@ class CustomProgressButton extends StatelessWidget {
         duration: duration,
         builder: (context, value, child) {
           return SizedBox(
-            width: 80,
-            height: 80,
+            width: 45.h,
+            height: 45.h,
             child: CustomPaint(
               painter: _CircularProgressPainter(
                 progress: value,
-                strokeWidth: 5,
+                strokeWidth: 8,
                 backgroundColor: kcWhitecolor,
                 progressColor: kcPrimaryColor,
               ),
               child: Container(
-                padding: EdgeInsets.all(20),
+                alignment: Alignment.center,
                 decoration: const BoxDecoration(
                   color: kcSecondaryColor,
                   shape: BoxShape.circle,

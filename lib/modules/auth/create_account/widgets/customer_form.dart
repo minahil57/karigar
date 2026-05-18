@@ -9,6 +9,7 @@ class CreateAccountForm extends StatelessWidget {
     return Form(
       key: controller.registerFormKey,
       child: Column(
+        spacing: 12.h,
         children: [
           CustomTextField(
             controller: controller.fullNameController,
@@ -16,14 +17,12 @@ class CreateAccountForm extends StatelessWidget {
             labelText: AppStrings.fullName,
             validator: AppValidators.name,
           ),
-          verticalSpace(20),
           CustomTextField(
             controller: controller.emailController,
             hintText: AppStrings.enterYourEmail,
             labelText: AppStrings.emailAdress,
             validator: AppValidators.email,
           ),
-          verticalSpace(20),
           GetBuilder<CreateAccountController>(
             id: "password",
             builder: (controller) {
@@ -35,14 +34,18 @@ class CreateAccountForm extends StatelessWidget {
                 obscureText: controller.isObscure,
                 suffixIcon: InkWell(
                   onTap: controller.togglePasswordVisibility,
-                  child: Icon(
-                    controller.isObscure ? Iconsax.eye_slash : Iconsax.eye,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 10.w),
+                    child: Icon(
+                      size: 16,
+                      controller.isObscure ? Iconsax.eye_slash : Iconsax.eye,
+                    ),
                   ),
                 ),
               );
             },
           ),
-          verticalSpace(40),
+          verticalSpace(0),
           GetBuilder<CreateAccountController>(
             id: "form",
             builder: (controller) {
