@@ -10,6 +10,7 @@ class AppLayout extends StatefulWidget {
   final Widget? drawer;
   final PreferredSizeWidget? appBar;
   final GlobalKey<ScaffoldState>? scaffoldKey;
+  final Function(int)? tabChangeCallBack;
 
   const AppLayout({
     super.key,
@@ -21,20 +22,32 @@ class AppLayout extends StatefulWidget {
     this.endDrawer,
     this.drawer,
     this.appBar,
+    this.tabChangeCallBack,
     this.scaffoldKey,
   }) : assert(child != null || (tabNames != null && tabPages != null));
 
+  static AppLayoutState? of(BuildContext context) {
+    return context.findAncestorStateOfType<AppLayoutState>();
+  }
+
   @override
-  State<AppLayout> createState() => _AppLayoutState();
+  State<AppLayout> createState() => AppLayoutState();
 }
 
-class _AppLayoutState extends State<AppLayout> {
+class AppLayoutState extends State<AppLayout> {
   late int _selectedIndex;
 
   @override
   void initState() {
     super.initState();
     _selectedIndex = widget.initialIndex;
+  }
+
+  void changeTab(int index) {
+    setState(() {
+      _selectedIndex = index;
+      widget.tabChangeCallBack?.call(index);
+    });
   }
 
   @override

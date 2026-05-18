@@ -54,7 +54,11 @@ final List<ServiceRequestModel> dummyServiceRequests = [
     providerService: ProviderService(
       id: 'ps1',
       service: Services(id: 's1', name: 'AC Repair'),
-      provider: dummyProvider,
+       provider: ProviderModel(
+        id: 'p3',
+        businessName: 'Spark Electric Solutions',
+        avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d',
+      ),
     ),
   ),
 
@@ -67,7 +71,11 @@ final List<ServiceRequestModel> dummyServiceRequests = [
     providerService: ProviderService(
       id: 'ps2',
       service: Services(id: 's2', name: 'Plumbing'),
-      provider: dummyProvider,
+      provider: ProviderModel(
+        id: 'p3',
+        businessName: 'Spark Electric Solutions',
+        avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d',
+      ),
     ),
   ),
 
@@ -80,7 +88,11 @@ final List<ServiceRequestModel> dummyServiceRequests = [
     providerService: ProviderService(
       id: 'ps3',
       service: Services(id: 's3', name: 'Electrician'),
-      provider: dummyProvider,
+      provider: ProviderModel(
+        id: 'p3',
+        businessName: 'Spark Electric Solutions',
+        avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d',
+      ),
     ),
   ),
 

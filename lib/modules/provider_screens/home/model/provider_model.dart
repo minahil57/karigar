@@ -56,7 +56,7 @@ class ProviderData {
   factory ProviderData.fromJson(Map<String, dynamic> json) {
     return ProviderData(
       id: json['id'],
-      userId: json['userId'],
+      userId: json['userId'] ?? '',
       businessName: json['businessName'] ?? '',
       phone: json['phone'] ?? '',
       email: json['email'] ?? '',

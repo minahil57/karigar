@@ -109,6 +109,18 @@ class ProvidersRepository {
       };
     } catch (e) {
       return {'data': null, 'error': 'Something went wrong'};
+  static Future<bool> updateBookingStatus(
+    String id, String status) async {
+    try {
+      final response = await ApiProvider.provider.updateBookingStatus(id, status);
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
     }
   }
 }

@@ -36,6 +36,7 @@ class ProviderHomeScreen extends StatelessWidget {
                   title: AppStrings.liveServiceRequests,
                   onViewAll: () {
                     Get.toNamed(Routes.completeProfile);
+                    AppLayout.of(context)?.changeTab(0);
                   },
                 ),
                 _buildServiceRequestList(context, controller, isMobile),

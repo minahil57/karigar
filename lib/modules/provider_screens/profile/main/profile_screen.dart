@@ -46,7 +46,10 @@ class ProviderProfileScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                  ProfileInfoCard(provider: provider),
+                  ProfileInfoCard(
+                    provider: provider,
+                    isUser: controller.isUser,
+                  ),
                   verticalSpaceLarge,
                   _buildSection(
                     context,
