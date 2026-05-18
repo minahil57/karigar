@@ -35,13 +35,11 @@ Future<void> main() async {
     ..dismissOnTap = false
     ..maskColor = Colors.transparent;
 
-  runApp(
-    ChangeNotifierProvider<AppNotifier>(
-      create: (context) => AppNotifier(),
-      child: const KarigarApp(),
-    ),
-  );
+  Get.put(AppNotifier());
+
+  runApp(const KarigarApp());
 }
+
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   log('Handling a background message ${message.messageId}');

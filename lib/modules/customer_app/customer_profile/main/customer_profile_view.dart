@@ -38,23 +38,23 @@ class CustomerProfileView extends StatelessWidget {
                       CustomText(
                         text: controller.user?.name ?? 'Customer Name',
                         variant: TextVariant.bold,
-                        fontSize: 24,
+                        fontSize: 20,
                         color: kcBlackColor,
                       ),
                       verticalSpaceSmall,
                       Row(
+                        spacing: 10.w,
                         children: [
                           const Icon(
                             Iconsax.sms,
-                            size: 16,
+                            size: 14,
                             color: kcTextGreyColor,
                           ),
-                          horizontalSpaceTiny,
                           CustomText(
                             text:
                                 controller.user?.email ??
                                 'customer@example.com',
-                            fontSize: 14,
+                            fontSize: 12,
                             color: kcTextGreyColor,
                           ),
                         ],
@@ -62,16 +62,16 @@ class CustomerProfileView extends StatelessWidget {
                       if (controller.user?.name != null) ...[
                         verticalSpaceTiny,
                         Row(
+                          spacing: 10.w,
                           children: [
                             const Icon(
-                              Iconsax.call,
-                              size: 16,
+                              Iconsax.key,
+                              size: 14,
                               color: kcTextGreyColor,
                             ),
-                            horizontalSpaceTiny,
                             CustomText(
-                              text: controller.user!.role,
-                              fontSize: 14,
+                              text: controller.user!.role.capitalizeFirst!,
+                              fontSize: 12,
                               color: kcTextGreyColor,
                             ),
                           ],
@@ -83,11 +83,36 @@ class CustomerProfileView extends StatelessWidget {
                 verticalSpaceMedium,
 
                 // Location Details Card
-                CustomText(
-                  text: AppStrings.yourLocation,
-                  variant: TextVariant.bold,
-                  fontSize: 18,
-                  color: kcBlackColor,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: AppStrings.yourLocation,
+                      variant: TextVariant.medium,
+                      fontSize: 14,
+                      color: kcBlackColor,
+                    ),
+                    if (controller.isLoadingAddress)
+                      SizedBox(
+                        height: 14,
+                        width: 14,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            kcSecondaryColor,
+                          ),
+                        ),
+                      )
+                    else
+                      InkWell(
+                        onTap: () => controller.fetchCurrentAddress(),
+                        child: Icon(
+                          Iconsax.refresh,
+                          size: 14,
+                          color: kcTextGreyColor,
+                        ),
+                      ),
+                  ],
                 ),
                 verticalSpaceSmall,
                 Container(
@@ -110,70 +135,19 @@ class CustomerProfileView extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: kcSecondaryColor.withValues(alpha: 0.1),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Iconsax.location5,
-                          color: kcSecondaryColor,
-                          size: 24,
-                        ),
-                      ),
-                      horizontalSpaceMedium,
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CustomText(
-                              text: AppStrings.currentAddress,
-                              variant: TextVariant.bold,
-                              fontSize: 14,
-                              color: kcBlackColor,
-                            ),
-                            verticalSpaceTiny,
-                            if (controller.isLoadingAddress)
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 4.0),
-                                child: SizedBox(
-                                  height: 16,
-                                  width: 16,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      kcSecondaryColor,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            else
-                              CustomText(
-                                text: controller.currentAddress,
-                                fontSize: 13,
-                                color: kcTextGreyColor,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                          ],
-                        ),
+                      const Icon(
+                        Iconsax.location5,
+                        color: kcTextGreyColor,
+                        size: 20,
                       ),
                       horizontalSpaceSmall,
-                      ClipOval(
-                        child: Material(
-                          color: Colors.transparent,
-                          child: IconButton(
-                            icon: const Icon(
-                              Iconsax.refresh,
-                              size: 20,
-                              color: kcTextGreyColor,
-                            ),
-                            onPressed: controller.isLoadingAddress
-                                ? null
-                                : () => controller.fetchCurrentAddress(),
-                          ),
+                      Expanded(
+                        child: CustomText(
+                          text: controller.currentAddress,
+                          fontSize: 12,
+                          color: kcTextGreyColor,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -184,8 +158,8 @@ class CustomerProfileView extends StatelessWidget {
                 // Settings & Preferences
                 CustomText(
                   text: AppStrings.preferences,
-                  variant: TextVariant.bold,
-                  fontSize: 18,
+                  variant: TextVariant.medium,
+                  fontSize: 14,
                   color: kcBlackColor,
                 ),
                 verticalSpaceSmall,
@@ -216,8 +190,8 @@ class CustomerProfileView extends StatelessWidget {
                 // Support & About
                 CustomText(
                   text: AppStrings.support,
-                  variant: TextVariant.bold,
-                  fontSize: 18,
+                  variant: TextVariant.medium,
+                  fontSize: 14,
                   color: kcBlackColor,
                 ),
                 verticalSpaceSmall,
@@ -231,7 +205,7 @@ class CustomerProfileView extends StatelessWidget {
                   title: AppStrings.privacyPolicy,
                   onTap: () {},
                 ),
-                verticalSpaceLarge,
+                verticalSpaceSmall,
 
                 // Account Actions
                 const Divider(color: kcborderColor),
@@ -267,7 +241,7 @@ class CustomerProfileView extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: kcWhitecolor,
           borderRadius: BorderRadius.circular(16),
@@ -276,10 +250,10 @@ class CustomerProfileView extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: kcPrimaryColor.withValues(alpha: 0.05),
-                shape: BoxShape.circle,
+                borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: kcPrimaryColor, size: 20),
             ),
@@ -287,7 +261,7 @@ class CustomerProfileView extends StatelessWidget {
             Expanded(
               child: CustomText(
                 text: title,
-                fontSize: 14,
+                fontSize: 12,
                 variant: TextVariant.medium,
                 color: kcBlackColor,
               ),
@@ -324,12 +298,12 @@ class CustomerProfileView extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: color, size: 20),
-            horizontalSpaceSmall,
+            Icon(icon, color: color, size: 18.sp),
+            horizontalSpaceMedium,
             CustomText(
               text: title,
               variant: TextVariant.bold,
-              fontSize: 14,
+              fontSize: 12,
               color: color,
             ),
           ],

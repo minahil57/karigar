@@ -31,7 +31,7 @@ export 'package:karigar/core/theme/text_style.dart';
 export 'package:logger/logger.dart';
 export 'package:lottie/lottie.dart';
 export 'package:mime/mime.dart';
-export 'package:provider/provider.dart';
+
 export 'package:responsive_framework/responsive_framework.dart' hide Condition;
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:talker_dio_logger/talker_dio_logger.dart';
