@@ -20,11 +20,11 @@ class ProfileStatsRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildStat(context, Iconsax.briefcase, '—', 'Jobs Done'),
+          _buildStat(context, Iconsax.briefcase, '—', AppStrings.jobsDone),
           _buildDivider(),
-          _buildStat(context, Iconsax.timer, '${provider.responseTime}m', 'Response'),
+          _buildStat(context, Iconsax.timer, '${provider.responseTime}m', AppStrings.responseTimeLabel),
           _buildDivider(),
-          _buildStat(context, Iconsax.star1, provider.rating.toString(), 'Rating'),
+          _buildStat(context, Iconsax.star1, provider.rating.toString(), AppStrings.ratingLabel),
         ],
       ),
     );

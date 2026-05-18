@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "737699639444",
+    "project_id": "karigar-6f923",
+    "storage_bucket": "karigar-6f923.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737699639444:android:21e4abd0d26401b64a0481",
+        "android_client_info": {
+          "package_name": "com.example.karigar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQziORq5uUxPFWq2tdaWIH5m5yRgdJu4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

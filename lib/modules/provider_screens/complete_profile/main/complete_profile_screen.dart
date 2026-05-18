@@ -11,8 +11,8 @@ class CompleteProfileScreen extends StatelessWidget {
           backgroundColor: kcWhitecolor,
           appBar: AppBar(
             
-            title: const CustomText(
-              text: 'Complete Profile',
+            title: CustomText(
+              text: AppStrings.completeProfile,
               fontSize: 18,
               variant: TextVariant.bold,
               color: kcBlackColor,
@@ -35,7 +35,7 @@ class CompleteProfileScreen extends StatelessWidget {
                   const AdditionalInfoWidget(),
                   verticalSpace(40),
                   CustomButton(
-                    text: 'Save Profile',
+                    text: AppStrings.saveProfile,
                     onPressed: () => controller.submitData(),
                     width: double.infinity,
                     isEnabled: controller.isFormFilled,

@@ -44,7 +44,7 @@ class CitySelectionWidget extends StatelessWidget {
                   children: [
                     const Icon(Icons.warning_amber_rounded, color: Colors.red, size: 24),
                     horizontalSpace(8),
-                    const CustomText(
+                    CustomText(
                       text: AppStrings.unsupportedLocation,
                       fontSize: 15,
                       variant: TextVariant.bold,
@@ -103,7 +103,7 @@ class CitySelectionWidget extends StatelessWidget {
                   onPressed: () {
                     _showChangeCityBottomSheet(context, controller);
                   },
-                  child: const CustomText(
+                  child: CustomText(
                     text: AppStrings.changeCity,
                     fontSize: 13,
                     variant: TextVariant.medium,
@@ -163,7 +163,7 @@ class CitySelectionWidget extends StatelessWidget {
         child: DropdownButton<String>(
           value: controller.selectedCityOverride,
           dropdownColor: kcWhitecolor,
-          hint: const CustomText(
+          hint: CustomText(
             text: AppStrings.chooseSupportedCity,
             fontSize: 14,
             color: Colors.grey,
@@ -205,7 +205,7 @@ class CitySelectionWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustomText(
+            CustomText(
               text: AppStrings.selectOperatingCity,
               fontSize: 18,
               variant: TextVariant.bold,

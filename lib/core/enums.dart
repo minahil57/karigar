@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 enum ItemsAlignment {
   row,
@@ -13,10 +14,10 @@ enum UserRole {
   String get title {
     switch (this) {
       case UserRole.customer:
-        return 'Customer';
+        return 'customer'.tr;
 
       case UserRole.serviceProvider:
-        return 'Service Provider';
+        return 'serviceProvider'.tr;
     }
   }
 
@@ -55,15 +56,15 @@ enum BookingStatus {
   String get title {
     switch (this) {
       case BookingStatus.requested:
-        return 'Requested';
+        return 'requested'.tr;
       case BookingStatus.confirmed:
-        return 'Confirmed';
+        return 'confirmed'.tr;
       case BookingStatus.reminded:
-        return 'Reminded';
+        return 'reminded'.tr;
       case BookingStatus.completed:
-        return 'Completed';
+        return 'completed'.tr;
       case BookingStatus.cancelled:
-        return 'Cancelled';
+        return 'cancelled'.tr;
     }
   }
 

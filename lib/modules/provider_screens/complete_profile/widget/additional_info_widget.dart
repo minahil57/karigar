@@ -21,8 +21,8 @@ class AdditionalInfoWidget extends StatelessWidget {
                   ),
                 ),
                 horizontalSpace(10),
-                const CustomText(
-                  text: 'Additional Information',
+                CustomText(
+                  text: AppStrings.additionalInformation,
                   fontSize: 16,
                   variant: TextVariant.bold,
                   color: kcBlackColor,
@@ -32,8 +32,8 @@ class AdditionalInfoWidget extends StatelessWidget {
             verticalSpace(15),
             CustomTextField(
               controller: controller.aboutMeController,
-              labelText: 'About Me',
-              hintText: 'Tell us about yourself...',
+              labelText: AppStrings.aboutMe,
+              hintText: AppStrings.aboutMeHint,
               prefixIcon: const Icon(Icons.notes, color: kcPrimaryColor, size: 20),
             ),
           ],

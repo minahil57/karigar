@@ -34,7 +34,10 @@ class ChatField extends StatelessWidget {
                       color: kcSecondaryColor,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Iconsax.send_1, color: kcWhitecolor),
+                    child: RotatedBox(
+                      quarterTurns: LocalizationService.isUrdu ? 2 : 0,
+                      child: const Icon(Iconsax.send_1, color: kcWhitecolor),
+                    ),
                   ),
                 ),
               ],

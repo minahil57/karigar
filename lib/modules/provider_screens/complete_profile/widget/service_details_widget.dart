@@ -18,8 +18,8 @@ class ServiceDetailsWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustomText(
-              text: 'Select Languages',
+            CustomText(
+              text: AppStrings.selectLanguages,
               fontSize: 18,
               variant: TextVariant.bold,
               color: kcBlackColor,
@@ -34,7 +34,7 @@ class ServiceDetailsWidget extends StatelessWidget {
                       final isSelected = ctrl.selectedLanguages.contains(lang);
                       return CheckboxListTile(
                         title: CustomText(
-                          text: lang,
+                          text: lang.tr,
                           fontSize: 16,
                           variant: TextVariant.medium,
                           color: kcBlackColor,
@@ -75,8 +75,8 @@ class ServiceDetailsWidget extends StatelessWidget {
                   ),
                 ),
                 horizontalSpace(10),
-                const CustomText(
-                  text: 'Service Details',
+                CustomText(
+                  text: AppStrings.serviceDetails,
                   fontSize: 16,
                   variant: TextVariant.bold,
                   color: kcBlackColor,
@@ -86,8 +86,8 @@ class ServiceDetailsWidget extends StatelessWidget {
             verticalSpace(15),
             
             // Service Cities
-            const CustomText(
-              text: 'Service Areas (Main Cities)',
+            CustomText(
+              text: AppStrings.serviceAreasLabel,
               fontSize: 14,
               variant: TextVariant.medium,
               color: kcBlackColor,
@@ -97,8 +97,8 @@ class ServiceDetailsWidget extends StatelessWidget {
             verticalSpace(20),
 
             // Multi-select Languages Dropdown
-            const CustomText(
-              text: 'Languages Spoken',
+            CustomText(
+              text: AppStrings.languagesSpoken,
               fontSize: 14,
               variant: TextVariant.medium,
               color: kcBlackColor,
@@ -122,14 +122,14 @@ class ServiceDetailsWidget extends StatelessWidget {
                         const Icon(Icons.language_outlined, color: kcPrimaryColor, size: 20),
                         horizontalSpace(10),
                         controller.selectedLanguages.isEmpty
-                            ? const CustomText(
-                                text: 'Select Languages (Multi-select)',
+                            ? CustomText(
+                                text: AppStrings.selectLanguagesHint,
                                 fontSize: 14,
                                 color: Colors.grey,
                                 variant: TextVariant.regular,
                               )
                             : CustomText(
-                                text: controller.selectedLanguages.join(', '),
+                                text: controller.selectedLanguages.map((e) => e.tr).join(', '),
                                 fontSize: 14,
                                 color: kcBlackColor,
                                 variant: TextVariant.medium,
@@ -144,8 +144,8 @@ class ServiceDetailsWidget extends StatelessWidget {
             verticalSpace(20),
 
             // Upwork-style Skills Search/Add Field
-            const CustomText(
-              text: 'Skills & Expertise',
+            CustomText(
+              text: AppStrings.skillsExpertise,
               fontSize: 14,
               variant: TextVariant.medium,
               color: kcBlackColor,
@@ -156,8 +156,8 @@ class ServiceDetailsWidget extends StatelessWidget {
                 Expanded(
                   child: CustomTextField(
                     controller: controller.skillInputController,
-                    labelText: 'Add Skill',
-                    hintText: 'e.g. Pipe Fitting, Wiring',
+                    labelText: AppStrings.addSkill,
+                    hintText: AppStrings.addSkillHint,
                     prefixIcon: const Icon(Icons.star_outline, color: kcPrimaryColor, size: 20),
                   ),
                 ),
@@ -225,8 +225,8 @@ class ServiceDetailsWidget extends StatelessWidget {
             verticalSpace(20),
 
             // Availability Option
-            const CustomText(
-              text: 'Availability Option',
+            CustomText(
+              text: AppStrings.availabilityOption,
               fontSize: 14,
               variant: TextVariant.medium,
               color: kcBlackColor,
@@ -239,7 +239,7 @@ class ServiceDetailsWidget extends StatelessWidget {
                 final isSelected = controller.selectedAvailability == opt;
                 return ChoiceChip(
                   label: CustomText(
-                    text: opt,
+                    text: opt.tr,
                     color: isSelected ? kcWhitecolor : kcBlackColor,
                     fontSize: 13,
                     variant: TextVariant.regular,
@@ -265,8 +265,8 @@ class ServiceDetailsWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomText(
-                        text: 'Opening Time',
+                      CustomText(
+                        text: AppStrings.openingTime,
                         fontSize: 13,
                         variant: TextVariant.medium,
                         color: kcBlackColor,
@@ -303,8 +303,8 @@ class ServiceDetailsWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomText(
-                        text: 'Closing Time',
+                      CustomText(
+                        text: AppStrings.closingTime,
                         fontSize: 13,
                         variant: TextVariant.medium,
                         color: kcBlackColor,
@@ -341,8 +341,8 @@ class ServiceDetailsWidget extends StatelessWidget {
             verticalSpace(20),
 
             // Price Range Dropdown/Chips
-            const CustomText(
-              text: 'Price Range / Rate',
+            CustomText(
+              text: AppStrings.priceRange,
               fontSize: 14,
               variant: TextVariant.medium,
               color: kcBlackColor,
@@ -355,7 +355,7 @@ class ServiceDetailsWidget extends StatelessWidget {
                 final isSelected = controller.selectedPriceRange == range;
                 return ChoiceChip(
                   label: CustomText(
-                    text: range.toUpperCase(),
+                    text: range.tr.toUpperCase(),
                     color: isSelected ? kcWhitecolor : kcBlackColor,
                     fontSize: 13,
                     variant: TextVariant.regular,
@@ -376,8 +376,8 @@ class ServiceDetailsWidget extends StatelessWidget {
 
             CustomTextField(
               controller: controller.experienceController,
-              labelText: 'Experience (Years)',
-              hintText: 'e.g. 5',
+              labelText: AppStrings.experienceYearsLabel,
+              hintText: AppStrings.experienceHint,
               keyboardType: TextInputType.number,
               prefixIcon: const Icon(Icons.trending_up, color: kcPrimaryColor, size: 20),
             ),

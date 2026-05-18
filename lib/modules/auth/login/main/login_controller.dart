@@ -16,11 +16,11 @@ class LoginController extends GetxController {
     update(["password"]);
   }
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+   
+  //   super.onInit();
+  // }
 
   void submitLogin() async {
     if (!formKey.currentState!.validate()) return;
@@ -28,15 +28,15 @@ class LoginController extends GetxController {
     FocusScope.of(Get.context!).unfocus();
 
     try {
-      EasyLoading.show(status: 'Logging in...');
+      EasyLoading.show(status: AppStrings.loggingIn);
 
       final errorMessage = await AuthRepository.loginUser({
         'email': emailController.text,
         'password': passwordController.text,
       });
       if (errorMessage == null) {
-        Snackbars.success('Login successful');
-        EasyLoading.showSuccess('Login successful');
+        Snackbars.success(AppStrings.loginSuccessful);
+        EasyLoading.showSuccess(AppStrings.loginSuccessful);
         log(await getAccessToken());
 
         log((getUser())!.toJson().toString());
@@ -49,7 +49,7 @@ class LoginController extends GetxController {
         Snackbars.error(errorMessage);
       }
     } catch (e) {
-      EasyLoading.showError('Something went wrong');
+      EasyLoading.showError(AppStrings.somethingWentWrong);
       EasyLoading.dismiss();
     }
     EasyLoading.dismiss();

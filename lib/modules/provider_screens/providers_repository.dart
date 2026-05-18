@@ -109,6 +109,9 @@ class ProvidersRepository {
       };
     } catch (e) {
       return {'data': null, 'error': 'Something went wrong'};
+    }
+  }
+
   static Future<bool> updateBookingStatus(
     String id, String status) async {
     try {

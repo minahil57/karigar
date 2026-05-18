@@ -73,8 +73,8 @@ class ProviderMapCard extends StatelessWidget {
                         height: 64,
                         width: 64,
                         fit: BoxFit.cover,
-                        placeholder: (_, __) => Container(color: kcborderColor),
-                        errorWidget: (_, __, ___) => Container(
+                        placeholder: (_, _) => Container(color: kcborderColor),
+                        errorWidget: (_, _, _) => Container(
                           color: kcborderColor,
                           child: const Icon(
                             Icons.person,

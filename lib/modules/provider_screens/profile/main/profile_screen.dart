@@ -36,10 +36,13 @@ class ProviderProfileScreen extends StatelessWidget {
                                     color: kcWhitecolor,
                                     shape: BoxShape.circle,
                                   ),
-                                  child: Icon(
-                                    Iconsax.arrow_left,
-                                    color: kcBlackColor,
-                                    size: 20,
+                                  child: RotatedBox(
+                                    quarterTurns: LocalizationService.isUrdu ? 2 : 0,
+                                    child: const Icon(
+                                      Iconsax.arrow_left,
+                                      color: kcBlackColor,
+                                      size: 20,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -56,42 +59,53 @@ class ProviderProfileScreen extends StatelessWidget {
                     children: [
                       ProfileDetailItem(
                         icon: Iconsax.briefcase,
-                        label: 'Experience',
+                        label: AppStrings.experience,
                         value:
-                            provider.experienceYears?.toString() ?? '— Years',
+                            '${provider.experienceYears?.toString() ?? '—'} ${AppStrings.experienceYearsLabel}',
                       ),
                       ProfileDetailItem(
                         icon: Iconsax.calendar,
-                        label: 'Member Since',
+                        label: AppStrings.memberSince,
                         value: provider.createdAt.year.toString(),
                       ),
                       ProfileDetailItem(
                         icon: Iconsax.call,
-                        label: 'Phone',
+                        label: AppStrings.phone,
                         value: provider.phone ?? '—',
                       ),
                       ProfileDetailItem(
                         icon: Iconsax.sms,
-                        label: 'Email',
+                        label: AppStrings.email,
                         value: provider.email ?? '—',
                       ),
                       ProfileDetailItem(
                         icon: Iconsax.location,
-                        label: 'Service Areas',
+                        label: AppStrings.serviceAreasLabel,
                         value:
                             '${provider.address.city}, ${provider.address.state}',
                       ),
                       ProfileDetailItem(
                         icon: Iconsax.global,
-                        label: 'Languages',
+                        label: AppStrings.languagesSpoken,
                         value: provider.languages?.toString() ?? '—',
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          final newLang = LocalizationService.isUrdu ? 'en' : 'ur';
+                          LocalizationService.changeLocale(newLang);
+                        },
+                        child: ProfileDetailItem(
+                          icon: Iconsax.global,
+                          label: AppStrings.selectLanguage,
+                          value: LocalizationService.isUrdu ? 'English (Switch)' : 'اردو (تبدیل کریں)',
+                        ),
                       ),
                       ProfileDetailItem(
                         icon: Iconsax.user,
-                        label: 'About Me',
+                        label: AppStrings.aboutMe,
                         value:
                             provider.about?.toString() ??
-                            'No description provided.',
+                            AppStrings.noDescription,
                       ),
                     ],
                   ),
@@ -121,7 +135,7 @@ class ProviderProfileScreen extends StatelessWidget {
                               size: 20,
                             ),
                             horizontalSpaceSmall,
-                            const CustomText(
+                            CustomText(
                               text: AppStrings.logout,
                               variant: TextVariant.bold,
                               fontSize: 14,

@@ -15,7 +15,7 @@ class SuggestionsSection extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: const CustomText(
+                child: CustomText(
                   text: AppStrings.suggestionsForYou,
                   fontSize: 14,
                   variant: TextVariant.medium,

@@ -17,8 +17,8 @@ class PersonalInfoWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const CustomText(
-              text: 'Select Profile Picture',
+            CustomText(
+              text: AppStrings.selectProfilePicture,
               fontSize: 18,
               variant: TextVariant.bold,
               color: kcBlackColor,
@@ -26,7 +26,7 @@ class PersonalInfoWidget extends StatelessWidget {
             verticalSpace(20),
             ListTile(
               leading: const Icon(Icons.camera_alt, color: kcSecondaryColor),
-              title: const CustomText(text: 'Take Photo', fontSize: 16, variant: TextVariant.medium),
+              title: CustomText(text: AppStrings.takePhoto, fontSize: 16, variant: TextVariant.medium),
               onTap: () {
                 Get.back();
                 controller.pickImage(ImageSource.camera);
@@ -34,7 +34,7 @@ class PersonalInfoWidget extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.photo_library, color: kcSecondaryColor),
-              title: const CustomText(text: 'Choose from Gallery', fontSize: 16, variant: TextVariant.medium),
+              title: CustomText(text: AppStrings.chooseGallery, fontSize: 16, variant: TextVariant.medium),
               onTap: () {
                 Get.back();
                 controller.pickImage(ImageSource.gallery);
@@ -65,8 +65,8 @@ class PersonalInfoWidget extends StatelessWidget {
                   ),
                 ),
                 horizontalSpace(10),
-                const CustomText(
-                  text: 'Personal Information',
+                CustomText(
+                  text: AppStrings.personalInformation,
                   fontSize: 16,
                   variant: TextVariant.bold,
                   color: kcBlackColor,
@@ -96,17 +96,17 @@ class PersonalInfoWidget extends StatelessWidget {
                             : null,
                       ),
                       child: controller.pickedImage == null
-                          ? const Column(
+                          ? Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.camera_alt_outlined,
                                   color: kcPrimaryColor,
                                   size: 32,
                                 ),
                                 verticalSpaceSmall,
                                 CustomText(
-                                  text: 'Upload',
+                                  text: AppStrings.upload,
                                   fontSize: 12,
                                   variant: TextVariant.medium,
                                   color: kcPrimaryColor,
@@ -142,30 +142,30 @@ class PersonalInfoWidget extends StatelessWidget {
             
             CustomTextField(
               controller: controller.nameController,
-              labelText: 'Business Name',
-              hintText: 'Enter your business name',
+              labelText: AppStrings.businessName,
+              hintText: AppStrings.businessNameHint,
               prefixIcon: const Icon(Icons.business_outlined, color: kcPrimaryColor, size: 20),
-              validator: (val) => val == null || val.isEmpty ? 'Required' : null,
+              validator: (val) => val == null || val.isEmpty ? AppStrings.required : null,
             ),
             verticalSpace(15),
             CustomTextField(
               controller: controller.professionController,
-              labelText: 'Profession',
-              hintText: 'e.g. Electrician, Plumber',
+              labelText: AppStrings.profession,
+              hintText: AppStrings.professionHint,
               prefixIcon: const Icon(Icons.work_outline, color: kcPrimaryColor, size: 20),
-              validator: (val) => val == null || val.isEmpty ? 'Required' : null,
+              validator: (val) => val == null || val.isEmpty ? AppStrings.required : null,
             ),
             verticalSpace(15),
             CustomTextField(
               controller: controller.phoneController,
-              labelText: 'Phone Number',
-              hintText: 'Enter your phone number',
+              labelText: AppStrings.phoneNumber,
+              hintText: AppStrings.phoneNumberHint,
               keyboardType: TextInputType.phone,
               maxLength: 11,
               prefixIcon: const Icon(Icons.phone_outlined, color: kcPrimaryColor, size: 20),
               validator: (val) {
-                if (val == null || val.isEmpty) return 'Required';
-                if (val.length != 11) return 'Must be exactly 11 digits';
+                if (val == null || val.isEmpty) return AppStrings.required;
+                if (val.length != 11) return AppStrings.phoneLengthError;
                 return null;
               },
             ),
