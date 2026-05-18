@@ -92,7 +92,7 @@ final List<ServiceRequestModel> dummyServiceRequests = [
     createdAt: '2026-05-14T15:20:00.000Z',
     providerService: ProviderService(
       id: 'ps4',
-      service: Services(id: 's4', name: 'Home Cleaning'),
+      service: Services(id: 's4', name: 'Home'),
       provider: dummyProvider,
     ),
   ),

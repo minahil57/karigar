@@ -40,4 +40,11 @@ class _Provider {
       endPoint: EndPoints.provider.providerBookings(id),
     );
   }
+
+  Future<Response> updateProfile(Map<String, dynamic> data) async {
+    return DioHelper.patchData(
+      endPoint: EndPoints.provider.profilePatch,
+      data: data,
+    );
+  }
 }

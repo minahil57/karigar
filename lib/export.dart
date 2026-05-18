@@ -35,11 +35,13 @@ export 'package:lottie/lottie.dart';
 export 'package:animate_do/animate_do.dart';
 export 'package:iconsax/iconsax.dart';
 export 'package:flutter_secure_storage/flutter_secure_storage.dart';
+export 'package:geolocator/geolocator.dart';
+export 'package:geocoding/geocoding.dart' hide Location;
 
 export 'app.dart';
 export 'main.dart';
 export 'core/export.dart';
-export 'modules/export.dart';
+export 'modules/export.dart' ;
 export 'services/export.dart';
 export 'routes.dart';
 export 'widgets/export.dart';

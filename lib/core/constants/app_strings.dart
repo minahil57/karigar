@@ -106,4 +106,33 @@ class AppStrings {
   static const String preferred = 'Preferred:';
   static const String accept = 'Accept';
   static const String reject = 'Reject';
+
+  // Complete Profile
+  static const String selectOperatingCity = "Select Operating City";
+  static const String completeProfile = "Complete Profile";
+  static const String personalInfo = "Personal Info";
+  static const String businessName = "Business Name";
+  static const String businessNameHint = "Enter your business name";
+  static const String profession = "Profession";
+  static const String professionHint = "e.g. Electrician, Plumber";
+  static const String aboutMe = "About Me";
+  static const String aboutMeHint = "Tell us about your services, background, etc.";
+  static const String serviceDetails = "Service Details";
+  static const String serviceAreas = "Service Areas (Main Cities)";
+  static const String languagesSpoken = "Languages Spoken";
+  static const String selectLanguages = "Select Languages";
+  static const String selectLanguagesHint = "Select Languages (Multi-select)";
+  static const String skillsExpertise = "Skills & Expertise";
+  static const String addSkill = "Add Skill";
+  static const String addSkillHint = "e.g. Pipe Fitting, Wiring";
+  static const String availabilityOption = "Availability Option";
+  static const String openingTime = "Opening Time";
+  static const String closingTime = "Closing Time";
+  static const String priceRange = "Price Range / Rate";
+  static const String experienceYearsLabel = "Experience (Years)";
+  static const String experienceHint = "e.g. 5";
+  static const String saveProfile = "Save Profile";
+  static const String unsupportedLocation = "Unsupported Location";
+  static const String changeCity = "Change City";
+  static const String chooseSupportedCity = "Choose Supported City";
 }
