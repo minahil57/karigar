@@ -7,6 +7,7 @@ class UserModel {
   final String role;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final bool isProfileCompleted;
 
   UserModel({
     required this.id,
@@ -17,6 +18,7 @@ class UserModel {
     required this.role,
     required this.createdAt,
     required this.updatedAt,
+    required this.isProfileCompleted,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class UserModel {
       role: json['role'] ?? '',
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
+      isProfileCompleted: json['isProfileCompleted'] ?? false ,
     );
   }
 
@@ -42,6 +45,31 @@ class UserModel {
       'role': role,
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt.toIso8601String(),
+      'isProfileCompleted': isProfileCompleted,
     };
+  }
+
+   UserModel copyWith({
+    String? id,
+    String? name,
+    String? email,
+    bool? emailVerified,
+    String? image,
+    String? role,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    bool? isProfileCompleted,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      emailVerified: emailVerified ?? this.emailVerified,
+      image: image ?? this.image,
+      role: role ?? this.role,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      isProfileCompleted: isProfileCompleted ?? this.isProfileCompleted,
+    );
   }
 }

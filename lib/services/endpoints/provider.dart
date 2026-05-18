@@ -21,8 +21,5 @@ class _Provider {
   String get uploadAvatar => '$_apiBaseUrl/upload/avatar';
   String profile(String id) => '$_controllerName/profile/$id';
   String providerBookings(String id) => '$_controllerName/$id/bookings';
-}
-String profile(String id) => '$_controllerName/profile/$id';
-String  providerBookings(String id) => '$_controllerName/$id/bookings';
 String updateBookingStatus(String id) => '$_controllerName/bookings/$id';
 }

@@ -10,13 +10,14 @@ class CompleteProfileScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: kcWhitecolor,
           appBar: AppBar(
-            
+            surfaceTintColor: kcWhitecolor,
             title: const CustomText(
               text: 'Complete Profile',
               fontSize: 18,
               variant: TextVariant.bold,
               color: kcBlackColor,
             ),
+            centerTitle: true,
             backgroundColor: kcWhitecolor,
             elevation: 0,
             iconTheme: const IconThemeData(color: kcBlackColor),

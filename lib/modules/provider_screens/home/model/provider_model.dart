@@ -67,7 +67,7 @@ class ProviderData {
       address: Address.fromJson(json['address']),
       availability: Availability.fromJson(json['availability']),
       priceRange: json['priceRange'],
-      responseTime: json['responseTime'],
+      responseTime: json['responseTime'] ?? 0,
       rating: (json['rating'] as num).toDouble(),
       reviewCount: json['reviewCount'],
       isOnboarded: json['isOnboarded'],
@@ -163,8 +163,6 @@ class Availability {
   final DayAvailability wednesday;
   final DayAvailability thursday;
   final DayAvailability friday;
-  final DayAvailability saturday;
-  final DayAvailability sunday;
 
   Availability({
     required this.monday,
@@ -172,8 +170,6 @@ class Availability {
     required this.wednesday,
     required this.thursday,
     required this.friday,
-    required this.saturday,
-    required this.sunday,
   });
 
   factory Availability.fromJson(Map<String, dynamic> json) {
@@ -183,8 +179,6 @@ class Availability {
       wednesday: DayAvailability.fromJson(json['wednesday']),
       thursday: DayAvailability.fromJson(json['thursday']),
       friday: DayAvailability.fromJson(json['friday']),
-      saturday: DayAvailability.fromJson(json['saturday']),
-      sunday: DayAvailability.fromJson(json['sunday']),
     );
   }
 
@@ -195,8 +189,6 @@ class Availability {
       'wednesday': wednesday.toJson(),
       'thursday': thursday.toJson(),
       'friday': friday.toJson(),
-      'saturday': saturday.toJson(),
-      'sunday': sunday.toJson(),
     };
   }
 }

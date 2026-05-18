@@ -2,6 +2,7 @@
 
 part 'auth.dart';
 part 'provider.dart';
+part 'customer.dart';
 
 abstract final class EndPoints {
   // static const String loginUrl = 'https://api.newcrm.freemyip.com'; // PROD
@@ -10,4 +11,5 @@ abstract final class EndPoints {
 
   static _Auth get auth => _Auth(apiBaseUrl: _apiBaseUrl);
   static _Provider get provider => _Provider(apiBaseUrl: _apiBaseUrl);
+  static _Customer get customer => _Customer(apiBaseUrl: _apiBaseUrl);
 }
