@@ -35,7 +35,7 @@ class CustomDefaultImage extends StatelessWidget {
       decoration: BoxDecoration(color: kcLightGrey, borderRadius: borderRadius),
       child: CustomText(
         text: getInitials(name),
-        fontSize: height * 0.4,
+        fontSize: 14,
         color: kcBlackColor,
       ),
     );

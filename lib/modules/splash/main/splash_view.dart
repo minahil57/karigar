@@ -10,7 +10,7 @@ class SplashView extends GetView<SplashController> {
       body: Center(
         child: CustomAssetsImage(
           imagePath: AppImages.logo,
-          height: 250,
+          height: context.height * (250 / 690),
           width: double.infinity,
         ),
       ),

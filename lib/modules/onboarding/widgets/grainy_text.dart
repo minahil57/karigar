@@ -14,8 +14,8 @@ class SmoothGrainyText extends StatefulWidget {
     super.key,
     required this.text,
     required this.style,
-    this.wordDelay = const Duration(milliseconds: 400),
-    this.wordDuration = const Duration(milliseconds: 800),
+    this.wordDelay = const Duration(milliseconds: 200),
+    this.wordDuration = const Duration(milliseconds: 400),
     this.brownIndexes = const [],
   });
 
@@ -93,7 +93,7 @@ class SmoothGrainyTextState extends State<SmoothGrainyText>
     return Wrap(
       alignment: WrapAlignment.center,
       spacing: 6,
-      runSpacing: 12,
+      runSpacing: 6,
       children: List.generate(words.length, (i) {
         final isBrown = widget.brownIndexes.contains(i);
         final textStyle = isBrown

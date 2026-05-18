@@ -7,6 +7,9 @@ abstract final class DioHelper {
   static void init() {
     _dio = Dio(
       BaseOptions(
+        connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(seconds: 30),
+        sendTimeout: const Duration(seconds: 30),
         receiveDataWhenStatusError: true,
         contentType: 'application/json',
         headers: {
@@ -19,6 +22,9 @@ abstract final class DioHelper {
     )..interceptors.addAll(dioInterceptoprs);
     _dioWithoutAuth = Dio(
       BaseOptions(
+        connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(seconds: 30),
+        sendTimeout: const Duration(seconds: 30),
         receiveDataWhenStatusError: true,
         contentType: 'application/json',
       ),

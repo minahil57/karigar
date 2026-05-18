@@ -3,17 +3,19 @@ import 'package:karigar/export.dart';
 enum TextVariant { regular, medium, bold }
 
 TextStyle appTextStyle({
-  required Color color,
-  required double fontSize,
-  required FontWeight fontWeight,
+  Color color = kcTextBlackcolor,
+  double fontSize = 14,
+  FontWeight fontWeight = FontWeight.w500,
+  double? height,
   TextDecoration decoration = TextDecoration.none,
   Color? decorationColor,
   TextDecorationStyle decorationStyle = TextDecorationStyle.solid,
 }) {
-  final TextStyle baseStyle = GoogleFonts.poppins(
-    fontSize: fontSize,
+  final TextStyle baseStyle = TextStyle(
+    fontFamily: 'Sora',
+    fontSize: fontSize.sp,
     fontWeight: fontWeight,
-    letterSpacing: -0.7,
+    height: height,
   );
 
   return baseStyle.copyWith(
@@ -27,6 +29,7 @@ TextStyle appTextStyle({
 TextStyle getBoldStyle({
   Color color = kcTextBlackcolor,
   double fontSize = 24,
+  double? height,
   TextDecoration decoration = TextDecoration.none,
   Color? decorationColor,
   TextDecorationStyle decorationStyle = TextDecorationStyle.solid,
@@ -35,6 +38,7 @@ TextStyle getBoldStyle({
     color: color,
     fontSize: fontSize,
     fontWeight: FontWeight.w600,
+    height: height,
     decoration: decoration,
     decorationColor: decorationColor,
     decorationStyle: decorationStyle,
@@ -44,14 +48,16 @@ TextStyle getBoldStyle({
 TextStyle getMediumStyle({
   Color color = kcTextBlackcolor,
   double fontSize = 14,
+  double? height,
   TextDecoration decoration = TextDecoration.none,
   Color? decorationColor,
   TextDecorationStyle decorationStyle = TextDecorationStyle.solid,
 }) {
   return appTextStyle(
     color: color,
-    fontSize: fontSize,
+    fontSize: fontSize.sp,
     fontWeight: FontWeight.w500,
+    height: height,
     decoration: decoration,
     decorationColor: decorationColor,
     decorationStyle: decorationStyle,
@@ -61,14 +67,16 @@ TextStyle getMediumStyle({
 TextStyle getRegularStyle({
   Color color = kcTextBlackcolor,
   double fontSize = 12,
+  double? height,
   TextDecoration decoration = TextDecoration.none,
   Color? decorationColor,
   TextDecorationStyle decorationStyle = TextDecorationStyle.solid,
 }) {
   return appTextStyle(
     color: color,
-    fontSize: fontSize,
+    fontSize: fontSize.sp,
     fontWeight: FontWeight.w400,
+    height: height,
     decoration: decoration,
     decorationColor: decorationColor,
     decorationStyle: decorationStyle,
