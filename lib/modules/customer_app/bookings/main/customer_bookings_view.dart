@@ -10,9 +10,27 @@ class CustomerBookingsView extends StatelessWidget {
     return CustomLayout(
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
             children: [
+              verticalSpaceSmall,
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: const Icon(Iconsax.arrow_left, color: kcBlackColor),
+                  ),
+                  CustomText(
+                    text: 'My Bookings',
+                    variant: TextVariant.bold,
+                    fontSize: 16,
+                    color: kcBlackColor,
+                  ),
+                ],
+              ),
+              verticalSpaceSmall,
               Expanded(
                 child: GetBuilder<CustomerBookingsController>(
                   id: 'bookings',
