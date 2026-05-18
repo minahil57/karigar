@@ -102,7 +102,7 @@ class _TimelineTile extends StatelessWidget {
     // Icon Configuration
     final IconData icon = isStep
         ? (isDone ? Iconsax.tick_circle : Iconsax.info_circle)
-        : Iconsax.cpu;
+        : Iconsax.bubble;
 
     final Color iconColor = isStep
         ? (isDone ? const Color(0xFF22C55E) : kcSecondaryColor)
@@ -207,10 +207,7 @@ class _TimelineTile extends StatelessWidget {
           verticalSpace(6),
           Text(
             item.text ?? '',
-            style: getRegularStyle(
-              fontSize: 15,
-              color: kcDarkGreyTextColor,
-            ).copyWith(fontStyle: FontStyle.italic, height: 1.4),
+            style: getRegularStyle(fontSize: 13, color: kcDarkGreyTextColor),
           ),
         ],
       ),

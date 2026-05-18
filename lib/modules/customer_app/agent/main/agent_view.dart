@@ -221,6 +221,29 @@ class AgentView extends StatelessWidget {
           );
         }
         return ChatBubble(message: msg);
+
+      // ── HITL widget types ──────────────────────────────────────────────────
+
+      case ChatMessageType.providerList:
+        // Render horizontally scrollable provider cards
+        return FadeInUp(
+          duration: const Duration(milliseconds: 300),
+          child: ProviderListWidget(providers: msg.providers!),
+        );
+
+      case ChatMessageType.datePicker:
+        // Render inline date+time picker
+        return FadeInUp(
+          duration: const Duration(milliseconds: 300),
+          child: DatePickerWidget(data: msg.datePickerData!),
+        );
+
+      case ChatMessageType.serviceList:
+        // Render suggested services
+        return FadeInUp(
+          duration: const Duration(milliseconds: 300),
+          child: ServiceListWidget(services: msg.services!),
+        );
     }
   }
 

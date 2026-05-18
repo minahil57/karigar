@@ -58,6 +58,53 @@ class SocketService extends GetxService {
     log('[Socket] Emitted cancel');
   }
 
+  /// Emits [provider:selected] to the server.
+  ///
+  /// If [scheduledTime], [requestedDay], and [requestedTime] are all provided,
+  /// the server calls bookingTool directly (no Gemini re-run).
+  /// If any are missing, the server responds with a [DATE_PICKER].
+  void emitProviderSelected({
+    String? providerId,
+    required String providerServiceId,
+    String? serviceName,
+    required String token,
+    String? scheduledTime,
+    String? requestedDay,
+    String? requestedTime,
+    String? location,
+  }) {
+    if (!_initialized) {
+      log('[Socket] Not connected — cannot emit provider:selected');
+      return;
+    }
+    final payload = <String, dynamic>{
+      'providerId': providerId,
+      'providerServiceId': providerServiceId,
+      'serviceName': serviceName,
+      'token': token,
+      'scheduledTime': scheduledTime,
+      'requestedDay': requestedDay,
+      'requestedTime': requestedTime,
+      'location': location,
+    };
+    _socket.emit('provider:selected', payload);
+    log('[Socket] Emitted provider:selected for $providerServiceId');
+  }
+
+  /// Emits [service:selected] to the server.
+  /// Server synthesises "Show me providers for {serviceName}" → runs DISCOVERY flow.
+  void emitServiceSelected({
+    required String serviceName,
+    required String token,
+  }) {
+    if (!_initialized) {
+      log('[Socket] Not connected — cannot emit service:selected');
+      return;
+    }
+    _socket.emit('service:selected', {'serviceName': serviceName, 'token': token});
+    log('[Socket] Emitted service:selected: $serviceName');
+  }
+
   // ── Listen ─────────────────────────────────────────────────────────────────
 
   void on(String event, Function(dynamic) handler) {
