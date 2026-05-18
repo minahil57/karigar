@@ -13,6 +13,8 @@ class CustomTextField extends StatelessWidget {
   final Color borderColor;
   final TextInputType keyboardType;
   final ValueChanged<String>? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
+  final int? maxLength;
 
   const CustomTextField({
     super.key,
@@ -28,6 +30,8 @@ class CustomTextField extends StatelessWidget {
     this.borderColor = kcborderColor,
     this.keyboardType = TextInputType.text,
     this.onChanged,
+    this.inputFormatters,
+    this.maxLength,
   });
 
   @override
@@ -44,6 +48,8 @@ class CustomTextField extends StatelessWidget {
           keyboardType: keyboardType,
           onChanged: onChanged,
           validator: validator,
+          inputFormatters: inputFormatters,
+          maxLength: maxLength,
           style: getRegularStyle(color: kcBlackColor, fontSize: 12),
           decoration: InputDecoration(
             hintText: hintText,
@@ -51,7 +57,7 @@ class CustomTextField extends StatelessWidget {
             fillColor: fillColor,
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
-
+            counterText: maxLength != null ? "" : null,
             hintStyle: getRegularStyle(color: kcTextGreyColor, fontSize: 12),
 
             contentPadding: const EdgeInsets.symmetric(

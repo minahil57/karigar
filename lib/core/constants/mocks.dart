@@ -104,12 +104,8 @@ final List<ServiceRequestModel> dummyServiceRequests = [
     createdAt: '2026-05-14T15:20:00.000Z',
     providerService: ProviderService(
       id: 'ps4',
-      service: Services(id: 's4', name: 'Home Cleaning'),
-     provider: ProviderModel(
-        id: 'p3',
-        businessName: 'Spark Electric Solutions',
-        avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d',
-      ),
+      service: Services(id: 's4', name: 'Home'),
+      provider: dummyProvider,
     ),
   ),
 ];

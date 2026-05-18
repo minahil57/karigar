@@ -35,6 +35,7 @@ class ProviderHomeScreen extends StatelessWidget {
                 HomeSectionHeader(
                   title: AppStrings.liveServiceRequests,
                   onViewAll: () {
+                    Get.toNamed(Routes.completeProfile);
                     AppLayout.of(context)?.changeTab(0);
                   },
                 ),
@@ -89,20 +90,20 @@ class ProviderHomeScreen extends StatelessWidget {
         return CustomSkeleton(
           enabled: controller.isServiceLoading,
           child: ListView.separated(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: controller.serviceRequests.length,
-          separatorBuilder: (context, index) => verticalSpaceSmall,
-          itemBuilder: (context, index) {
-            final request = controller.serviceRequests[index];
-            return ServiceRequestCard(
-              request: request,
-              onAccept: () {},
-              onReject: () {},
-            );
-          },
-                ),
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: controller.serviceRequests.length,
+            separatorBuilder: (context, index) => verticalSpaceSmall,
+            itemBuilder: (context, index) {
+              final request = controller.serviceRequests[index];
+              return ServiceRequestCard(
+                request: request,
+                onAccept: () {},
+                onReject: () {},
+              );
+            },
+          ),
         );
       },
     );

@@ -3,7 +3,6 @@ import 'package:karigar/export.dart';
 abstract final class DioHelper {
   static late Dio _dio;
   static late Dio _dioWithoutAuth;
-  static late Dio _dioforFileUpload;
 
   static void init() {
     _dio = Dio(
@@ -22,12 +21,6 @@ abstract final class DioHelper {
       BaseOptions(
         receiveDataWhenStatusError: true,
         contentType: 'application/json',
-      ),
-    )..interceptors.addAll([loggerInterceptor, networkInterceptor]);
-    _dioforFileUpload = Dio(
-      BaseOptions(
-        receiveDataWhenStatusError: true,
-        contentType: 'multipart/form-data',
       ),
     )..interceptors.addAll([loggerInterceptor, networkInterceptor]);
   }
@@ -59,11 +52,7 @@ abstract final class DioHelper {
     Map<String, dynamic>? queryParameters,
     required dynamic data,
   }) async {
-    return _dioforFileUpload.post(
-      endPoint,
-      queryParameters: queryParameters,
-      data: data,
-    );
+    return _dio.post(endPoint, queryParameters: queryParameters, data: data);
   }
 
   static Future<Response> posttDataWithOutInterceptors({
@@ -141,7 +130,7 @@ abstract final class DioHelper {
     final bytes = await file.readAsBytes();
 
     final formData = FormData.fromMap({
-      "url": MultipartFile.fromBytes(
+      "avatar": MultipartFile.fromBytes(
         bytes,
         filename: file.name,
         contentType: MediaType.parse(
