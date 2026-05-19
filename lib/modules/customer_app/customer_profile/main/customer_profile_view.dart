@@ -164,11 +164,6 @@ class CustomerProfileView extends StatelessWidget {
                 ),
                 verticalSpaceSmall,
                 _buildOptionTile(
-                  icon: Iconsax.notification,
-                  title: AppStrings.notifications,
-                  onTap: () {},
-                ),
-                _buildOptionTile(
                   icon: Iconsax.global,
                   title: LocalizationService.isUrdu
                       ? 'English (Switch)'

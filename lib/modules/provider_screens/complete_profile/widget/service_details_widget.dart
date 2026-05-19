@@ -88,6 +88,96 @@ class ServiceDetailsWidget extends StatelessWidget {
             ),
             verticalSpace(15),
 
+            CustomText(
+              text: AppStrings.selectService,
+              fontSize: 14,
+              variant: TextVariant.medium,
+              color: kcBlackColor,
+            ),
+            verticalSpace(8),
+            if (controller.isLoadingServices)
+              const Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  child: CircularProgressIndicator(color: kcSecondaryColor),
+                ),
+              )
+            else if (controller.services.isEmpty)
+              CustomText(
+                text: AppStrings.noServicesAvailable,
+                fontSize: 12,
+                variant: TextVariant.regular,
+                color: Colors.grey,
+              )
+            else
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                decoration: BoxDecoration(
+                  color: kcWhitecolor,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: kcborderColor),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<ServiceModel>(
+                    value: controller.selectedService,
+                    dropdownColor: kcWhitecolor,
+                    hint: CustomText(
+                      text: AppStrings.selectServiceHint,
+                      fontSize: 12,
+                      color: Colors.grey,
+                      variant: TextVariant.regular,
+                    ),
+                    icon: const Icon(Icons.arrow_drop_down, color: kcBlackColor),
+                    isExpanded: true,
+                    onChanged: controller.setSelectedService,
+                    items: controller.services.map((service) {
+                      return DropdownMenuItem<ServiceModel>(
+                        value: service,
+                        child: CustomText(
+                          text: service.name,
+                          fontSize: 14,
+                          variant: TextVariant.medium,
+                          color: kcBlackColor,
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            verticalSpace(15),
+            Row(
+              children: [
+                Expanded(
+                  child: CustomTextField(
+                    controller: controller.servicePriceController,
+                    labelText: AppStrings.servicePrice,
+                    hintText: '1500',
+                    keyboardType: TextInputType.number,
+                    prefixIcon: const Icon(
+                      Icons.payments_outlined,
+                      color: kcPrimaryColor,
+                      size: 20,
+                    ),
+                  ),
+                ),
+                horizontalSpace(10),
+                Expanded(
+                  child: CustomTextField(
+                    controller: controller.serviceDurationController,
+                    labelText: AppStrings.serviceDuration,
+                    hintText: '60',
+                    keyboardType: TextInputType.number,
+                    prefixIcon: const Icon(
+                      Icons.timer_outlined,
+                      color: kcPrimaryColor,
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            verticalSpace(20),
+
             // Service Cities
             CustomText(
               text: AppStrings.serviceAreasLabel,

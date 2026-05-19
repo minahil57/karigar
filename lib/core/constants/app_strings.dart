@@ -107,6 +107,11 @@ class AppStrings {
   static String get aboutMe => "aboutMe".tr;
   static String get aboutMeHint => "aboutMeHint".tr;
   static String get serviceDetails => "serviceDetails".tr;
+  static String get selectService => "selectService".tr;
+  static String get selectServiceHint => "selectServiceHint".tr;
+  static String get noServicesAvailable => "noServicesAvailable".tr;
+  static String get servicePrice => "servicePrice".tr;
+  static String get serviceDuration => "serviceDuration".tr;
   static String get serviceAreas => "serviceAreas".tr;
   static String get languagesSpoken => "languagesSpoken".tr;
   static String get selectLanguages => "selectLanguages".tr;
