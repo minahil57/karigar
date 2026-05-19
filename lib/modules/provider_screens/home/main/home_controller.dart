@@ -40,8 +40,23 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     await PermissionHandlerService.requestAppPermissions();
+    fetchCurrentAddress();
     fetchProfile();
     fetchServiceRequests();
+  }
+
+  Future<void> fetchCurrentAddress() async {
+    try {
+      final position = await LocationService.getCurrentLocation();
+      if (position != null) {
+        await ProvidersRepository.updateProfile({
+          'lat': position.latitude,
+          'lng': position.longitude,
+        });
+      }
+    } catch (e) {
+      log('[HomeController] Error updating location: $e');
+    }
   }
 
   Future<void> fetchProfile() async {
