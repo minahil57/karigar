@@ -49,6 +49,7 @@ dependencies:
   gpt_markdown: ^1.1.7
   flutter_screenutil: ^5.9.3
   shimmer: ^3.0.0
+  permission_handler: ^12.0.1
 
 dev_dependencies:
   flutter_test:

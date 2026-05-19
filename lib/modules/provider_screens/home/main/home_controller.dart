@@ -39,6 +39,7 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    await PermissionHandlerService.requestAppPermissions();
     fetchProfile();
     fetchServiceRequests();
   }

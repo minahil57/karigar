@@ -5,4 +5,5 @@ export 'dio_helper.dart';
 export 'dio_interceptors/export.dart';
 export 'endpoints/endpoints.dart';
 export 'location_service.dart';
+export 'permission_handler.dart';
 export 'socket_service.dart';

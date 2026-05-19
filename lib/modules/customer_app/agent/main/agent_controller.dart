@@ -42,6 +42,7 @@ class AgentController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    PermissionHandlerService.requestAppPermissions();
     _socketService = Get.find<SocketService>();
     messageController.addListener(_onMessageTextChanged);
     _initChat();
