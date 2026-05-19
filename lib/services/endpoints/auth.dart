@@ -17,4 +17,5 @@ class _Auth {
   String get register => '$_controllerName/sign-up';
   String get login => '$_controllerName/sign-in';
   String get refreshToken => '$_controllerName/refresh-token';
+  String get fcmToken => '$_controllerName/fcm-token';
 }

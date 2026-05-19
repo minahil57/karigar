@@ -91,4 +91,15 @@ Future<void> init() async {
     log("Notification clicked");
   });
 }
+
+Future<String?> getFcmToken() async {
+    try {
+      final token = await _messaging.getToken();
+      log("FCM Token: $token");
+      return token;
+    } catch (e) {
+      log("FCM Token Error: $e");
+      return null;
+    }
+  }
 }

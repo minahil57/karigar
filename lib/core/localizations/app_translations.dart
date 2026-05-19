@@ -152,7 +152,7 @@ class AppTranslations extends Translations {
       'homeTab': 'Home',
       'profileTab': 'Profile',
       'communityTab': 'Community',
-      'aiTab': 'Chat',
+      'aiTab': 'KarigarAI',
       'jobsDone': 'Jobs Done',
       'responseTimeLabel': 'Response',
       'ratingLabel': 'Rating',
