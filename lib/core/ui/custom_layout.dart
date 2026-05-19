@@ -25,6 +25,6 @@ class CustomLayout extends StatelessWidget {
       child: child,
     );
 
-    return Scaffold(resizeToAvoidBottomInset: false, body: content);
+    return Scaffold(resizeToAvoidBottomInset: true, body: content);
   }
 }

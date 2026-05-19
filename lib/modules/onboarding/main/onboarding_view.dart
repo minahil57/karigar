@@ -15,9 +15,7 @@ class OnboardingView extends GetView<OnboardingController> {
               Expanded(
                 flex: 55,
                 child: Padding(
-                  padding: EdgeInsets.only(
-                    top: context.mediaQueryPadding.top + 10.h,
-                  ),
+                  padding: EdgeInsetsGeometry.only(top: kToolbarHeight),
                   child: Stack(
                     children: [
                       PageView.builder(
@@ -182,14 +180,20 @@ class OnboardingView extends GetView<OnboardingController> {
   ) {
     return Stack(
       alignment: Alignment.center,
+      fit: StackFit.expand,
       children: [
         // Center-positioned illustration with smooth fade-in-up animation
         FadeInUp(
           duration: const Duration(milliseconds: 800),
           from: 20,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-            child: Image.asset(pageData.imagePath, fit: BoxFit.contain),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+            child: Image.asset(
+              pageData.imagePath,
+              fit: BoxFit.contain,
+              height: MediaQuery.sizeOf(context).height * 0.5,
+              width: MediaQuery.sizeOf(context).width,
+            ),
           ),
         ),
 

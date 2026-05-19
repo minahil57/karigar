@@ -4,7 +4,11 @@ class ProviderMapCard extends StatelessWidget {
   final ProviderData provider;
   final VoidCallback onDismiss;
 
-  const ProviderMapCard({super.key, required this.provider, required this.onDismiss});
+  const ProviderMapCard({
+    super.key,
+    required this.provider,
+    required this.onDismiss,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -164,6 +168,31 @@ class ProviderMapCard extends StatelessWidget {
           verticalSpace(16),
 
           // ── See Full Details button ──────────────────────────
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () {
+                AppLayout.of(context)?.changeTab(1);
+                Get.find<AgentController>().sendMessage(customText: 'Book me the ${provider.businessName} for ${provider.specialty?.toString()}');
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: kcPrimaryColor,
+                foregroundColor: kcWhitecolor,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                elevation: 0,
+              ),
+              child: const CustomText(
+                text: 'Book  Now',
+                fontSize: 14,
+                variant: TextVariant.bold,
+                color: kcWhitecolor,
+              ),
+            ),
+          ),
+          verticalSpaceSmall,
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
