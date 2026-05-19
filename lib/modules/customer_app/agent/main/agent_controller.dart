@@ -42,10 +42,19 @@ class AgentController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    _syncFcmToken();
     PermissionHandlerService.requestAppPermissions().then((value) => fetchCurrentAddress());
     _socketService = Get.find<SocketService>();
     messageController.addListener(_onMessageTextChanged);
     _initChat();
+  }
+
+  Future<void> _syncFcmToken() async {
+    try {
+      await AuthRepository.syncFcmToken();
+    } catch (e) {
+      log('[AgentController] FCM token sync failed: $e');
+    }
   }
 
   Future<void> fetchCurrentAddress() async {

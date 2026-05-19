@@ -55,7 +55,17 @@ class _Auth {
     return dio.post(EndPoints.auth.login, data: {'token': refreshToken});
   }
 
-    Future<Response> updateFcmToken({required String token}) async {
-    return DioHelper.postData(endPoint: EndPoints.auth.fcmToken, data: {'token': token});
+  Future<Response> updateFcmToken({required String token}) async {
+    return DioHelper.postData(
+      endPoint: EndPoints.auth.fcmToken,
+      data: {'token': token},
+    );
+  }
+
+  Future<Response> deleteFcmToken({required String token}) async {
+    return DioHelper.deleteData(
+      endPoint: EndPoints.auth.fcmToken,
+      data: {'token': token},
+    );
   }
 }

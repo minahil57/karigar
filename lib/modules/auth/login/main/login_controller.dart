@@ -1,11 +1,8 @@
 import 'package:karigar/export.dart';
-import 'package:karigar/services/notifications/firebase_notification.dart';
 
 class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  final firebaseNotificationService = FirebaseNotificationService();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>(
     debugLabel: 'login_form',
@@ -40,10 +37,7 @@ class LoginController extends GetxController {
       if (errorMessage == null) {
         Snackbars.success(AppStrings.loginSuccessful);
         EasyLoading.showSuccess(AppStrings.loginSuccessful);
-        log(await getAccessToken());
-           final fcmToken = await firebaseNotificationService.getFcmToken();
-            await LocalStorage.setFcmToken(fcmToken ?? "");
-           await AuthRepository.updateFcmToken();
+        await AuthRepository.syncFcmToken();
 
         log((getUser())!.toJson().toString());
         if (getUser()?.role == UserRole.customer.apiValue) {

@@ -1,4 +1,5 @@
 import 'package:karigar/export.dart';
+import 'package:karigar/services/notifications/firebase_notification.dart';
 
 class AuthRepository {
   static bool isLoggedIn = false;
@@ -132,8 +133,11 @@ class AuthRepository {
   }
 
   static Future<void> localLogout() async {
+    await deleteFcmToken();
     await LocalStorage.removeLoggedInUser();
-    await LocalStorage.removeData(LocalStorage.accessToken); // Clear non-secure if exists
+    await LocalStorage.removeData(
+      LocalStorage.accessToken,
+    ); // Clear non-secure if exists
     await LocalStorage.deleteSecureData(LocalStorage.accessToken);
     await LocalStorage.removeData(LocalStorage.refreshToken);
     await LocalStorage.deleteSecureData(LocalStorage.refreshToken);
@@ -210,10 +214,31 @@ class AuthRepository {
     // await LocalStorage.saveData(LocalStorage.refreshToken, model.refreshToken!);
   }
 
+  static Future<void> syncFcmToken() async {
+    final fcmToken = await FirebaseNotificationService().getFcmToken();
+    if (fcmToken == null || fcmToken.isEmpty) return;
+    await LocalStorage.setFcmToken(fcmToken);
+    await updateFcmToken();
+
+    log("FCM Token: $fcmToken");
+  }
+
   static Future<void> updateFcmToken() async {
     String? token = LocalStorage.getFcmToken();
-    if (token != null) {
+    if (token != null && token.isNotEmpty) {
       await ApiProvider.auth.updateFcmToken(token: token);
     }
+  }
+
+  static Future<void> deleteFcmToken() async {
+    final token = LocalStorage.getFcmToken();
+    if (token != null && token.isNotEmpty) {
+      try {
+        await ApiProvider.auth.deleteFcmToken(token: token);
+      } catch (_) {
+        // Still clear local token if the server call fails.
+      }
+    }
+    await LocalStorage.removeData(LocalStorage.fcmToken);
   }
 }
