@@ -26,10 +26,6 @@ class AppValidators {
       return "Password must be at least 6 characters";
     }
 
-    if (!RegExp(r'[A-Z]').hasMatch(value)) {
-      return "Include at least one uppercase letter";
-    }
-
     if (!RegExp(r'[a-z]').hasMatch(value)) {
       return "Include at least one lowercase letter";
     }
