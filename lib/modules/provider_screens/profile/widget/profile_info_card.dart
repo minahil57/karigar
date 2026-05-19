@@ -128,42 +128,42 @@ class ProfileInfoCard extends StatelessWidget {
             ],
           ),
         ),
-        if (isUser) ...[
-          verticalSpaceSmall,
-          GestureDetector(
-            onTap: () {
-              // Edit profile action
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              decoration: BoxDecoration(
-                color: kcPrimaryColor,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: kcPrimaryColor.withValues(alpha: 0.2),
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(Iconsax.edit, color: kcWhitecolor, size: 16),
-                  horizontalSpaceTiny,
-                  CustomText(
-                    text: AppStrings.editProfile,
-                    variant: TextVariant.medium,
-                    fontSize: 12,
-                    color: kcWhitecolor,
-                  ),
-                ],
-              ),
-            ),
-          ),
+        // if (isUser) ...[
+        //   verticalSpaceSmall,
+        //   GestureDetector(
+        //     onTap: () {
+        //       // Edit profile action
+        //     },
+        //     child: Container(
+        //       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        //       decoration: BoxDecoration(
+        //         color: kcPrimaryColor,
+        //         borderRadius: BorderRadius.circular(12),
+        //         boxShadow: [
+        //           BoxShadow(
+        //             color: kcPrimaryColor.withValues(alpha: 0.2),
+        //             blurRadius: 10,
+        //             offset: const Offset(0, 4),
+        //           ),
+        //         ],
+        //       ),
+        //       child: Row(
+        //         mainAxisSize: MainAxisSize.min,
+        //         children: [
+        //           const Icon(Iconsax.edit, color: kcWhitecolor, size: 16),
+        //           horizontalSpaceTiny,
+        //           CustomText(
+        //             text: AppStrings.editProfile,
+        //             variant: TextVariant.medium,
+        //             fontSize: 12,
+        //             color: kcWhitecolor,
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
         ],
-      ],
+    //  ],
     );
   }
 }

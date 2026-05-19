@@ -162,6 +162,60 @@ class ProvidersRepository {
     }
   }
 
+  static Future<Map<String, dynamic>> getServices() async {
+    try {
+      final response = await ApiProvider.services.getAllServices();
+
+      if (response.statusCode == 200) {
+        final List<dynamic> servicesData = response.data ?? [];
+
+        final List<ServiceModel> services = servicesData
+            .map((e) => ServiceModel.fromJson(e as Map<String, dynamic>))
+            .toList();
+
+        return {'data': services, 'error': null};
+      } else {
+        return {
+          'data': null,
+          'error': response.data['message'] ?? 'Something went wrong',
+        };
+      }
+    } on DioException catch (e) {
+      return {
+        'data': null,
+        'error':
+            e.response?.data['message'] ?? e.message ?? 'Something went wrong',
+      };
+    } catch (e) {
+      return {'data': null, 'error': 'Something went wrong'};
+    }
+  }
+
+  static Future<Map<String, dynamic>> addProviderService(
+    Map<String, dynamic> data,
+  ) async {
+    try {
+      final response = await ApiProvider.services.addProviderService(data);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return {'data': response.data, 'error': null};
+      } else {
+        return {
+          'data': null,
+          'error': response.data['message'] ?? 'Something went wrong',
+        };
+      }
+    } on DioException catch (e) {
+      return {
+        'data': null,
+        'error':
+            e.response?.data['message'] ?? e.message ?? 'Something went wrong',
+      };
+    } catch (e) {
+      return {'data': null, 'error': 'Something went wrong'};
+    }
+  }
+
   static Future<bool> updateBookingStatus(String id, String status) async {
     try {
       final response = await ApiProvider.provider.updateBookingStatus(

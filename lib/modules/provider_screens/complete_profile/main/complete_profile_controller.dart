@@ -23,6 +23,14 @@ class CompleteProfileController extends GetxController
   final List<String> priceRangeOptions = ['low', 'medium', 'high'];
   String selectedPriceRange = 'medium';
 
+  // Services catalog
+  final List<ServiceModel> services = [];
+  bool isLoadingServices = false;
+  ServiceModel? selectedService;
+  final servicePriceController = TextEditingController(text: '1500');
+  final serviceDurationController = TextEditingController(text: '60');
+  static const String defaultPriceType = 'fixed';
+
   // Form Submission loading state
   bool isSubmitting = false;
 
@@ -35,13 +43,15 @@ class CompleteProfileController extends GetxController
         experienceController.text.trim().isNotEmpty &&
         selectedAreas.isNotEmpty &&
         selectedLanguages.isNotEmpty &&
-        selectedSkills.isNotEmpty;
+        selectedSkills.isNotEmpty &&
+        selectedService != null;
   }
 
   @override
   void onInit() {
     super.onInit();
     detectUserLocation();
+    fetchServices();
 
     // Add text listeners for real-time Save Button enabling/disabling
     nameController.addListener(update);
@@ -49,6 +59,29 @@ class CompleteProfileController extends GetxController
     phoneController.addListener(update);
     aboutMeController.addListener(update);
     experienceController.addListener(update);
+  }
+
+  Future<void> fetchServices() async {
+    isLoadingServices = true;
+    update();
+
+    final result = await ProvidersRepository.getServices();
+
+    if (result['error'] == null) {
+      services
+        ..clear()
+        ..addAll(result['data'] as List<ServiceModel>);
+    } else {
+      Snackbars.error(result['error'].toString());
+    }
+
+    isLoadingServices = false;
+    update();
+  }
+
+  void setSelectedService(ServiceModel? service) {
+    selectedService = service;
+    update();
   }
 
   void setPriceRange(String value) {
@@ -85,6 +118,8 @@ class CompleteProfileController extends GetxController
     aboutMeController.dispose();
     skillInputController.dispose();
     experienceController.dispose();
+    servicePriceController.dispose();
+    serviceDurationController.dispose();
     super.onClose();
   }
 
@@ -104,6 +139,10 @@ class CompleteProfileController extends GetxController
       }
       if (selectedSkills.isEmpty) {
         Snackbars.warning('Please add at least one skill');
+        return;
+      }
+      if (selectedService == null) {
+        Snackbars.warning('Please select a service');
         return;
       }
 
@@ -176,6 +215,22 @@ class CompleteProfileController extends GetxController
           "skills": selectedSkills,
           "isAvailable": true,
         };
+
+        final price = int.tryParse(servicePriceController.text.trim()) ?? 1500;
+        final duration =
+            int.tryParse(serviceDurationController.text.trim()) ?? 60;
+
+        final serviceResult = await ProvidersRepository.addProviderService({
+          'serviceId': selectedService!.id,
+          'price': price,
+          'priceType': defaultPriceType,
+          'durationMinutes': duration,
+        });
+
+        if (serviceResult['error'] != null) {
+          Snackbars.error(serviceResult['error'].toString());
+          return;
+        }
 
         debugPrint('Submitting Profile PATCH Payload: $requestData');
 
