@@ -27,4 +27,26 @@ class CustomerRepository {
       return {'data': null, 'error': 'Something went wrong'};
     }
   }
+
+  static Future<Map<String, dynamic>> updateProfile(Map<String, dynamic> data) async {
+    try {
+      final response = await ApiProvider.customer.updateProfile(data: data);
+
+      if (response.statusCode == 200) {
+        return {'data': response.data['data'], 'error': null};
+      } else {
+        return {
+          'data': null,
+          'error': response.data['message'] ?? 'Something went wrong',
+        };
+      }
+    } on DioException catch (e) {
+      return {
+        'data': null,
+        'error': e.response?.data['message'] ?? e.message ?? 'Something went wrong',
+      };
+    } catch (e) {
+      return {'data': null, 'error': 'Something went wrong'};
+    }
+  }
 }

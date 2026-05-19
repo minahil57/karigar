@@ -15,4 +15,5 @@ class _Customer {
   String get _controllerName => '$_apiBaseUrl/user';
 
   String get bookings => '$_controllerName/bookings';
+  String get updateProfile => '$_controllerName/profile';
 }
