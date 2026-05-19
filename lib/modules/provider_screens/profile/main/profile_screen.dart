@@ -93,21 +93,23 @@ class ProviderProfileScreen extends StatelessWidget {
                             ? provider.languages.join(', ')
                             : '—',
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          final newLang = LocalizationService.isUrdu
-                              ? 'en'
-                              : 'ur';
-                          LocalizationService.changeLocale(newLang);
-                        },
-                        child: ProfileDetailItem(
-                          icon: Iconsax.global,
-                          label: AppStrings.selectLanguage,
-                          value: LocalizationService.isUrdu
-                              ? 'English (Switch)'
-                              : 'اردو (تبدیل کریں)',
+
+                      if (controller.isUser)
+                        GestureDetector(
+                          onTap: () {
+                            final newLang = LocalizationService.isUrdu
+                                ? 'en'
+                                : 'ur';
+                            LocalizationService.changeLocale(newLang);
+                          },
+                          child: ProfileDetailItem(
+                            icon: Iconsax.global,
+                            label: AppStrings.selectLanguage,
+                            value: LocalizationService.isUrdu
+                                ? 'English (Switch)'
+                                : 'اردو (تبدیل کریں)',
+                          ),
                         ),
-                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Column(
