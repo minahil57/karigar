@@ -1,4 +1,5 @@
 import 'package:karigar/export.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProfileInfoCard extends StatelessWidget {
   final ProviderData provider;
@@ -24,10 +25,12 @@ class ProfileInfoCard extends StatelessWidget {
                   width: 4,
                 ),
               ),
-              child: CustomCacheImage(
-                height: 100,
-                width: 100,
-                imageUrl: provider.avatar ?? "",
+              child: Skeleton.ignore(
+                child: CustomCacheImage(
+                  height: 100,
+                  width: 100,
+                  imageUrl: provider.avatar ?? "",
+                ),
               ),
             ),
           ],

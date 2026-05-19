@@ -3,10 +3,7 @@ import 'package:karigar/export.dart';
 class ProfileStatsRow extends StatelessWidget {
   final ProviderData provider;
 
-  const ProfileStatsRow({
-    super.key,
-    required this.provider,
-  });
+  const ProfileStatsRow({super.key, required this.provider});
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +17,37 @@ class ProfileStatsRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildStat(context, Iconsax.briefcase, '—', AppStrings.jobsDone),
+          _buildStat(
+            context,
+            Iconsax.briefcase,
+            provider.totalBookings?.toString() ?? '0',
+            AppStrings.jobsDone,
+          ),
           _buildDivider(),
-          _buildStat(context, Iconsax.timer, '${provider.responseTime}m', AppStrings.responseTimeLabel),
+          _buildStat(
+            context,
+            Iconsax.timer,
+            '${provider.responseTime}m',
+            AppStrings.responseTimeLabel,
+          ),
           _buildDivider(),
-          _buildStat(context, Iconsax.star1, provider.rating.toString(), AppStrings.ratingLabel),
+          _buildStat(
+            context,
+            Iconsax.star1,
+            provider.rating.toString(),
+            AppStrings.ratingLabel,
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildStat(BuildContext context, IconData icon, String value, String label) {
+  Widget _buildStat(
+    BuildContext context,
+    IconData icon,
+    String value,
+    String label,
+  ) {
     return Column(
       children: [
         Icon(icon, size: 18, color: kcBlackColor),
@@ -41,11 +58,7 @@ class ProfileStatsRow extends StatelessWidget {
           fontSize: 14,
           color: kcBlackColor,
         ),
-        CustomText(
-          text: label,
-          fontSize: 10,
-          color: kcTextLightGrey,
-        ),
+        CustomText(text: label, fontSize: 10, color: kcTextLightGrey),
       ],
     );
   }

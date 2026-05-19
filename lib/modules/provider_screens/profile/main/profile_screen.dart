@@ -37,7 +37,9 @@ class ProviderProfileScreen extends StatelessWidget {
                                     shape: BoxShape.circle,
                                   ),
                                   child: RotatedBox(
-                                    quarterTurns: LocalizationService.isUrdu ? 2 : 0,
+                                    quarterTurns: LocalizationService.isUrdu
+                                        ? 2
+                                        : 0,
                                     child: const Icon(
                                       Iconsax.arrow_left,
                                       color: kcBlackColor,
@@ -87,25 +89,56 @@ class ProviderProfileScreen extends StatelessWidget {
                       ProfileDetailItem(
                         icon: Iconsax.global,
                         label: AppStrings.languagesSpoken,
-                        value: provider.languages?.toString() ?? '—',
+                        value: provider.languages.isNotEmpty
+                            ? provider.languages.join(', ')
+                            : '—',
                       ),
                       GestureDetector(
                         onTap: () {
-                          final newLang = LocalizationService.isUrdu ? 'en' : 'ur';
+                          final newLang = LocalizationService.isUrdu
+                              ? 'en'
+                              : 'ur';
                           LocalizationService.changeLocale(newLang);
                         },
                         child: ProfileDetailItem(
                           icon: Iconsax.global,
                           label: AppStrings.selectLanguage,
-                          value: LocalizationService.isUrdu ? 'English (Switch)' : 'اردو (تبدیل کریں)',
+                          value: LocalizationService.isUrdu
+                              ? 'English (Switch)'
+                              : 'اردو (تبدیل کریں)',
                         ),
                       ),
-                      ProfileDetailItem(
-                        icon: Iconsax.user,
-                        label: AppStrings.aboutMe,
-                        value:
-                            provider.about?.toString() ??
-                            AppStrings.noDescription,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 10.h,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Iconsax.user,
+                                  size: 16,
+                                  color: kcTextLightGrey,
+                                ),
+                                horizontalSpaceSmall,
+                                CustomText(
+                                  text: AppStrings.aboutMe,
+                                  fontSize: 12,
+                                  color: kcTextGreyColor,
+                                ),
+                              ],
+                            ),
+                            CustomText(
+                              text:
+                                  provider.about?.toString() ??
+                                  AppStrings.noDescription,
+                              fontSize: 12,
+                              color: kcBlackColor,
+                              variant: TextVariant.medium,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

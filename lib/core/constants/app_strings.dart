@@ -58,7 +58,8 @@ class AppStrings {
   static String get back => "back".tr;
 
   static String get findExpertsOrGetHired => "findExpertsOrGetHired".tr;
-  static String get poweredBySmartAgentMatching => "poweredBySmartAgentMatching".tr;
+  static String get poweredBySmartAgentMatching =>
+      "poweredBySmartAgentMatching".tr;
   static String get signInToYourAccount => "signInToYourAccount".tr;
   static String get password => "password".tr;
   static String get passwordHint => "passwordHint".tr;
@@ -87,7 +88,7 @@ class AppStrings {
   static String get earnings => "earnings".tr;
   static String get activeBooking => "activeBooking".tr;
   static String get ongoing => "ongoing".tr;
-  static String get liveServiceRequests => "liveServiceRequests".tr;
+  static String get bookingRequests => "bookingRequests".tr;
   static String get viewAll => "viewAll".tr;
   static String get aiPerfectMatch => "aiPerfectMatch".tr;
   static String get estEarnings => "estEarnings".tr;
@@ -125,6 +126,7 @@ class AppStrings {
   static String get chooseSupportedCity => "chooseSupportedCity".tr;
 
   // Newly Localized Hardcoded UI Strings
+  static String get noData => "noData".tr;
   static String get yourLocation => "yourLocation".tr;
   static String get currentAddress => "currentAddress".tr;
   static String get preferences => "preferences".tr;

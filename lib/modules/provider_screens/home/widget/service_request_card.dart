@@ -34,7 +34,9 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
     });
 
     EasyLoading.show(
-      status: isAccept ? AppStrings.acceptingRequest : AppStrings.rejectingRequest,
+      status: isAccept
+          ? AppStrings.acceptingRequest
+          : AppStrings.rejectingRequest,
     );
 
     try {
@@ -63,7 +65,9 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
         EasyLoading.showError(AppStrings.somethingWentWrong);
       }
     } catch (e) {
-      EasyLoading.showError('${AppStrings.somethingWentWrong}: ${e.toString()}');
+      EasyLoading.showError(
+        '${AppStrings.somethingWentWrong}: ${e.toString()}',
+      );
     } finally {
       if (mounted) {
         setState(() {
@@ -97,13 +101,14 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
+                flex: 3,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Flexible(
+                        Expanded(
                           child: CustomText(
                             text: formatToLocalDate(widget.request.createdAt),
                             variant: TextVariant.bold,
@@ -116,6 +121,7 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
+                        horizontalSpaceSmall,
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 8,
@@ -153,6 +159,7 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
                         ),
                       ],
                     ),
+                    verticalSpaceTiny,
                     CustomText(
                       text: widget.request.providerService.service.name,
                       color: kcTextGreyColor,
@@ -171,34 +178,16 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
                           color: kcTextLightGrey,
                         ),
                         horizontalSpaceTiny,
-                        CustomText(
-                          text: widget.request.location,
-                          color: kcTextLightGrey,
-                          fontSize: getResponsiveFontSize(
-                            context,
-                            fontSize: 10,
-                            max: 12,
-                          ),
-                        ),
-                        horizontalSpaceSmall,
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: kcPrimaryVeryLight,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
+                        Expanded(
                           child: CustomText(
                             text: widget.request.location,
-                            variant: TextVariant.medium,
+                            color: kcTextLightGrey,
                             fontSize: getResponsiveFontSize(
                               context,
-                              fontSize: 9,
-                              max: 11,
+                              fontSize: 10,
+                              max: 12,
                             ),
-                            color: kcPrimaryColor,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
@@ -207,48 +196,26 @@ class _ServiceRequestCardState extends State<ServiceRequestCard> {
                 ),
               ),
               horizontalSpaceSmall,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  CustomText(
-                    text: 'Market Competitive',
-                    variant: TextVariant.bold,
-                    fontSize: getResponsiveFontSize(
-                      context,
-                      fontSize: 16,
-                      max: 20,
-                    ),
-                    color: kcBlackColor,
-                  ),
-                  CustomText(
-                    text: AppStrings.estEarnings,
-                    color: kcTextLightGrey,
-                    fontSize: 9,
-                  ),
-                ],
-              ),
             ],
           ),
           verticalSpaceSmall,
-          Divider(color: kcborderColor.withValues(alpha: 0.3)),
+          Divider(color: kcborderColor),
           verticalSpaceSmall,
           Row(
             children: [
               const Icon(Iconsax.clock, size: 14, color: kcTextLightGrey),
               horizontalSpaceTiny,
-              CustomText(
-                text: widget.request.scheduledTime,
-                color: kcTextLightGrey,
-                fontSize: getResponsiveFontSize(context, fontSize: 10, max: 12),
-              ),
-              const Spacer(),
-              const Icon(Iconsax.calendar_1, size: 12, color: kcTextLightGrey),
-              horizontalSpaceTiny,
-              CustomText(
-                text: '${AppStrings.preferred} ${widget.request.scheduledTime}',
-                variant: TextVariant.medium,
-                color: kcDarkTextColor,
-                fontSize: getResponsiveFontSize(context, fontSize: 10, max: 12),
+              Expanded(
+                child: CustomText(
+                  text: widget.request.scheduledTime,
+                  color: kcTextLightGrey,
+                  fontSize: getResponsiveFontSize(
+                    context,
+                    fontSize: 10,
+                    max: 12,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),

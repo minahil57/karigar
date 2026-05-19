@@ -41,10 +41,13 @@ class WorkHistoryCard extends StatelessWidget {
                   children: [
                     const Icon(Iconsax.user, size: 12, color: kcTextLightGrey),
                     horizontalSpaceTiny,
-                    CustomText(
-                      text: history.providerService.provider.businessName,
-                      fontSize: 10,
-                      color: kcTextLightGrey,
+                    Expanded(
+                      child: CustomText(
+                        text: history.providerService.provider.businessName,
+                        fontSize: 10,
+                        color: kcTextLightGrey,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ],
                 ),

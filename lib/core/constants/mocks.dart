@@ -37,7 +37,7 @@ final dummyProvider = ProviderData(
   isAvailable: true,
   about: null,
   experienceYears: null,
-  languages: null,
+  languages: [],
   createdAt: DateTime.parse('2026-05-15T18:28:34.772Z'),
   updatedAt: DateTime.parse('2026-05-15T21:15:51.032Z'),
 );

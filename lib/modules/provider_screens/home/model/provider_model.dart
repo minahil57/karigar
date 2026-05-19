@@ -22,7 +22,9 @@ class ProviderData {
   final bool isAvailable;
   final dynamic about;
   final dynamic experienceYears;
-  final dynamic languages;
+  final List<String> languages;
+  final int? totalBookings;
+  final int? earnings;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -48,7 +50,9 @@ class ProviderData {
     required this.isAvailable,
     this.about,
     this.experienceYears,
-    this.languages,
+    this.languages = const [],
+    this.totalBookings,
+    this.earnings,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -61,7 +65,7 @@ class ProviderData {
       phone: json['phone'] ?? '',
       email: json['email'] ?? '',
       avatar: json['avatar'] ?? '',
-      lat: (json['lat'] as num).toDouble() ,
+      lat: (json['lat'] as num).toDouble(),
       lng: (json['lng'] as num).toDouble(),
       location: Location.fromJson(json['location']),
       address: Address.fromJson(json['address']),
@@ -76,7 +80,9 @@ class ProviderData {
       isAvailable: json['isAvailable'],
       about: json['about'],
       experienceYears: json['experienceYears'],
-      languages: json['languages'],
+      languages: (json['languages'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
+      earnings: json['earnings'],
+      totalBookings: json['totalBookings'],
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
     );

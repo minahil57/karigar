@@ -33,7 +33,7 @@ class ProviderHomeScreen extends StatelessWidget {
                 ),
                 verticalSpaceSmall,
                 HomeSectionHeader(
-                  title: AppStrings.liveServiceRequests,
+                  title: AppStrings.bookingRequests,
                   onViewAll: () {
                     Get.toNamed(Routes.completeProfile);
                     AppLayout.of(context)?.changeTab(0);
@@ -59,26 +59,37 @@ class ProviderHomeScreen extends StatelessWidget {
         builder: (controller) {
           return CustomSkeleton(
             enabled: controller.isServiceLoading,
-            child: GridView.builder(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                mainAxisExtent: 220,
-              ),
-              itemCount: controller.serviceRequests.length,
-              itemBuilder: (context, index) {
-                final request = controller.serviceRequests[index];
-                return ServiceRequestCard(
-                  request: request,
-                  onAccept: () {},
-                  onReject: () {},
-                );
-              },
-            ),
+            child: controller.serviceRequests.isEmpty
+                ? Center(
+                    heightFactor: 10,
+                    child: CustomText(
+                      text: AppStrings.noData,
+                      variant: TextVariant.bold,
+                      fontSize: 12,
+                      color: kcBlackColor,
+                    ),
+                  )
+                : GridView.builder(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          mainAxisExtent: 220,
+                        ),
+                    itemCount: controller.serviceRequests.length,
+                    itemBuilder: (context, index) {
+                      final request = controller.serviceRequests[index];
+                      return ServiceRequestCard(
+                        request: request,
+                        onAccept: () {},
+                        onReject: () {},
+                      );
+                    },
+                  ),
           );
         },
       );
@@ -89,21 +100,31 @@ class ProviderHomeScreen extends StatelessWidget {
       builder: (controller) {
         return CustomSkeleton(
           enabled: controller.isServiceLoading,
-          child: ListView.separated(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: controller.serviceRequests.length,
-            separatorBuilder: (context, index) => verticalSpaceSmall,
-            itemBuilder: (context, index) {
-              final request = controller.serviceRequests[index];
-              return ServiceRequestCard(
-                request: request,
-                onAccept: () {},
-                onReject: () {},
-              );
-            },
-          ),
+          child: controller.serviceRequests.isEmpty
+              ? Center(
+                  heightFactor: 10,
+                  child: CustomText(
+                    text: AppStrings.noData,
+                    variant: TextVariant.medium,
+                    fontSize: 12,
+                    color: kcTextGreyColor,
+                  ),
+                )
+              : ListView.separated(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: controller.serviceRequests.length,
+                  separatorBuilder: (context, index) => verticalSpaceSmall,
+                  itemBuilder: (context, index) {
+                    final request = controller.serviceRequests[index];
+                    return ServiceRequestCard(
+                      request: request,
+                      onAccept: () {},
+                      onReject: () {},
+                    );
+                  },
+                ),
         );
       },
     );

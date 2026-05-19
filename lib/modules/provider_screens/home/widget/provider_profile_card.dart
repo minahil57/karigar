@@ -1,14 +1,11 @@
 import 'package:karigar/export.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProviderProfileCard extends StatelessWidget {
   final ProviderData provider;
   final VoidCallback? onTap;
 
-  const ProviderProfileCard({
-    super.key,
-    required this.provider,
-    this.onTap,
-  });
+  const ProviderProfileCard({super.key, required this.provider, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +39,14 @@ class ProviderProfileCard extends StatelessWidget {
                           width: 2,
                         ),
                       ),
-                      child: CircleAvatar(
-                        radius: 35,
-                        backgroundImage: CachedNetworkImageProvider(provider.avatar ?? ''),
-                        backgroundColor: kcborderColor,
+                      child: Skeleton.ignore(
+                        child: CircleAvatar(
+                          radius: 35,
+                          backgroundImage: CachedNetworkImageProvider(
+                            provider.avatar ?? '',
+                          ),
+                          backgroundColor: kcborderColor,
+                        ),
                       ),
                     ),
                     if (provider.isAvailable)
@@ -91,7 +92,9 @@ class ProviderProfileCard extends StatelessWidget {
                                 color: kcSecondaryColor.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(
-                                  color: kcSecondaryColor.withValues(alpha: 0.3),
+                                  color: kcSecondaryColor.withValues(
+                                    alpha: 0.3,
+                                  ),
                                 ),
                               ),
                               child: Row(
@@ -116,7 +119,9 @@ class ProviderProfileCard extends StatelessWidget {
                         ],
                       ),
                       CustomText(
-                        text: provider.specialty?.toString() ?? 'Service Provider',
+                        text:
+                            provider.specialty?.toString() ??
+                            'Service Provider',
                         color: kcWhitecolor.withValues(alpha: 0.6),
                         fontSize: 12,
                       ),
@@ -149,7 +154,7 @@ class ProviderProfileCard extends StatelessWidget {
                   child: StatItem(
                     icon: Iconsax.briefcase,
                     label: AppStrings.jobs,
-                    value: '—',
+                    value: provider.totalBookings.toString(),
                     trend: '+0 ${AppStrings.thisMonth}',
                   ),
                 ),
@@ -158,7 +163,7 @@ class ProviderProfileCard extends StatelessWidget {
                   child: StatItem(
                     icon: Iconsax.wallet,
                     label: AppStrings.earnings,
-                    value: '₹0',
+                    value: 'Rs ${provider.earnings}',
                     trend: '+0% ${AppStrings.thisMonth}',
                     iconColor: Colors.amber,
                   ),
@@ -188,7 +193,7 @@ class ProviderProfileCard extends StatelessWidget {
                     ),
                   ),
                   horizontalSpaceSmall,
-                   Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
