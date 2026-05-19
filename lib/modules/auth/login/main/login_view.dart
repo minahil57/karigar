@@ -7,10 +7,11 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return CustomLayout(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: SafeArea(
+            bottom: false,
             child: Column(
               mainAxisAlignment: .spaceBetween,
               children: [

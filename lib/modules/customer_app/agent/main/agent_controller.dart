@@ -42,10 +42,24 @@ class AgentController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    PermissionHandlerService.requestAppPermissions();
+    PermissionHandlerService.requestAppPermissions().then((value) => fetchCurrentAddress());
     _socketService = Get.find<SocketService>();
     messageController.addListener(_onMessageTextChanged);
     _initChat();
+  }
+
+  Future<void> fetchCurrentAddress() async {
+    try {
+      final position = await LocationService.getCurrentLocation();
+      if (position != null) {
+        await CustomerRepository.updateProfile({
+          'lat': position.latitude,
+          'lng': position.longitude,
+        });
+      }
+    } catch (e) {
+      log('[AgentController] Error updating location: $e');
+    }
   }
 
   Future<void> _initChat() async {

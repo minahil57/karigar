@@ -13,4 +13,8 @@ class _Customer {
   Future<Response> getBookings() async {
     return DioHelper.getData(endPoint: EndPoints.customer.bookings);
   }
+
+  Future<Response> updateProfile({required Map<String, dynamic> data}) async {
+    return DioHelper.patchData(endPoint: EndPoints.customer.updateProfile, data: data);
+  }
 }

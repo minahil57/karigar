@@ -163,7 +163,7 @@ class _ViewToggleButtonState extends State<ViewToggleButton>
                             child: Transform.rotate(
                               angle: t * 1.5,
                               child: const Icon(
-                                Iconsax.element_3,
+                                Iconsax.map,
                                 color: Colors.white,
                                 size: 20,
                               ),
