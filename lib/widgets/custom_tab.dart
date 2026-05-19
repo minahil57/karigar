@@ -62,7 +62,7 @@ class CustomSegmentedTab extends StatelessWidget {
                       onTap: () => onChanged(item),
                       behavior: HitTestBehavior.opaque,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
                         color: Colors.transparent,
                         child: Center(
                           child: AnimatedDefaultTextStyle(

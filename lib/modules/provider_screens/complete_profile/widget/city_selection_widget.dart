@@ -13,11 +13,13 @@ class CitySelectionWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: [
-                  const CircularProgressIndicator(color: kcSecondaryColor), // Teal accent loading
+                  const CircularProgressIndicator(
+                    color: kcSecondaryColor,
+                  ), // Teal accent loading
                   verticalSpaceSmall,
                   const CustomText(
                     text: 'Detecting your location...',
-                    fontSize: 14,
+                    fontSize: 12,
                     variant: TextVariant.medium,
                     color: kcSecondaryColor,
                   ),
@@ -42,11 +44,15 @@ class CitySelectionWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.warning_amber_rounded, color: Colors.red, size: 24),
+                    const Icon(
+                      Icons.warning_amber_rounded,
+                      color: Colors.red,
+                      size: 24,
+                    ),
                     horizontalSpace(8),
                     CustomText(
                       text: AppStrings.unsupportedLocation,
-                      fontSize: 15,
+                      fontSize: 13,
                       variant: TextVariant.bold,
                       color: Colors.red,
                     ),
@@ -54,14 +60,16 @@ class CitySelectionWidget extends StatelessWidget {
                 ),
                 verticalSpace(10),
                 CustomText(
-                  text: 'We do not operate in your current city (${controller.detectedCity ?? "Unknown Location"}).',
-                  fontSize: 13,
+                  text:
+                      'We do not operate in your current city (${controller.detectedCity ?? "Unknown Location"}).',
+                  fontSize: 12,
                   variant: TextVariant.regular,
                   color: Colors.red,
                 ),
                 verticalSpace(5),
                 const CustomText(
-                  text: 'We currently operate in Islamabad, Rawalpindi, Karachi, and Lahore.',
+                  text:
+                      'We currently operate in Islamabad, Rawalpindi, Karachi, and Lahore.',
                   fontSize: 13,
                   variant: TextVariant.medium,
                   color: kcBlackColor,
@@ -89,7 +97,11 @@ class CitySelectionWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.location_on, color: kcPrimaryColor, size: 20), // Primary focus
+                    const Icon(
+                      Icons.location_on,
+                      color: kcPrimaryColor,
+                      size: 20,
+                    ), // Primary focus
                     horizontalSpace(6),
                     CustomText(
                       text: 'City: ${controller.activeCity}',
@@ -113,7 +125,7 @@ class CitySelectionWidget extends StatelessWidget {
               ],
             ),
             verticalSpace(8),
-            
+
             // Areas chips list: Active chips use Teal as selection accent
             if (controller.availableAreas.isEmpty)
               const CustomText(
@@ -165,7 +177,7 @@ class CitySelectionWidget extends StatelessWidget {
           dropdownColor: kcWhitecolor,
           hint: CustomText(
             text: AppStrings.chooseSupportedCity,
-            fontSize: 14,
+            fontSize: 12,
             color: Colors.grey,
             variant: TextVariant.regular,
           ),
@@ -174,7 +186,9 @@ class CitySelectionWidget extends StatelessWidget {
           onChanged: (String? value) {
             controller.setCityOverride(value);
           },
-          items: controller.supportedCities.map<DropdownMenuItem<String>>((String value) {
+          items: controller.supportedCities.map<DropdownMenuItem<String>>((
+            String value,
+          ) {
             return DropdownMenuItem<String>(
               value: value,
               child: CustomText(
@@ -190,7 +204,10 @@ class CitySelectionWidget extends StatelessWidget {
     );
   }
 
-  void _showChangeCityBottomSheet(BuildContext context, CompleteProfileController controller) {
+  void _showChangeCityBottomSheet(
+    BuildContext context,
+    CompleteProfileController controller,
+  ) {
     Get.bottomSheet(
       Container(
         padding: const EdgeInsets.all(20),
@@ -223,7 +240,9 @@ class CitySelectionWidget extends StatelessWidget {
                     variant: isSelected ? TextVariant.bold : TextVariant.medium,
                     color: isSelected ? kcSecondaryColor : kcBlackColor,
                   ),
-                  trailing: isSelected ? const Icon(Icons.check, color: kcSecondaryColor) : null,
+                  trailing: isSelected
+                      ? const Icon(Icons.check, color: kcSecondaryColor)
+                      : null,
                   onTap: () {
                     controller.setCityOverride(city);
                     Get.back();

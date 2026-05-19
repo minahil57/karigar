@@ -10,11 +10,10 @@ class CompleteProfileScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: kcWhitecolor,
           appBar: AppBar(
-            
             title: CustomText(
               text: AppStrings.completeProfile,
-              fontSize: 18,
-              variant: TextVariant.bold,
+              fontSize: 16,
+              variant: TextVariant.medium,
               color: kcBlackColor,
             ),
             centerTitle: true,

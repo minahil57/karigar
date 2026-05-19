@@ -3,7 +3,10 @@ import 'package:karigar/export.dart';
 class ServiceDetailsWidget extends StatelessWidget {
   const ServiceDetailsWidget({super.key});
 
-  void _showLanguageSelectionBottomSheet(BuildContext context, CompleteProfileController controller) {
+  void _showLanguageSelectionBottomSheet(
+    BuildContext context,
+    CompleteProfileController controller,
+  ) {
     Get.bottomSheet(
       Container(
         padding: const EdgeInsets.all(20),
@@ -84,7 +87,7 @@ class ServiceDetailsWidget extends StatelessWidget {
               ],
             ),
             verticalSpace(15),
-            
+
             // Service Cities
             CustomText(
               text: AppStrings.serviceAreasLabel,
@@ -105,31 +108,43 @@ class ServiceDetailsWidget extends StatelessWidget {
             ),
             verticalSpace(8),
             GestureDetector(
-              onTap: () => _showLanguageSelectionBottomSheet(context, controller),
+              onTap: () =>
+                  _showLanguageSelectionBottomSheet(context, controller),
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
                 decoration: BoxDecoration(
                   color: kcWhitecolor,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: kcborderColor.withValues(alpha: 0.8)),
+                  border: Border.all(
+                    color: kcborderColor.withValues(alpha: 0.8),
+                  ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.language_outlined, color: kcPrimaryColor, size: 20),
+                        const Icon(
+                          Icons.language_outlined,
+                          color: kcPrimaryColor,
+                          size: 20,
+                        ),
                         horizontalSpace(10),
                         controller.selectedLanguages.isEmpty
                             ? CustomText(
                                 text: AppStrings.selectLanguagesHint,
-                                fontSize: 14,
+                                fontSize: 12,
                                 color: Colors.grey,
                                 variant: TextVariant.regular,
                               )
                             : CustomText(
-                                text: controller.selectedLanguages.map((e) => e.tr).join(', '),
+                                text: controller.selectedLanguages
+                                    .map((e) => e.tr)
+                                    .join(', '),
                                 fontSize: 14,
                                 color: kcBlackColor,
                                 variant: TextVariant.medium,
@@ -150,7 +165,7 @@ class ServiceDetailsWidget extends StatelessWidget {
               variant: TextVariant.medium,
               color: kcBlackColor,
             ),
-            verticalSpace(8),
+            verticalSpace(15),
             Row(
               children: [
                 Expanded(
@@ -158,40 +173,41 @@ class ServiceDetailsWidget extends StatelessWidget {
                     controller: controller.skillInputController,
                     labelText: AppStrings.addSkill,
                     hintText: AppStrings.addSkillHint,
-                    prefixIcon: const Icon(Icons.star_outline, color: kcPrimaryColor, size: 20),
+                    prefixIcon: const Icon(
+                      Icons.star_outline,
+                      color: kcPrimaryColor,
+                      size: 20,
+                    ),
                   ),
                 ),
                 horizontalSpace(10),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: GestureDetector(
-                    onTap: () {
-                      controller.addSkill(controller.skillInputController.text);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: kcPrimaryColor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(
-                        Icons.add,
-                        color: kcWhitecolor,
-                      ),
+                GestureDetector(
+                  onTap: () {
+                    controller.addSkill(controller.skillInputController.text);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: kcPrimaryColor,
+                      borderRadius: BorderRadius.circular(12),
                     ),
+                    child: const Icon(Icons.add, color: kcWhitecolor),
                   ),
                 ),
               ],
             ),
             verticalSpace(10),
-            
+
             // Upwork style chips using Teal Palette as secondary accent (30%)
             Wrap(
               spacing: 8,
               runSpacing: 8,
               children: controller.selectedSkills.map((skill) {
                 return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: kcSecondaryLightColor.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(20),
@@ -241,7 +257,7 @@ class ServiceDetailsWidget extends StatelessWidget {
                   label: CustomText(
                     text: opt.tr,
                     color: isSelected ? kcWhitecolor : kcBlackColor,
-                    fontSize: 13,
+                    fontSize: 12,
                     variant: TextVariant.regular,
                   ),
                   selected: isSelected,
@@ -267,7 +283,7 @@ class ServiceDetailsWidget extends StatelessWidget {
                     children: [
                       CustomText(
                         text: AppStrings.openingTime,
-                        fontSize: 13,
+                        fontSize: 12,
                         variant: TextVariant.medium,
                         color: kcBlackColor,
                       ),
@@ -275,7 +291,10 @@ class ServiceDetailsWidget extends StatelessWidget {
                       GestureDetector(
                         onTap: () => controller.pickStartTime(context),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 14,
+                          ),
                           decoration: BoxDecoration(
                             color: kcWhitecolor,
                             borderRadius: BorderRadius.circular(12),
@@ -285,12 +304,19 @@ class ServiceDetailsWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomText(
-                                text: controller.formatTimeForUi(controller.selectedStartTime, context),
-                                fontSize: 14,
+                                text: controller.formatTimeForUi(
+                                  controller.selectedStartTime,
+                                  context,
+                                ),
+                                fontSize: 12,
                                 variant: TextVariant.medium,
                                 color: kcBlackColor,
                               ),
-                              const Icon(Icons.access_time, color: kcSecondaryColor, size: 18), // Secondary teal theme accent
+                              const Icon(
+                                Icons.access_time,
+                                color: kcSecondaryColor,
+                                size: 16,
+                              ), // Secondary teal theme accent
                             ],
                           ),
                         ),
@@ -305,7 +331,7 @@ class ServiceDetailsWidget extends StatelessWidget {
                     children: [
                       CustomText(
                         text: AppStrings.closingTime,
-                        fontSize: 13,
+                        fontSize: 12,
                         variant: TextVariant.medium,
                         color: kcBlackColor,
                       ),
@@ -313,7 +339,10 @@ class ServiceDetailsWidget extends StatelessWidget {
                       GestureDetector(
                         onTap: () => controller.pickEndTime(context),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 14,
+                          ),
                           decoration: BoxDecoration(
                             color: kcWhitecolor,
                             borderRadius: BorderRadius.circular(12),
@@ -323,12 +352,19 @@ class ServiceDetailsWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomText(
-                                text: controller.formatTimeForUi(controller.selectedEndTime, context),
-                                fontSize: 14,
+                                text: controller.formatTimeForUi(
+                                  controller.selectedEndTime,
+                                  context,
+                                ),
+                                fontSize: 12,
                                 variant: TextVariant.medium,
                                 color: kcBlackColor,
                               ),
-                              const Icon(Icons.access_time, color: kcSecondaryColor, size: 18), // Secondary teal theme accent
+                              const Icon(
+                                Icons.access_time,
+                                color: kcSecondaryColor,
+                                size: 16,
+                              ), // Secondary teal theme accent
                             ],
                           ),
                         ),
@@ -379,7 +415,11 @@ class ServiceDetailsWidget extends StatelessWidget {
               labelText: AppStrings.experienceYearsLabel,
               hintText: AppStrings.experienceHint,
               keyboardType: TextInputType.number,
-              prefixIcon: const Icon(Icons.trending_up, color: kcPrimaryColor, size: 20),
+              prefixIcon: const Icon(
+                Icons.trending_up,
+                color: kcPrimaryColor,
+                size: 20,
+              ),
             ),
           ],
         );
