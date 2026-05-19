@@ -14,11 +14,13 @@ class SocketService extends GetxService {
   void connect(String token) {
     if (_initialized) return;
 
+    const socketUrl = 'https://karigarbackend-production.up.railway.app:443';
+
     _socket = io.io(
-      EndPoints.baseUrl,
+      socketUrl,
       io.OptionBuilder()
-          .setTransports(['websocket'])
-          .disableAutoConnect()
+          .setTransports(['websocket', 'polling'])
+          .enableAutoConnect()
           .setAuth({'token': token})
           .build(),
     );
@@ -101,7 +103,10 @@ class SocketService extends GetxService {
       log('[Socket] Not connected — cannot emit service:selected');
       return;
     }
-    _socket.emit('service:selected', {'serviceName': serviceName, 'token': token});
+    _socket.emit('service:selected', {
+      'serviceName': serviceName,
+      'token': token,
+    });
     log('[Socket] Emitted service:selected: $serviceName');
   }
 
