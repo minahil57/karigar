@@ -21,6 +21,7 @@ class CreateAccountController extends GetxController {
   UserRole? get selectedValue => _selectedValue;
 
   void onChanged(UserRole? value) {
+    if (value == null || value == _selectedValue) return;
     _selectedValue = value;
     update(["tab", "form"]);
   }
