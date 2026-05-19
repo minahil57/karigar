@@ -49,8 +49,8 @@ class ProviderCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100),
                     child: CachedNetworkImage(
                       imageUrl: provider.avatar ?? '',
-                      height: 70,
-                      width: 70,
+                      height: 50.w,
+                      width: 50.w,
                       fit: BoxFit.cover,
                       placeholder: (context, url) =>
                           Container(color: kcborderColor),
@@ -87,7 +87,7 @@ class ProviderCard extends StatelessWidget {
                       Flexible(
                         child: CustomText(
                           text: provider.businessName,
-                          fontSize: 16,
+                          fontSize: 12,
                           variant: TextVariant.bold,
                           color: const Color(0xFF1A3B5D),
                           overflow: TextOverflow.ellipsis,
@@ -107,18 +107,18 @@ class ProviderCard extends StatelessWidget {
                   CustomText(
                     text:
                         provider.specialty?.toString() ?? 'General Technician',
-                    fontSize: 12,
+                    fontSize: 11,
                     color: kcTextGreyColor,
                   ),
                   verticalSpaceSmall,
                   Row(
+                    spacing: 20.w,
                     children: [
                       _buildMiniStat(
                         Iconsax.star1,
                         provider.rating.toString(),
                         Colors.amber,
                       ),
-                      horizontalSpaceSmall,
                       _buildMiniStat(
                         Iconsax.location,
                         provider.address.city,
@@ -128,36 +128,6 @@ class ProviderCard extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: kcSecondaryColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: CustomText(
-                    text: '${provider.responseTime}m away',
-                    fontSize: 11,
-                    variant: TextVariant.medium,
-                    color: kcSecondaryColor,
-                  ),
-                ),
-                verticalSpaceMedium,
-                RotatedBox(
-                  quarterTurns: LocalizationService.isUrdu ? 2 : 0,
-                  child: const Icon(
-                    Iconsax.arrow_right_3,
-                    color: kcTextGreyColor,
-                    size: 20,
-                  ),
-                ),
-              ],
             ),
           ],
         ),
@@ -176,6 +146,7 @@ class ProviderCard extends StatelessWidget {
           fontSize: 12,
           variant: TextVariant.medium,
           color: const Color(0xFF1A3B5D),
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );
