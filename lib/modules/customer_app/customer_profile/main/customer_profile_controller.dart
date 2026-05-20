@@ -34,8 +34,10 @@ class CustomerProfileController extends GetxController {
     }
   }
 
-  void logout() {
-    AuthRepository.localLogout();
+  void logout() async {
+   await  EasyLoading.show(status: 'Logging out...');
+  await   AuthRepository.localLogout();
+    EasyLoading.dismiss();
   }
 
   void deleteAccount() {
