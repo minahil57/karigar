@@ -133,7 +133,9 @@ class AuthRepository {
   }
 
   static Future<void> localLogout() async {
-    await deleteFcmToken();
+    if (getUser()?.role == UserRole.customer.apiValue) {
+      await deleteFcmToken();
+    }
     await LocalStorage.removeLoggedInUser();
     await LocalStorage.removeData(
       LocalStorage.accessToken,

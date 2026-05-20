@@ -12,9 +12,9 @@ class AppTranslations extends Translations {
       'onboardingTitle2': 'Offer & Accept Services',
       'onboardingSubtitle2':
           'As a provider, receive job requests, accept offers, and grow your service network.',
-      'onboardingTitle3': 'Manage Work in Real-Time',
+      'onboardingTitle3': 'Get Matched. Choose. Earn.',
       'onboardingSubtitle3':
-          'Track job progress, communicate directly, and stay updated from start to finish.',
+          'View live service requests, check job details, and accept bookings instantly.',
       'onboardingTitle4': 'Build Your Service Network',
       'onboardingSubtitle4':
           'Connect users and providers in one platform and manage all your service activity easily.',
@@ -209,9 +209,9 @@ class AppTranslations extends Translations {
       'onboardingTitle2': 'خدمات پیش کریں اور قبول کریں',
       'onboardingSubtitle2':
           'بطور سروس فراہم کنندہ، ملازمت کی درخواستیں وصول کریں، پیشکشیں قبول کریں اور اپنا نیٹ ورک بڑھائیں۔',
-      'onboardingTitle3': 'کام کو حقیقی وقت میں سنبھالیں',
+      'onboardingTitle3': 'کام حاصل کریں۔ منتخب کریں۔ کمائیں۔',
       'onboardingSubtitle3':
-          'کام کی پیشرفت کو ٹریک کریں، براہ راست رابطہ کریں، اور شروع سے آخر تک باخبر رہیں۔',
+        'لائیو سروس ریکویسٹس دیکھیں، جاب کی تفصیلات چیک کریں، اور فوراً بکنگ قبول کریں۔',
       'onboardingTitle4': 'اپنا سروس نیٹ ورک بنائیں',
       'onboardingSubtitle4':
           'صارفین اور فراہم کنندگان کو ایک پلیٹ فارم پر جوڑیں اور اپنی تمام سروس سرگرمیوں کو آسانی سے سنبھالیں۔',
