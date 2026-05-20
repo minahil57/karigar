@@ -6,18 +6,18 @@ class AppTranslations extends Translations {
     'en_US': {
       'appTitle': 'Karigar',
       // Onboarding
-      'onboardingTitle1': 'Find & Hire Skilled Karigars',
+      'onboardingTitle1': 'Discover Skilled And Reliable Karigars',
       'onboardingSubtitle1':
-          'Search trusted electricians, plumbers, mechanics, and other professionals near you with ease.',
-      'onboardingTitle2': 'Offer & Accept Services',
+          'Easily find and book trusted electricians, plumbers, and mechanics near your location.',
+      'onboardingTitle2': 'Showcase Your Skills And Services',
       'onboardingSubtitle2':
-          'As a provider, receive job requests, accept offers, and grow your service network.',
-      'onboardingTitle3': 'Get Matched. Choose. Earn.',
+          'Register as a service provider to receive job requests and grow your business.',
+      'onboardingTitle3': 'Smart Matchmaking Powered By AI',
       'onboardingSubtitle3':
-          'View live service requests, check job details, and accept bookings instantly.',
-      'onboardingTitle4': 'Build Your Service Network',
+          'Our AI algorithm finds the perfect match for your specific service requirements.',
+      'onboardingTitle4': 'Build Your Trusted Service Network',
       'onboardingSubtitle4':
-          'Connect users and providers in one platform and manage all your service activity easily.',
+          'Connect with local professionals and manage all your bookings in one place.',
       // Welcome
       'welcomeToKarigar': 'Welcome to Karigar',
       'welcomeSubtitle':
@@ -203,18 +203,18 @@ class AppTranslations extends Translations {
     'ur_PK': {
       'appTitle': 'کاریگر',
       // Onboarding
-      'onboardingTitle1': 'ماہر کاریگر تلاش کریں اور کام پر رکھیں',
+      'onboardingTitle1': 'ماہر اور قابلِ بھروسہ کاریگر دریافت کریں',
       'onboardingSubtitle1':
-          'اپنے قریبی معتبر الیکٹریشن، پلمبر، مکینک اور دیگر پیشہ ور افراد کو آسانی سے تلاش کریں۔',
-      'onboardingTitle2': 'خدمات پیش کریں اور قبول کریں',
+          'اپنے قریبی معتبر الیکٹریشنز، پلمبرز اور مکینکس کو باآسانی تلاش کریں اور بک کریں۔',
+      'onboardingTitle2': 'اپنی مہارت اور خدمات پیش کریں',
       'onboardingSubtitle2':
-          'بطور سروس فراہم کنندہ، ملازمت کی درخواستیں وصول کریں، پیشکشیں قبول کریں اور اپنا نیٹ ورک بڑھائیں۔',
-      'onboardingTitle3': 'کام حاصل کریں۔ منتخب کریں۔ کمائیں۔',
+          'بطور سروس فراہم کنندہ رجسٹر ہوں، ملازمت کی درخواستیں وصول کریں اور اپنا کاروبار بڑھائیں۔',
+      'onboardingTitle3': 'مصنوعی ذہانت سے بہترین ملاپ',
       'onboardingSubtitle3':
-        'لائیو سروس ریکویسٹس دیکھیں، جاب کی تفصیلات چیک کریں، اور فوراً بکنگ قبول کریں۔',
-      'onboardingTitle4': 'اپنا سروس نیٹ ورک بنائیں',
+          'ہمارا سمارٹ اے آئی سسٹم آپ کی ضرورت کے مطابق بہترین پیشہ ور افراد کا انتخاب کرتا ہے۔',
+      'onboardingTitle4': 'اپنا قابلِ بھروسہ سروس نیٹ ورک بنائیں',
       'onboardingSubtitle4':
-          'صارفین اور فراہم کنندگان کو ایک پلیٹ فارم پر جوڑیں اور اپنی تمام سروس سرگرمیوں کو آسانی سے سنبھالیں۔',
+          'مقامی پیشہ ور افراد سے جڑیں اور اپنی تمام بکنگز کا ایک ہی جگہ پر انتظام کریں۔',
       // Welcome
       'welcomeToKarigar': 'کاریگر میں خوش آمدید',
       'welcomeSubtitle':

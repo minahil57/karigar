@@ -18,6 +18,7 @@ class CompleteProfileScreen extends StatelessWidget {
             ),
             centerTitle: true,
             backgroundColor: kcWhitecolor,
+            surfaceTintColor: kcWhitecolor,
             elevation: 0,
             iconTheme: const IconThemeData(color: kcBlackColor),
           ),

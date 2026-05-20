@@ -111,7 +111,10 @@ class ServiceDetailsWidget extends StatelessWidget {
               )
             else
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 2,
+                ),
                 decoration: BoxDecoration(
                   color: kcWhitecolor,
                   borderRadius: BorderRadius.circular(12),
@@ -127,7 +130,10 @@ class ServiceDetailsWidget extends StatelessWidget {
                       color: Colors.grey,
                       variant: TextVariant.regular,
                     ),
-                    icon: const Icon(Icons.arrow_drop_down, color: kcBlackColor),
+                    icon: const Icon(
+                      Icons.arrow_drop_down,
+                      color: kcBlackColor,
+                    ),
                     isExpanded: true,
                     onChanged: controller.setSelectedService,
                     items: controller.services.map((service) {
@@ -499,6 +505,13 @@ class ServiceDetailsWidget extends StatelessWidget {
               }).toList(),
             ),
             verticalSpace(20),
+            CustomText(
+              text: AppStrings.experience,
+              fontSize: 14,
+              variant: TextVariant.medium,
+              color: kcBlackColor,
+            ),
+            verticalSpace(8),
 
             CustomTextField(
               controller: controller.experienceController,

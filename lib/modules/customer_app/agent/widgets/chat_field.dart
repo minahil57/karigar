@@ -19,11 +19,11 @@ class ChatField extends StatelessWidget {
                   child: CustomTextField(
                     controller: controller.messageController,
                     hintText: AppStrings.writeYourMessage,
-                    suffixIcon: const Icon(
-                      Iconsax.microphone,
-                      size: 19,
-                      color: kcTextGreyColor,
-                    ),
+                    // suffixIcon: const Icon(
+                    //   Iconsax.microphone,
+                    //   size: 19,
+                    //   color: kcTextGreyColor,
+                    // ),
                   ),
                 ),
                 Obx(() {
@@ -50,8 +50,7 @@ class ChatField extends StatelessWidget {
                             shape: BoxShape.circle,
                           ),
                           child: RotatedBox(
-                            quarterTurns:
-                                LocalizationService.isUrdu ? 2 : 0,
+                            quarterTurns: LocalizationService.isUrdu ? 2 : 0,
                             child: Icon(
                               isThinking ? Icons.stop_rounded : Iconsax.send_1,
                               color: kcWhitecolor,

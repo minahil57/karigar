@@ -1,4 +1,3 @@
-
 import 'package:karigar/export.dart';
 
 abstract final class LocalStorage {
@@ -32,7 +31,7 @@ abstract final class LocalStorage {
   static Future<void> initData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     AuthRepository.isLoggedIn = preferences.getBool(_isLoggedInKey) ?? false;
-  //  ThemeCustomizer.fromJSON(preferences.getString(_themeCustomizerKey));
+    //  ThemeCustomizer.fromJSON(preferences.getString(_themeCustomizerKey));
   }
 
   static Future<bool> saveData(String key, String data) async {

@@ -6,7 +6,7 @@ class ProviderProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => ProfileController());
+    Get.put(ProfileController());
 
     return GetBuilder<ProfileController>(
       builder: (controller) {

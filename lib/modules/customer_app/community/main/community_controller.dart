@@ -56,7 +56,21 @@ class CommunityController extends GetxController {
   }
 
   GoogleMapController? mapController;
-  ProviderData? selectedProvider;
+  List<ProviderData>? selectedProviders;
+  int selectedProviderIndex = 0;
+
+  ProviderData? get selectedProvider {
+    final providers = selectedProviders;
+    if (providers == null || providers.isEmpty) return null;
+    return providers[selectedProviderIndex.clamp(0, providers.length - 1)];
+  }
+
+  bool get hasSelectedProviders =>
+      selectedProviders != null && selectedProviders!.isNotEmpty;
+
+  bool get isClusterSelection =>
+      selectedProviders != null && selectedProviders!.length > 1;
+
   Set<Marker> markers = {};
 
   Future<void> onMapCreated(GoogleMapController controller) async {
@@ -78,28 +92,60 @@ class CommunityController extends GetxController {
     );
   }
 
-  void selectProvider(ProviderData? provider) {
-    selectedProvider = provider;
+  void selectProvider(ProviderData provider) {
+    selectedProviders = [provider];
+    selectedProviderIndex = 0;
     update(['map']);
   }
 
-  void dismissCard() => selectProvider(null);
+  void selectProvidersAtLocation(List<ProviderData> providers) {
+    selectedProviders = providers;
+    selectedProviderIndex = 0;
+    update(['map']);
+  }
+
+  void onCarouselPageChanged(int index) {
+    selectedProviderIndex = index;
+    update(['map']);
+  }
+
+  void dismissCard() {
+    selectedProviders = null;
+    selectedProviderIndex = 0;
+    update(['map']);
+  }
 
   void zoomIn() => mapController?.animateCamera(CameraUpdate.zoomIn());
   void zoomOut() => mapController?.animateCamera(CameraUpdate.zoomOut());
 
   Future<void> buildMarkers(List<ProviderData> providers) async {
-    // ignore: unnecessary_null_comparison
-    final valid = providers.where((p) => p.lat != null).toList();
+    final groups = groupProvidersByLocation(providers);
 
     final placeholders = await Future.wait(
-      valid.map((provider) async {
-        final icon = await buildPlaceholderMarker(title: provider.businessName);
+      groups.entries.map((entry) async {
+        final group = entry.value;
+        final first = group.first;
+        final position = LatLng(first.lat.toDouble(), first.lng.toDouble());
+
+        if (group.length == 1) {
+          final icon = await buildPlaceholderMarker(title: first.businessName);
+          return Marker(
+            markerId: MarkerId(first.userId),
+            position: position,
+            icon: icon,
+            onTap: () => selectProvider(first),
+          );
+        }
+
+        final icon = await buildClusterPlaceholderMarker(
+          title: first.businessName,
+          count: group.length,
+        );
         return Marker(
-          markerId: MarkerId(provider.userId),
-          position: LatLng(provider.lat.toDouble(), provider.lng.toDouble()),
+          markerId: MarkerId('cluster_${entry.key}'),
+          position: position,
           icon: icon,
-          onTap: () => selectProvider(provider),
+          onTap: () => selectProvidersAtLocation(group),
         );
       }),
     );
@@ -108,21 +154,40 @@ class CommunityController extends GetxController {
     update(['map']);
 
     final updated = <String, Marker>{
-      for (final m in placeholders) m.markerId.value: m,
+      for (final marker in placeholders) marker.markerId.value: marker,
     };
 
     await Future.wait(
-      valid.map((provider) async {
-        final icon = await buildNetworkLogoMarker(
-          provider.avatar,
-          title: provider.businessName,
-        );
-        updated[provider.userId] = Marker(
-          markerId: MarkerId(provider.userId),
-          position: LatLng(provider.lat.toDouble(), provider.lng.toDouble()),
-          icon: icon,
-          onTap: () => selectProvider(provider),
-        );
+      groups.entries.map((entry) async {
+        final group = entry.value;
+        final first = group.first;
+        final position = LatLng(first.lat.toDouble(), first.lng.toDouble());
+
+        if (group.length == 1) {
+          final icon = await buildNetworkLogoMarker(
+            first.avatar,
+            title: first.businessName,
+          );
+          updated[first.userId] = Marker(
+            markerId: MarkerId(first.userId),
+            position: position,
+            icon: icon,
+            onTap: () => selectProvider(first),
+          );
+        } else {
+          final icon = await buildNetworkClusterMarker(
+            first.avatar,
+            title: first.businessName,
+            count: group.length,
+          );
+          updated['cluster_${entry.key}'] = Marker(
+            markerId: MarkerId('cluster_${entry.key}'),
+            position: position,
+            icon: icon,
+            onTap: () => selectProvidersAtLocation(group),
+          );
+        }
+
         markers = updated.values.toSet();
         update(['map']);
       }),

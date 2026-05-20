@@ -68,7 +68,9 @@ class CommunityMapView extends StatelessWidget {
 
               Positioned(
                 right: 16,
-                bottom: ctrl.selectedProvider != null ? 230 : 40,
+                bottom: ctrl.hasSelectedProviders
+                    ? (ctrl.isClusterSelection ? 340 : 230)
+                    : 40,
                 child: const ZoomButtons(),
               ),
 
@@ -77,14 +79,21 @@ class CommunityMapView extends StatelessWidget {
               AnimatedPositioned(
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeOut,
-                bottom: ctrl.selectedProvider != null ? 24 : -260,
+                bottom: ctrl.hasSelectedProviders ? 24 : -360,
                 left: 16,
                 right: 16,
-                child: ctrl.selectedProvider != null
-                    ? ProviderMapCard(
-                        provider: ctrl.selectedProvider!,
-                        onDismiss: ctrl.dismissCard,
-                      )
+                child: ctrl.hasSelectedProviders
+                    ? ctrl.isClusterSelection
+                        ? ProviderMapCarousel(
+                            providers: ctrl.selectedProviders!,
+                            initialIndex: ctrl.selectedProviderIndex,
+                            onDismiss: ctrl.dismissCard,
+                            onPageChanged: ctrl.onCarouselPageChanged,
+                          )
+                        : ProviderMapCard(
+                            provider: ctrl.selectedProvider!,
+                            onDismiss: ctrl.dismissCard,
+                          )
                     : const SizedBox.shrink(),
               ),
             ],

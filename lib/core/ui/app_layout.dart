@@ -57,8 +57,12 @@ class AppLayoutState extends State<AppLayout> {
         children: [
           if (widget.tabNames != null)
             SafeArea(
+              bottom: false,
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 child: _buildTabBar(),
               ),
             ),

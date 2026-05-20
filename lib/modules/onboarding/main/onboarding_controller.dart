@@ -1,7 +1,6 @@
 import 'package:karigar/export.dart';
 
 class OnboardingController extends GetxController {
-
   final PageController _pageController = PageController();
   PageController get pageController => _pageController;
   int _currentPage = 0;
@@ -11,14 +10,13 @@ class OnboardingController extends GetxController {
     update();
   }
 
-
   final List<OnboardingPageModel> _pages = [
     OnboardingPageModel(
       id: 1,
       title: AppStrings.onboardingTitle1,
       subtitle: AppStrings.onboardingSubtitle1,
       imagePath: AppImages.onboardingSlide1,
-      brownIndex: [3,4],
+      brownIndex: [3, 4],
     ),
 
     OnboardingPageModel(
@@ -48,11 +46,9 @@ class OnboardingController extends GetxController {
 
   List<OnboardingPageModel> get pages => _pages;
 
-
   void onPageChanged(int page) {
     currentPage = page;
   }
-
 
   void nextPage() {
     if (_currentPage < _pages.length - 1) {
@@ -84,11 +80,9 @@ class OnboardingController extends GetxController {
     }
   }
 
-
   void onGetStarted() {
     nextPage();
   }
-
 
   double get progress {
     switch (_currentPage) {

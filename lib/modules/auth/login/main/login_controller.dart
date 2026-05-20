@@ -15,7 +15,6 @@ class LoginController extends GetxController {
     update(["password"]);
   }
 
-
   void submitLogin() async {
     if (!formKey.currentState!.validate()) return;
 
