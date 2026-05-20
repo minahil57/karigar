@@ -15,12 +15,6 @@ class LoginController extends GetxController {
     update(["password"]);
   }
 
-  // @override
-  // void onInit() async{
-  //  final fcmToken = await firebaseNotificationService.getFcmToken();
-  //  log(fcmToken.toString());
-  //   super.onInit();
-  // }
 
   void submitLogin() async {
     if (!formKey.currentState!.validate()) return;
@@ -37,7 +31,6 @@ class LoginController extends GetxController {
       if (errorMessage == null) {
         Snackbars.success(AppStrings.loginSuccessful);
         EasyLoading.showSuccess(AppStrings.loginSuccessful);
-        await AuthRepository.syncFcmToken();
 
         log((getUser())!.toJson().toString());
         if (getUser()?.role == UserRole.customer.apiValue) {

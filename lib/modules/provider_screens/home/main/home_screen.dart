@@ -35,7 +35,6 @@ class ProviderHomeScreen extends StatelessWidget {
                 HomeSectionHeader(
                   title: AppStrings.bookingRequests,
                   onViewAll: () {
-                    Get.toNamed(Routes.completeProfile);
                     AppLayout.of(context)?.changeTab(0);
                   },
                 ),
