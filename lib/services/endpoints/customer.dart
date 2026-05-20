@@ -16,4 +16,5 @@ class _Customer {
 
   String get bookings => '$_controllerName/bookings';
   String get updateProfile => '$_controllerName/profile';
+  String get fcmToken => '$_controllerName/fcm-token';
 }

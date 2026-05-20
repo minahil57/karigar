@@ -235,8 +235,9 @@ class AuthRepository {
     if (token != null && token.isNotEmpty) {
       try {
         await ApiProvider.auth.deleteFcmToken(token: token);
-      } catch (_) {
+      } catch (e) {
         // Still clear local token if the server call fails.
+        log('Error deleting FCM token: $e');
       }
     }
     await LocalStorage.removeData(LocalStorage.fcmToken);

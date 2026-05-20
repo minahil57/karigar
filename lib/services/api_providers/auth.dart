@@ -57,14 +57,14 @@ class _Auth {
 
   Future<Response> updateFcmToken({required String token}) async {
     return DioHelper.postData(
-      endPoint: EndPoints.auth.fcmToken,
+      endPoint: EndPoints.customer.fcmToken,
       data: {'token': token},
     );
   }
 
   Future<Response> deleteFcmToken({required String token}) async {
     return DioHelper.deleteData(
-      endPoint: EndPoints.auth.fcmToken,
+      endPoint: EndPoints.customer.fcmToken,
       data: {'token': token},
     );
   }
